@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feature;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,8 @@ class FeaturesController extends Controller
      */
     public function index()
     {
-        //
+        $features = \App\Feature::paginate();
+        return view('features.index', compact('features'));
     }
 
     /**
@@ -26,7 +28,7 @@ class FeaturesController extends Controller
      */
     public function create()
     {
-        //
+        return view('features.create');
     }
 
     /**
@@ -37,7 +39,14 @@ class FeaturesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        \App\Feature::create($data);
+
+        \Session::flash('message_type', 'success');
+        \Session::flash('message', 'Característica cadastrada com sucesso!');
+
+        return redirect('features');
     }
 
     /**
@@ -48,7 +57,7 @@ class FeaturesController extends Controller
      */
     public function show($id)
     {
-        //
+        return Feature::findOrFail($id);
     }
 
     /**
@@ -59,7 +68,8 @@ class FeaturesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feature = Feature::findOrFail($id);
+        return view('features.edit', compact('feature'));
     }
 
     /**
@@ -71,7 +81,15 @@ class FeaturesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $feature = Feature::findOrFail($id);
+        $feature->update($data);
+
+        \Session::flash('message_type', 'success');
+        \Session::flash('message', 'Característica atualizada com sucesso!');
+
+        return redirect('/features');
     }
 
     /**
@@ -82,6 +100,16 @@ class FeaturesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_count = Feature::destroy($id);
+
+        if($delete_count != 1) {
+            \Session::flash('message_type', 'danger');
+            \Session::flash('message', 'Erro ao excluir característica!');
+        } else {
+            \Session::flash('message_type', 'success');
+            \Session::flash('message', 'Característica excluida com sucesso!');
+        }
+
+        return redirect('features');
     }
 }

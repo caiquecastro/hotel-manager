@@ -52,6 +52,8 @@ class RoomsController extends Controller
 
         \Session::flash('message_type', 'success');
         \Session::flash('message', 'Quarto cadastrado com sucesso!');
+
+        return redirect('rooms');
     }
 
     /**
@@ -124,6 +126,9 @@ class RoomsController extends Controller
 
     public function getBook($id)
     {
-        return view('rooms.book');
+        $rooms = Room::lists('number', 'id');
+        $room = Room::findOrFail($id);
+        $customers = \App\Customer::lists('name', 'id');
+        return view('rooms.book', compact('rooms', 'customers', 'room'));
     }
 }

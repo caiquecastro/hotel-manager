@@ -3,7 +3,7 @@
 @section('content')
     <h1>Quartos</h1>
     <a href="{{ action('RoomsController@create') }}" class="btn btn-primary m-b">Adicionar novo</a>
-    <a href="{{ action('FeaturesController@index') }}" class="btn btn-primary m-b">Nova característica</a>
+    <a href="{{ action('FeaturesController@index') }}" class="btn btn-primary m-b">Características</a>
     <table class="table">
         <thead>
         <tr>
