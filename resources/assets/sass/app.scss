@@ -1,0 +1,21 @@
+@import "bootstrap";
+@import "font-awesome";
+
+.navbar {
+  margin-bottom: 10px;
+}
+
+input[type=date].form-control,
+input[type=time].form-control,
+input[type=datetime-local].form-control,
+input[type=month].form-control {
+  line-height: 1.5;
+}
+
+.chart {
+  width: 100%;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
