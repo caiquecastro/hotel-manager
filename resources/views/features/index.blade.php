@@ -4,6 +4,8 @@
     <h1>Características</h1>
     <a href="{{ action('RoomsController@index') }}" class="btn btn-primary m-b">Voltar</a>
     <a href="{{ action('FeaturesController@create') }}" class="btn btn-primary m-b">Nova característica</a>
+    @include('errors.list')
+    @include('partials._messages')
     <table class="table">
         <thead>
         <tr>

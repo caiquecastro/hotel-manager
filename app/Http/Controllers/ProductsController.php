@@ -18,7 +18,6 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::paginate();
-
         return view('products.index', compact('products'));
     }
 
@@ -41,6 +40,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['saleable'] = isset($data['saleable']) ? $data['saleable'] : false;
 
         $room = Product::create($data);
 
@@ -82,7 +82,15 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $product = Product::findOrFail($id);
+        $product->update($data);
+
+        \Session::flash('message_type', 'success');
+        \Session::flash('message', 'Produto atualizado com sucesso!');
+
+        return redirect('/products');
     }
 
     /**
@@ -93,6 +101,16 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_count = Product::destroy($id);
+
+        if($delete_count != 1) {
+            \Session::flash('message_type', 'danger');
+            \Session::flash('message', 'Erro ao excluir produto!');
+        } else {
+            \Session::flash('message_type', 'success');
+            \Session::flash('message', 'Produto excluido com sucesso!');
+        }
+
+        return redirect('products');
     }
 }

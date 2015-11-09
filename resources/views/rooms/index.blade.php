@@ -5,6 +5,8 @@
     <a href="{{ action('RoomsController@create') }}" class="btn btn-primary m-b">Adicionar novo</a>
     <a href="{{ action('FeaturesController@index') }}" class="btn btn-primary m-b">Características</a>
     <a href="{{ action('TypesController@index') }}" class="btn btn-primary m-b">Tipos</a>
+    @include('errors.list')
+    @include('partials._messages')
     <table class="table">
         <thead>
         <tr>
@@ -42,19 +44,22 @@
                             Disponível
                         </span>
                     @elseif($room->status == "occupied")
-                        <span class="text-warning">
-                            <span class="fa fa-circle"></span>
-                            Manutenção
-                        </span>
-                    @else
                         <span class="text-danger">
                             <span class="fa fa-circle"></span>
                             Ocupado
                         </span>
+                    @else
+                        <span class="text-warning">
+                            <span class="fa fa-circle"></span>
+                            Manutenção
+                        </span>
                     @endif
                 </td>
                 <td>
-                    <a href="{{ action('RoomsController@createBook', $room->id) }}" class="btn btn-primary btn-sm">
+                    {!! Form::open(['method'=>'PUT', 'action'=>['RoomsController@putMaintenance', $room->id], 'class' => 'display-inline-block']) !!}
+                    {!! Form::button('<span class="fa fa-wrench"></span>', ['type'=>'submit', 'class'=>'btn btn-warning btn-sm']) !!}
+                    {!! Form::close() !!}
+                    <a href="{{ action('BookingsController@create', $room->id) }}" class="btn btn-primary btn-sm">
                         <span class="fa fa-calendar"></span>
                     </a>
                     <a href="{{ action('RoomsController@edit', $room->id) }}" class="btn btn-secondary btn-sm">

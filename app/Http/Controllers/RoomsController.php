@@ -125,11 +125,23 @@ class RoomsController extends Controller
         return redirect('/rooms');
     }
 
-    public function createBook($id)
+    public function putMaintenance($id)
     {
-        $rooms = Room::lists('number', 'id');
         $room = Room::findOrFail($id);
-        $customers = \App\Customer::lists('name', 'id');
-        return view('rooms.book', compact('rooms', 'customers', 'room'));
+
+        if($room->status == "occupied") {
+            \Session::flash('message_type', 'warning');
+            \Session::flash('message', 'Não foi possível definir manutenção para quarto ocupado!');
+        } elseif($room->status == "available") {
+            \Session::flash('message_type', 'success');
+            \Session::flash('message', 'Quarto em manutenção definido com sucesso!');
+            $room->status = "maintenance";
+        } else {
+            \Session::flash('message_type', 'success');
+            \Session::flash('message', 'Quarto disponível definido com sucesso!');
+            $room->status = "available";
+        }
+        $room->save();
+        return redirect('/rooms');
     }
 }

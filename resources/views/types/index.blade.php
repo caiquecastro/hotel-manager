@@ -4,6 +4,8 @@
     <h1>Tipos de Quarto</h1>
     <a href="{{ action('RoomsController@index') }}" class="btn btn-primary m-b">Voltar</a>
     <a href="{{ action('TypesController@create') }}" class="btn btn-primary m-b">Novo tipo de quarto</a>
+    @include('errors.list')
+    @include('partials._messages')
     <table class="table">
         <thead>
         <tr>

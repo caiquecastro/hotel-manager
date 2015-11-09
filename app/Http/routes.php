@@ -18,13 +18,16 @@ Route::get('/', function () {
 Route::resource('customers', 'CustomersController');
 
 Route::resource('rooms', 'RoomsController');
-Route::get('rooms/book/{id}', 'RoomsController@createBook');
-Route::post('rooms/book/{id}', 'RoomsController@postBook');
+Route::put('rooms/{id}/maintenance', 'RoomsController@putMaintenance');
 
 Route::resource('features', 'FeaturesController');
 Route::resource('types', 'TypesController');
 
 Route::resource('products', 'ProductsController');
+
+Route::resource('bookings', 'BookingsController');
+Route::get('bookings/create/{id}', 'BookingsController@create');
+Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
 
 Route::get('stock', 'StockController@index');
 

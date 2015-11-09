@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('barcode');
             $table->decimal('price', 6, 2);
             $table->boolean('saleable');
             $table->enum('uom', ['unit', 'weight']);

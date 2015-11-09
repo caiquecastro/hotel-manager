@@ -25,9 +25,6 @@
             <a class="nav-link" href="{{ action('BookingsController@index') }}">Reservas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="manage-room.html">Recepção</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="consumo.html">Consumo</a>
         </li>
         <li class="nav-item">

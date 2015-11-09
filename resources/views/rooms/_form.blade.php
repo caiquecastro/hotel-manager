@@ -32,6 +32,6 @@
 </div>
 <div class="form-group row">
     <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>

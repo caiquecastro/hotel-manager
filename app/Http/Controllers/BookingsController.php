@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
+use App\Room;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,17 +18,28 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::paginate();
+        $rooms = Room::all();
+        return view('bookings.index', compact('bookings', 'rooms'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param null $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id = null)
     {
-        //
+        $rooms = Room::lists('number', 'id');
+        $customers = \App\Customer::lists('name', 'id');
+
+        if(!empty($id)) {
+            $room = Room::findOrFail($id);
+        } else {
+            $room = Room::all()->first();
+        }
+        return view('bookings.create', compact('rooms', 'customers', 'room'));
     }
 
     /**
@@ -37,7 +50,20 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $room = Room::findOrFail($data['room_id']);
+
+        \App\Booking::create($data);
+        $room->status = 'occupied';
+        $room->save();
+
+        \Session::flash('message_type', 'success');
+        \Session::flash('message', 'Reserva cadastrada com sucesso!');
+
+        return redirect('bookings');
+
+
     }
 
     /**
@@ -83,5 +109,10 @@ class BookingsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCheckout($id)
+    {
+
     }
 }

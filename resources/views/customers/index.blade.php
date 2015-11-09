@@ -3,6 +3,8 @@
 @section('content')
     <h1>Clientes</h1>
     <a href="{{ action('CustomersController@create') }}" class="btn btn-primary m-b">Adicionar novo</a>
+    @include('errors.list')
+    @include('partials._messages')
     <table class="table">
         <thead>
         <tr>
