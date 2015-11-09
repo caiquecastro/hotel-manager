@@ -29,7 +29,7 @@
             </div>
         @endforeach
     </div>
-    {{--<a href="{{ action('BookingsController@create', null) }}" class="btn btn-primary m-b">Adicionar novo</a>--}}
+    <a href="{{ action('BookingsController@create', null) }}" class="btn btn-primary m-b">Nova reserva</a>
     <table class="table">
         <thead>
         <tr>
@@ -47,8 +47,8 @@
                 <td>{{ $booking->id }}</td>
                 <td>{{ $booking->customer->name }}</td>
                 <td>{{ $booking->room->number }}</td>
-                <td>{{ $booking->checkin }}</td>
-                <td>{{ $booking->checkout }}</td>
+                <td>{{ $booking->checkin->format("d/m/Y") }}</td>
+                <td>{{ $booking->checkout->format("d/m/Y") }}</td>
                 <td>
                     <a href="{{ action('BookingsController@edit', $booking->id) }}" class="btn btn-secondary btn-sm">
                         <span class="fa fa-pencil"></span>

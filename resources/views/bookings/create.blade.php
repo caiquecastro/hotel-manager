@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label for="checkout" class="col-sm-2 form-control-label">Saída</label>
                     <div class="col-sm-5">
-                        {!! Form::text('checkout', \Carbon\Carbon::now()->format("d/m/Y"), ['class' => 'form-control js-date']) !!}
+                        {!! Form::text('checkout', \Carbon\Carbon::now()->addDay()->format("d/m/Y"), ['class' => 'form-control js-date']) !!}
                     </div>
                 </div>
                 <div class="form-group row">

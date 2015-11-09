@@ -31,5 +31,5 @@ Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
 
 Route::get('stock', 'StockController@index');
 
-Route::get('reports', 'ReportController@index');
+Route::get('reports', 'ReportsController@index');
 

@@ -34,7 +34,7 @@
             <a class="nav-link" href="finances.html">Contabilidade</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ action('ReportController@index') }}">Relatórios</a>
+            <a class="nav-link" href="{{ action('ReportsController@index') }}">Relatórios</a>
         </li>
     </ul>
 </nav>
