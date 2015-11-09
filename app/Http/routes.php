@@ -18,8 +18,15 @@ Route::get('/', function () {
 Route::resource('customers', 'CustomersController');
 
 Route::resource('rooms', 'RoomsController');
-Route::get('rooms/book/{id}', 'RoomsController@getBook');
+Route::get('rooms/book/{id}', 'RoomsController@createBook');
 Route::post('rooms/book/{id}', 'RoomsController@postBook');
 
 Route::resource('features', 'FeaturesController');
+Route::resource('types', 'TypesController');
+
+Route::resource('products', 'ProductsController');
+
+Route::get('stock', 'StockController@index');
+
+Route::get('reports', 'ReportController@index');
 

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Feature;
-use App\Room;
+use App\Type;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class RoomsController extends Controller
+class TypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,9 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        $rooms = Room::paginate();
-        return view('rooms.index', compact('rooms'));
+        $types = Type::paginate();
+
+        return view('types.index', compact('types'));
     }
 
     /**
@@ -29,9 +29,7 @@ class RoomsController extends Controller
      */
     public function create()
     {
-        $features = Feature::all();
-        $types = \App\Type::lists('name', 'id');
-        return view('rooms.create', compact('features', 'types'));
+        return view('types.create');
     }
 
     /**
@@ -43,17 +41,13 @@ class RoomsController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['status'] = 'available';
 
-        $features = $data['features'];
-
-        $room = Room::create($data);
-        $room->features()->attach($features);
+        \App\Type::create($data);
 
         \Session::flash('message_type', 'success');
-        \Session::flash('message', 'Quarto cadastrado com sucesso!');
+        \Session::flash('message', 'Tipo de Quarto cadastrada com sucesso!');
 
-        return redirect('rooms');
+        return redirect('types');
     }
 
     /**
@@ -64,7 +58,7 @@ class RoomsController extends Controller
      */
     public function show($id)
     {
-        return Room::findOrFail($id);
+        return Type::findOrFail($id);
     }
 
     /**
@@ -75,10 +69,9 @@ class RoomsController extends Controller
      */
     public function edit($id)
     {
-        $room = Room::findOrFail($id);
-        $features = Feature::all('name', 'id');
-        $types = \App\Type::lists('name', 'id');
-        return view('rooms.edit', compact('room', 'features', 'types'));
+        $type = Type::findOrFail($id);
+
+        return view('types.edit', compact('type'));
     }
 
     /**
@@ -91,17 +84,14 @@ class RoomsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $features = $data['features'];
 
-        $room = Room::findOrFail($id);
-        $room->update($data);
-
-        $room->features()->sync($features);
+        $type = Type::findOrFail($id);
+        $type->update($data);
 
         \Session::flash('message_type', 'success');
-        \Session::flash('message', 'Quarto atualizado com sucesso!');
+        \Session::flash('message', 'Tipo de Quarto atualizado com sucesso!');
 
-        return redirect('/rooms');
+        return redirect('types');
     }
 
     /**
@@ -112,24 +102,16 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        $delete_count = Room::destroy($id);
+        $delete_count = Type::destroy($id);
 
         if($delete_count != 1) {
             \Session::flash('message_type', 'danger');
-            \Session::flash('message', 'Erro ao excluir quarto!');
+            \Session::flash('message', 'Erro ao excluir tipo de quarto!');
         } else {
             \Session::flash('message_type', 'success');
-            \Session::flash('message', 'Quarto excluida com sucesso!');
+            \Session::flash('message', 'Tipo de quarto excluido com sucesso!');
         }
 
-        return redirect('/rooms');
-    }
-
-    public function createBook($id)
-    {
-        $rooms = Room::lists('number', 'id');
-        $room = Room::findOrFail($id);
-        $customers = \App\Customer::lists('name', 'id');
-        return view('rooms.book', compact('rooms', 'customers', 'room'));
+        return redirect('types');
     }
 }

@@ -4,6 +4,7 @@
     <h1>Quartos</h1>
     <a href="{{ action('RoomsController@create') }}" class="btn btn-primary m-b">Adicionar novo</a>
     <a href="{{ action('FeaturesController@index') }}" class="btn btn-primary m-b">Características</a>
+    <a href="{{ action('TypesController@index') }}" class="btn btn-primary m-b">Tipos</a>
     <table class="table">
         <thead>
         <tr>
@@ -53,7 +54,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ action('RoomsController@getBook', $room->id) }}" class="btn btn-primary btn-sm">
+                    <a href="{{ action('RoomsController@createBook', $room->id) }}" class="btn btn-primary btn-sm">
                         <span class="fa fa-calendar"></span>
                     </a>
                     <a href="{{ action('RoomsController@edit', $room->id) }}" class="btn btn-secondary btn-sm">

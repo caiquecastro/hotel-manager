@@ -19,7 +19,10 @@
             <a class="nav-link" href="{{ action('RoomsController@index') }}">Quartos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="product-index.html">Produtos</a>
+            <a class="nav-link" href="{{ action('ProductsController@index') }}">Produtos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ action('BookingsController@index') }}">Reservas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="manage-room.html">Recepção</a>
@@ -28,13 +31,13 @@
             <a class="nav-link" href="consumo.html">Consumo</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="inventory.html">Estoque</a>
+            <a class="nav-link" href="{{ action('StockController@index') }}">Estoque</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="finances.html">Contabilidade</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="report.html">Relatórios</a>
+            <a class="nav-link" href="{{ action('ReportController@index') }}">Relatórios</a>
         </li>
     </ul>
 </nav>

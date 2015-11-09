@@ -5,6 +5,12 @@
     </div>
 </div>
 <div class="form-group row">
+    {!! Form::label('type_id', 'Tipo', ['class' => 'col-sm-2 form-control-label']) !!}
+    <div class="col-sm-5">
+        {!! Form::select("type_id", $types, null, ['class'=> 'c-select form-control']) !!}
+    </div>
+</div>
+<div class="form-group row">
     {!! Form::label('floor', 'Andar', ['class' => 'col-sm-2 form-control-label']) !!}
     <div class="col-sm-5">
         {!! Form::select("floor", ["ground"=>"Térreo", "first" => "1º Andar", "second" => "2º Andar"], null, ['class'=> 'c-select form-control']) !!}
