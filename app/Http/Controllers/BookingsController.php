@@ -125,7 +125,9 @@ class BookingsController extends Controller
         $room = Room::findOrFail($id);
         $booking = Booking::where('room_id', '=', $room->id)
             ->get();
-        dd($booking);
+
+        //return redirect('bookings');
+
         return view('bookings.checkout', compact('booking'));
     }
 }

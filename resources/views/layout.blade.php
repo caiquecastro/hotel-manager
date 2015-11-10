@@ -25,14 +25,14 @@
             <a class="nav-link" href="{{ action('BookingsController@index') }}">Reservas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="consumo.html">Consumo</a>
+            <a class="nav-link" href="{{ action('ConsumptionController@index') }}">Consumo</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ action('StockController@index') }}">Estoque</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="finances.html">Contabilidade</a>
-        </li>
+        {{--<li class="nav-item">--}}
+            {{--<a class="nav-link" href="{{ action('StockController@index') }}">Estoque</a>--}}
+        {{--</li>--}}
+        {{--<li class="nav-item">--}}
+            {{--<a class="nav-link" href="{{ action('FinancesController@index') }}">Contabilidade</a>--}}
+        {{--</li>--}}
         <li class="nav-item">
             <a class="nav-link" href="{{ action('ReportsController@index') }}">Relatórios</a>
         </li>

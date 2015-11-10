@@ -19,6 +19,7 @@ Route::resource('customers', 'CustomersController');
 
 Route::resource('rooms', 'RoomsController');
 Route::put('rooms/{id}/maintenance', 'RoomsController@putMaintenance');
+Route::get('rooms/{id}/booking', 'RoomsController@getBooking');
 
 Route::resource('features', 'FeaturesController');
 Route::resource('types', 'TypesController');
@@ -30,6 +31,18 @@ Route::get('bookings/create/{id}', 'BookingsController@create');
 Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
 
 Route::get('stock', 'StockController@index');
+Route::get('stock/{id}', 'StockController@getProductInfo');
 
 Route::get('reports', 'ReportsController@index');
 
+Route::get('consumption', 'ConsumptionController@index');
+Route::post('consumption', 'ConsumptionController@store');
+
+Route::get('finance', 'FinancesController@index');
+
+Route::get('login', function() {
+    return view('login.index');
+});
+Route::post('login', function() {
+    return redirect('/');
+});

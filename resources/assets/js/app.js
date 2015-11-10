@@ -1,4 +1,4 @@
-;(function(win, doc, $, undefined) {
+;(function (win, doc, $, undefined) {
     var phoneMask, phoneMaskOptions;
 
     phoneMask = function (val) {
@@ -6,7 +6,7 @@
     };
 
     phoneMaskOptions = {
-        onKeyPress: function(val, e, field, options) {
+        onKeyPress: function (val, e, field, options) {
             field.mask(SPMaskBehavior.apply({}, arguments), options);
         }
     };
@@ -18,7 +18,7 @@
 
     $("input[name=person_type]").on("change", toggleCustomerForm);
 
-    $("#print-page").on("click", function() {
+    $("#print-page").on("click", function () {
         win.print();
     });
 
@@ -41,21 +41,76 @@
     };
 
 
-    var chartRoom = $("#chart-room");
+    var chartRoom = doc.getElementById("chart-room");
 
-    if(chartRoom.length) {
-        var ctx = chartElement.getContext("2d");
+    if (chartRoom) {
+        var ctx = chartRoom.getContext("2d");
         var roomNightsChart = new Chart(ctx).Line(data, options);
     }
 
-    $("input[name=person_type]").find(":checked").each(function() {
+    $("#barcode-search").blur(function () {
+        var barcode = $(this).val();
+        $.ajax({
+            method: "GET",
+            url: "/stock/" + barcode,
+            data: {
+
+            }
+        }).done(function (data) {
+            $("#name").val(data.name);
+            $("#product_id").val(data.id);
+            $("#price").val(data.price);
+        });
+    });
+
+    $("body").on("blur", "#amount", function() {
+        var price = $("#price").val();
+        var amount = $(this).val();
+        $("#total").val(price*amount);
+    });
+
+    $("body").on("click", "#save-consumption", function(e) {
+        e.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/consumption",
+            data: {
+                _token: $("[name=_token]").val(),
+                booking_id: $("#booking_id").val(),
+                product_id: $("#product_id").val(),
+                price: $("#price").val(),
+                amount: $("#amount").val()
+            }
+        }).done(function (data) {
+            $("#name").val(data.name);
+            $("#product_id").val(data.id);
+            $("#price").val(data.price);
+        });
+    });
+
+    $("#open-consumption").click(function() {
+        var room_id = $(this).data("id");
+
+        $.ajax({
+            method: "GET",
+            url: "/rooms/"+room_id,
+            data: {
+                booking_id: $("#booking_id").val()
+            }
+        }).done(function (data) {
+            $("#booking_id").val(data.booking_id);
+            $("#modal-consumption").modal();
+        });
+    });
+
+    $("input[name=person_type]").find(":checked").each(function () {
         toggleCustomerForm();
     });
 
     function toggleCustomerForm() {
         var current_val = $(this).val();
 
-        if(current_val.indexOf('LegalPerson') > 0) {
+        if (current_val.indexOf('LegalPerson') > 0) {
             $(".row-cpf").attr("hidden", true);
             $("#cpf").attr("disabled", true);
 

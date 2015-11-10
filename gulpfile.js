@@ -33,6 +33,7 @@ elixir(function(mix) {
         "../../../" + paths.jquery + "/jquery.js",
         "../../../" + paths.bootstrap + "/dist/js/bootstrap.js",
         "../../../" + paths.jquery_mask + "/dist/jquery.mask.min.js",
+        "../../../" + paths.chart_js + "/Chart.min.js",
         '/resources/assets/js/app.js'
     ]);
 
