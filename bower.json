@@ -26,6 +26,7 @@
     "bootstrap": "4.*",
     "font-awesome": "~4.4.0",
     "jquery-mask-plugin": "~1.13.4",
-    "Chart.js": "~1.0.2"
+    "Chart.js": "~1.0.2",
+    "jquery-maskmoney": "^3.0.2"
   }
 }

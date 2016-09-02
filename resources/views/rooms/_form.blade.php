@@ -16,13 +16,18 @@
         {!! Form::select("floor", ["ground"=>"Térreo", "first" => "1º Andar", "second" => "2º Andar"], null, ['class'=> 'c-select form-control']) !!}
     </div>
 </div>
+
 <div class="form-group row">
     <label class="col-sm-2">Características</label>
     <div class="col-sm-10">
         @foreach($features as $feature)
         <div class="checkbox">
             <label class="c-input c-checkbox">
-                <input type="checkbox" name="features[]" value="{{ $feature->id }}">
+                <input type="checkbox" name="features[]" value="{{ $feature->id }}"
+                        @if (isset($room) and $room->features->contains($feature))
+                            checked
+                        @endif
+                >
                 <span class="c-indicator"></span>
                 {{ $feature->name }}
             </label>

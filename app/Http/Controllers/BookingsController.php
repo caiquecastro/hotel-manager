@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Booking;
 use App\Room;
+use App\Booking;
+use App\Customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class BookingsController extends Controller
 {
@@ -53,9 +52,12 @@ class BookingsController extends Controller
         $data = $request->all();
 
         $room = Room::findOrFail($data['room_id']);
-        $available_room = Booking::where('room_id', '=', $room->id)
-            ->where('checkin', '>=', $data['checkin'])
-            ->orWhere('room_id', '=', $room->id)
+        $customer = Customer::findOrFail($data['customer_id']);
+
+        $available_room = Booking::where(function ($query) use ($room, $customer) {
+            $query->where('room_id', '=', $room->id)
+                ->orWhere('customer_id', '=', $customer->id);
+        })->where('checkin', '>=', $data['checkin'])
             ->where('checkout', '>=', $data['checkout'])
             ->count();
 
@@ -83,7 +85,7 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Booking::findOrFail($id);
     }
 
     /**
@@ -124,10 +126,13 @@ class BookingsController extends Controller
     {
         $room = Room::findOrFail($id);
         $booking = Booking::where('room_id', '=', $room->id)
-            ->get();
+            ->where('checkin', '>=', Carbon::today())
+            ->orWhere('checkout', '<=', Carbon::today())
+            ->firstOrFail();
 
-        //return redirect('bookings');
+        $bookingDays = $booking->checkout->diffInDays($booking->checkin)+1;
+        $roomPrice = $booking->room->type->price;
 
-        return view('bookings.checkout', compact('booking'));
+        return view('bookings.checkout', compact('booking', 'bookingDays', 'roomPrice'));
     }
 }

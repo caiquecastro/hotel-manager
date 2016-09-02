@@ -19,7 +19,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customer::paginate();
+        $customers = Customer::with('person')->paginate();
 
         return view('customers.index', compact('customers'));
     }
@@ -51,7 +51,7 @@ class CustomersController extends Controller
         } else {
             $person = LegalPerson::create($data);
         }
-        $customer = Customer::firstOrNew($data);
+        $customer = Customer::create($data);
         $person->customer()->save($customer);
 
         \Session::flash('message_type', 'success');

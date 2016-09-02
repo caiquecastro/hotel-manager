@@ -7,7 +7,7 @@
     @include('partials._messages')
     <div class="row">
         <div class="col-md-8">
-            {!! Form::open(array('action' => array('TypesController@store'))) !!}
+            {!! Form::open(array('action' => array('TypesController@store'), 'class' => 'js-parse-price')) !!}
             @include('types._form')
             {!! Form::close() !!}
         </div>

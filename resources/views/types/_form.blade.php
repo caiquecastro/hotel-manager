@@ -7,7 +7,7 @@
 <div class="form-group row">
     {!! Form::label('price', 'Preço', ['class' => 'col-sm-2 form-control-label']) !!}
     <div class="col-sm-5">
-        {!! Form::text('price', null, ['class' => 'form-control']) !!}
+        {!! Form::text('price', null, ['class' => 'form-control js-price']) !!}
     </div>
 </div>
 <div class="form-group row">

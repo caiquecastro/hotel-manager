@@ -17,21 +17,21 @@
                     <label class="col-sm-2 form-control-label">Quarto</label>
 
                     <div class="col-sm-10">
-                        <p class="form-control-static">101</p>
+                        <p class="form-control-static">{{ $booking->room->number }}</p>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Entrada</label>
 
                     <div class="col-sm-5">
-                        <p class="form-control-static">13/06/2015</p>
+                        <p class="form-control-static">{{ $booking->checkin->format("d-m-Y") }}</p>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Saída</label>
 
                     <div class="col-sm-5">
-                        <p class="form-control-static">23/06/2015</p>
+                        <p class="form-control-static">{{ $booking->checkout->format("d-m-Y") }}</p>
                     </div>
                 </div>
                 <h2 class="h4">Consumo</h2>
@@ -47,36 +47,39 @@
                     </thead>
                     <tfoot>
                     <tr>
-                        <td colspan="4" class="text-right">Subtotal</td>
-                        <td class="text-right">R$ 1828,00</td>
-                    </tr>
-                    <tr>
                         <td colspan="4" class="text-right">Total</td>
-                        <td class="text-right">R$ 1828,00</td>
+                        <td class="text-right">
+                            R$ {{ number_format($booking->consumptions->sum('total_price') + $roomPrice * $bookingDays, 2, ',', '.') }}
+                        </td>
                     </tr>
                     </tfoot>
                     <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Diária Suite Master</td>
-                        <td class="text-center">11</td>
-                        <td class="text-right">R$ 149,00</td>
-                        <td class="text-right">R$ 1639,00</td>
+                        <td>{{ $booking->room->number }}</td>
+                        <td>{{ $booking->room->type->name }}</td>
+                        <td class="text-center">
+                            {{ $bookingDays }}
+                        </td>
+                        <td class="text-right">R$ {{ number_format($roomPrice, 2, ',', '.') }}</td>
+                        <td class="text-right">R$ {{ number_format($roomPrice * $bookingDays, 2, ',', '.') }}</td>
                     </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>Almoço (15/06/2015)</td>
-                        <td class="text-center">1</td>
-                        <td class="text-right">R$ 89,00</td>
-                        <td class="text-right">R$ 89,00</td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>Refrigerante Coca-Cola</td>
-                        <td class="text-center">20</td>
-                        <td class="text-right">R$ 5,00</td>
-                        <td class="text-right">R$ 100,00</td>
-                    </tr>
+                    @foreach ($booking->consumptions as $consumption)
+                        <tr>
+                            <td>{{ $consumption->product->barcode }}</td>
+                            <td>
+                                {{ $consumption->product->name }} ({{ $consumption->created_at->format("d-m-Y H:i") }})
+                            </td>
+                            <td class="text-center">
+                                {{ $consumption->amount }}
+                            </td>
+                            <td class="text-right">
+                                R$ {{ number_format($consumption->price, 2, ',', '.') }}
+                            </td>
+                            <td class="text-right">
+                                R$ {{ number_format($consumption->total_price, 2, ',', '.') }}
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
 

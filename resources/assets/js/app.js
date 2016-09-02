@@ -14,6 +14,9 @@
     $(".js-date").mask("99/99/9999");
     $(".js-cpf").mask("999.999.999-99");
     $(".js-cnpj").mask("99.999.999/9999-99");
+    $(".js-price").maskMoney({
+        prefix: 'R$ '
+    });
     $('.js-telefone').mask(phoneMask, phoneMaskOptions);
 
     $("input[name=person_type]").on("change", toggleCustomerForm);
@@ -40,6 +43,11 @@
         bezierCurve: false
     };
 
+    $('.js-parse-price').on('submit', function(e) {
+        $(this).find('.js-price').each(function () {
+            $(this).val($(this).maskMoney('unmasked')[0]);
+        });
+    });
 
     var chartRoom = doc.getElementById("chart-room");
 
@@ -52,10 +60,7 @@
         var barcode = $(this).val();
         $.ajax({
             method: "GET",
-            url: "/stock/" + barcode,
-            data: {
-
-            }
+            url: "/stock/" + barcode
         }).done(function (data) {
             $("#name").val(data.name);
             $("#product_id").val(data.id);
@@ -81,24 +86,24 @@
                 price: $("#price").val(),
                 amount: $("#amount").val()
             }
-        }).done(function (data) {
-            $("#name").val(data.name);
-            $("#product_id").val(data.id);
-            $("#price").val(data.price);
+        }).done(function () {
+            $("#barcode-search").val('');
+            $("#name").val('');
+            $("#product_id").val('');
+            $("#price").val('');
+
+            $("#modal-consumption").modal('close');
         });
     });
 
-    $("#open-consumption").click(function() {
-        var room_id = $(this).data("id");
+    $(".open-consumption").click(function() {
+        var booking_id = $(this).data("id");
 
         $.ajax({
             method: "GET",
-            url: "/rooms/"+room_id,
-            data: {
-                booking_id: $("#booking_id").val()
-            }
+            url: "/bookings/" + booking_id
         }).done(function (data) {
-            $("#booking_id").val(data.booking_id);
+            $("#booking_id").val(data.id);
             $("#modal-consumption").modal();
         });
     });

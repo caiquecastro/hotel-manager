@@ -17,6 +17,7 @@ elixir(function(mix) {
         bootstrap: "vendor/bower_components/bootstrap",
         fontawesome: "vendor/bower_components/font-awesome",
         jquery_mask: "vendor/bower_components/jquery-mask-plugin",
+        mask_money: "vendor/bower_components/jquery-maskmoney",
         chart_js: "vendor/bower_components/Chart.js"
     };
 
@@ -33,6 +34,7 @@ elixir(function(mix) {
         "../../../" + paths.jquery + "/jquery.js",
         "../../../" + paths.bootstrap + "/dist/js/bootstrap.js",
         "../../../" + paths.jquery_mask + "/dist/jquery.mask.min.js",
+        "../../../" + paths.mask_money + "/dist/jquery.maskMoney.min.js",
         "../../../" + paths.chart_js + "/Chart.min.js",
         '/resources/assets/js/app.js'
     ]);

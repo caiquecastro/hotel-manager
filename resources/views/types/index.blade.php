@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ $type->id }}</td>
                 <td>{{ $type->name }}</td>
-                <td>{{ $type->price }}</td>
+                <td>R$ {{ number_format($type->price, 2, ',', '.') }}</td>
                 <td>
                     <a href="{{ action('TypesController@edit', $type->id) }}" class="btn btn-secondary btn-sm">
                         <span class="fa fa-pencil"></span>

@@ -25,9 +25,9 @@
                 <td>{{ $customer->phone }}</td>
                 <td>{{ $customer->created_at->format("d/m/Y") }}</td>
                 <td>
-                    {{--<a href="{{ action('CustomersController@show', $customer->id) }}" class="btn btn-secondary btn-sm">--}}
-                        {{--<span class="fa fa-file"></span>--}}
-                    {{--</a>--}}
+                    <a href="{{ action('CustomersController@show', $customer->id) }}" class="btn btn-secondary btn-sm">
+                        <span class="fa fa-file"></span>
+                    </a>
                     <a href="{{ action('CustomersController@edit', $customer->id) }}" class="btn btn-secondary btn-sm">
                         <span class="fa fa-pencil"></span>
                     </a>

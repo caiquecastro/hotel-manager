@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class ConsumptionController extends Controller
 {
@@ -16,8 +15,11 @@ class ConsumptionController extends Controller
      */
     public function index()
     {
-        $occupied_rooms = \App\Room::where("status", "=", "occupied")->get();
-        return view('consumption.index', compact('occupied_rooms'));
+        $activeRooms = Booking::with('room')->where('checkin', '>=', Carbon::today())
+            ->where('checkout', '>=', Carbon::today())
+            ->get();
+
+        return view('consumption.index', compact('activeRooms'));
     }
 
     /**
@@ -38,8 +40,9 @@ class ConsumptionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        \App\Consumption::create($request->all());
+        $consumption = \App\Consumption::create($request->all());
+
+        return response()->json($consumption);
     }
 
     /**

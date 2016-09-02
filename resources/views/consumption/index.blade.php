@@ -1,16 +1,16 @@
 @extends('layout')
 
 @section('content')
-    <h1>Consumo</h1>
+    <h1>Restaurante</h1>
 
     <div class="row">
-        @foreach($occupied_rooms as $room)
+        @foreach($activeRooms as $booking)
             <div class="col-sm-2">
                 <div class="card">
                     <div class="card-block">
-                        <h4 class="card-title">#{{ $room->number }}</h4>
-                        <button type="button" class="btn btn-primary btn-block" id="open-consumption"
-                                data-id="{{ $room->id }}">
+                        <h4 class="card-title">#{{ $booking->room->number }}</h4>
+                        <button type="button" class="btn btn-primary btn-block open-consumption"
+                                data-id="{{ $booking->id }}">
                             Inserir
                         </button>
                     </div>
@@ -31,6 +31,7 @@
                 <div class="modal-body">
                     <form action="">
                         {!! Form::token() !!}
+                        <input type="hidden" id="booking_id" value="">
                         <div class="form-group">
                             <label for="barcode-search">Código do Produto</label>
                             <input type="text" class="form-control" id="barcode-search">

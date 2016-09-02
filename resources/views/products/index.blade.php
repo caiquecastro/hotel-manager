@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ $product->barcode }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->price }}</td>
+                <td>R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                 <td>
                     <a href="{{ action('ProductsController@edit', $product->id) }}" class="btn btn-secondary btn-sm">
                         <span class="fa fa-pencil"></span>

@@ -13,7 +13,7 @@
 <div class="form-group row">
     {!! Form::label('price', 'Preço', ['class' => 'col-sm-2 form-control-label']) !!}
     <div class="col-sm-5">
-        {!! Form::text('price', null, ['class' => 'form-control']) !!}
+        {!! Form::text('price', null, ['class' => 'form-control js-price']) !!}
         <small class="text-muted">
             Preço de Venda
         </small>
@@ -24,7 +24,7 @@
     <div class="col-sm-5">
         <div class="checkbox">
             <label class="c-input c-checkbox">
-                {!! Form::checkbox('saleable', 'true') !!}
+                {!! Form::checkbox('saleable', true, true) !!}
                 <span class="c-indicator"></span>
                 Sim
             </label>

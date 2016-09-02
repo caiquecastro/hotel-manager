@@ -30,4 +30,9 @@ class Booking extends Model
     {
         return $this->belongsTo('App\Room');
     }
+
+    public function consumptions()
+    {
+        return $this->hasMany(Consumption::class);
+    }
 }
