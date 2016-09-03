@@ -7,6 +7,7 @@ use App\Booking;
 use App\Customer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookingRequest;
 
 class BookingsController extends Controller
 {
@@ -44,10 +45,10 @@ class BookingsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\BookingRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookingRequest $request)
     {
         $data = $request->all();
 
@@ -85,7 +86,9 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
-        return Booking::findOrFail($id);
+        return response()->json(
+            Booking::findOrFail($id)
+        );
     }
 
     /**
