@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Room;
 use App\Booking;
 use App\Customer;
+use App\Http\Requests\BookingRequest;
+use App\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Requests\BookingRequest;
 
 class BookingsController extends Controller
 {
@@ -20,6 +20,7 @@ class BookingsController extends Controller
     {
         $bookings = Booking::paginate();
         $rooms = Room::all();
+
         return view('bookings.index', compact('bookings', 'rooms'));
     }
 
@@ -62,7 +63,7 @@ class BookingsController extends Controller
             ->where('checkout', '>=', $data['checkout'])
             ->count();
 
-        if($available_room > 0) {
+        if ($available_room > 0) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Não foi possível reservar o quarto na data desejada!');
             return redirect('bookings');

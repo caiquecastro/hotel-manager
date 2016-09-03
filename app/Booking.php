@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Booking
- * @package App
  *
  * @method static Booking findOrFail($id)
  */

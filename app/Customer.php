@@ -32,5 +32,4 @@ class Customer extends Model
     {
         return $this->person->birthday;
     }
-
 }
