@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Auth::routes();
+
 Route::get('dashboard', 'DashboardController@index');
 
 Route::resource('customers', 'CustomersController');
