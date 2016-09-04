@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('dashboard', 'DashboardController@index');
 
 Route::resource('customers', 'CustomersController');
 
