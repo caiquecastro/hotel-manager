@@ -6,6 +6,11 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "laravel-elixir": "^6.0.0-9"
+    "laravel-elixir": "^6.0.0-9",
+    "bootstrap": "^4.0.0-beta.2",
+    "font-awesome": "~4.4.0",
+    "jquery-mask-plugin": "~1.13.4",
+    "chart.js": "~1.0.2",
+    "jquery-maskmoney": "^3.0.2"
   }
 }
