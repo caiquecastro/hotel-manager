@@ -1,0 +1,46 @@
+version: '3.4'
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+
+services:
+  postgres:
+    image: ambientum/postgres:9.6
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=hotelmanager
+      - POSTGRES_USER=hotelmanager_user
+      - POSTGRES_PASSWORD=hotelmanager_pass
+
+  cache:
+    image: ambientum/redis:4.0
+    command: --appendonly yes
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
+  app:
+    image: ambientum/php:7.1-nginx
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "80:8080"
+    links:
+      - postgres
+      - cache
+
+  queue:
+    image: ambientum/php:7.1
+    command: php artisan queue:listen
+    volumes:
+      - .:/var/www/app
+    links:
+      - postgres
+      - cache
