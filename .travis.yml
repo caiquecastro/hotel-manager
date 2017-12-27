@@ -14,7 +14,7 @@ before_script:
   - psql -c 'create database hotelmanager;' -U postgres
   - cp .env.travis .env
   - php artisan key:generate --force
-  - php artisan migrate
+  - php artisan migrate --force
 
 script:
   - vendor/bin/phpunit
