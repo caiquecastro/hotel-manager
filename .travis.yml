@@ -13,7 +13,7 @@ install:
 before_script:
   - psql -c 'create database hotelmanager;' -U postgres
   - cp .env.travis .env
-  - php artisan key:generate
+  - php artisan key:generate --force
   - php artisan migrate
 
 script:
