@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Feature;
 use App\Room;
+use App\Feature;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class RoomsController extends Controller
 {
@@ -19,6 +16,7 @@ class RoomsController extends Controller
     public function index()
     {
         $rooms = Room::paginate();
+
         return view('rooms.index', compact('rooms'));
     }
 
@@ -31,6 +29,7 @@ class RoomsController extends Controller
     {
         $features = Feature::all();
         $types = \App\Type::orderBy('price')->lists('name', 'id');
+
         return view('rooms.create', compact('features', 'types'));
     }
 
@@ -78,6 +77,7 @@ class RoomsController extends Controller
         $room = Room::findOrFail($id);
         $features = Feature::all('name', 'id');
         $types = \App\Type::lists('name', 'id');
+
         return view('rooms.edit', compact('room', 'features', 'types'));
     }
 
@@ -114,7 +114,7 @@ class RoomsController extends Controller
     {
         $delete_count = Room::destroy($id);
 
-        if($delete_count != 1) {
+        if ($delete_count != 1) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Erro ao excluir quarto!');
         } else {
@@ -129,19 +129,20 @@ class RoomsController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        if($room->status == "occupied") {
+        if ($room->status == 'occupied') {
             \Session::flash('message_type', 'warning');
             \Session::flash('message', 'Não foi possível definir manutenção para quarto ocupado!');
-        } elseif($room->status == "available") {
+        } elseif ($room->status == 'available') {
             \Session::flash('message_type', 'success');
             \Session::flash('message', 'Quarto em manutenção definido com sucesso!');
-            $room->status = "maintenance";
+            $room->status = 'maintenance';
         } else {
             \Session::flash('message_type', 'success');
             \Session::flash('message', 'Quarto disponível definido com sucesso!');
-            $room->status = "available";
+            $room->status = 'available';
         }
         $room->save();
+
         return redirect('/rooms');
     }
 }

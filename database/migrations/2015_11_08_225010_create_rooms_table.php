@@ -14,11 +14,11 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("number");
-            $table->string("floor");
+            $table->string('number');
+            $table->string('floor');
             $table->integer('type_id')->unsigned();
 
-            $table->enum("status", ["available", "occupied", "maintenance"])->default("available");
+            $table->enum('status', ['available', 'occupied', 'maintenance'])->default('available');
             $table->timestamps();
 
             $table->foreign('type_id')

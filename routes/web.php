@@ -42,9 +42,9 @@ Route::post('consumption', 'ConsumptionController@store');
 
 Route::get('finance', 'FinancesController@index');
 
-Route::get('login', function() {
+Route::get('login', function () {
     return view('login.index');
 });
-Route::post('login', function() {
+Route::post('login', function () {
     return redirect('/');
 });

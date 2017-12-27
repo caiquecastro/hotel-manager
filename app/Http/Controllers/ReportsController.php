@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 class ReportsController extends Controller
 {
     /**
@@ -17,6 +14,7 @@ class ReportsController extends Controller
     public function index()
     {
         $rooms = \App\Room::all();
+
         return view('reports.index', compact('rooms'));
     }
 

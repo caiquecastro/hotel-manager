@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 class ProductsController extends Controller
 {
     /**
@@ -18,6 +15,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::paginate();
+
         return view('products.index', compact('products'));
     }
 
@@ -70,6 +68,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
+
         return view('products.edit', compact('product'));
     }
 
@@ -103,7 +102,7 @@ class ProductsController extends Controller
     {
         $delete_count = Product::destroy($id);
 
-        if($delete_count != 1) {
+        if ($delete_count != 1) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Erro ao excluir produto!');
         } else {

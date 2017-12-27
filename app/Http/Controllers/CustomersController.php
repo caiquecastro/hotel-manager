@@ -6,9 +6,6 @@ use App\Customer;
 use App\LegalPerson;
 use App\NaturalPerson;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
 
 class CustomersController extends Controller
@@ -47,7 +44,7 @@ class CustomersController extends Controller
 
         $type = $request->input('person_type');
 
-        if ("App\\NaturalPerson" == $type) {
+        if ('App\\NaturalPerson' == $type) {
             $person = NaturalPerson::create($data);
         } else {
             $person = LegalPerson::create($data);
@@ -81,6 +78,7 @@ class CustomersController extends Controller
     public function edit($id)
     {
         $customer = Customer::findOrFail($id);
+
         return view('customers.edit', compact('customer'));
     }
 
@@ -119,7 +117,7 @@ class CustomersController extends Controller
         $customer->person->delete();
         $delete_count = $customer->delete();
 
-        if($delete_count != 1) {
+        if ($delete_count != 1) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Erro ao excluir cliente!');
         } else {

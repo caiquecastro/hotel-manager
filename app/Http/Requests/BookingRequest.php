@@ -22,7 +22,7 @@ class BookingRequest extends Request
     public function rules()
     {
         return [
-            'room_id' => 'exists:rooms,id'
+            'room_id' => 'exists:rooms,id',
         ];
     }
 }
