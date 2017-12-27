@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerRequest;
 
 class CustomersController extends Controller
 {
@@ -40,7 +41,7 @@ class CustomersController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
         $data = $request->all();
 
@@ -51,8 +52,8 @@ class CustomersController extends Controller
         } else {
             $person = LegalPerson::create($data);
         }
-        $customer = Customer::create($data);
-        $person->customer()->save($customer);
+
+        $person->customer()->create($data);
 
         \Session::flash('message_type', 'success');
         \Session::flash('message', 'Cliente cadastrado com sucesso!');
