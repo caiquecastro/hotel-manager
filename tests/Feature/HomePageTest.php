@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-class ExampleTest extends TestCase
+class HomePageTest extends TestCase
 {
     /**
      * A basic functional test example.
