@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class CustomerTest extends TestCase
 {
-    public function testExample()
+    public function testViewCustomerList()
     {
         $this->withoutExceptionHandling();
 

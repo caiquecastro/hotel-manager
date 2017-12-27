@@ -4,8 +4,17 @@ php:
   - 7.2
   - nightly
 
+services:
+  - postgresql
+
 install:
   - travis_retry composer install --no-interaction --prefer-dist
+
+before_script:
+  - psql -c 'create database hotelmanager;' -U postgres
+  - cp .env.travis .env
+  - php artisan key:generate
+  - php artisan migrate
 
 script:
   - vendor/bin/phpunit
