@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Room;
 use App\Booking;
 use App\Customer;
-use App\Http\Requests\BookingRequest;
-use App\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookingRequest;
 
 class BookingsController extends Controller
 {
@@ -35,11 +35,12 @@ class BookingsController extends Controller
         $rooms = Room::lists('number', 'id');
         $customers = \App\Customer::lists('name', 'id');
 
-        if(!empty($id)) {
+        if(! empty($id)) {
             $room = Room::findOrFail($id);
         } else {
             $room = Room::all()->first();
         }
+
         return view('bookings.create', compact('rooms', 'customers', 'room'));
     }
 
@@ -66,6 +67,7 @@ class BookingsController extends Controller
         if ($available_room > 0) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Não foi possível reservar o quarto na data desejada!');
+
             return redirect('bookings');
         }
 
@@ -134,7 +136,7 @@ class BookingsController extends Controller
             ->orWhere('checkout', '<=', Carbon::today())
             ->firstOrFail();
 
-        $bookingDays = $booking->checkout->diffInDays($booking->checkin)+1;
+        $bookingDays = $booking->checkout->diffInDays($booking->checkin) + 1;
         $roomPrice = $booking->room->type->price;
 
         return view('bookings.checkout', compact('booking', 'bookingDays', 'roomPrice'));

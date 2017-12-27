@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Booking
+ * Class Booking.
  *
  * @method static Booking findOrFail($id)
  */

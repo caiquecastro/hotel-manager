@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TypeRequest;
 use App\Type;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\TypeRequest;
 
 class TypesController extends Controller
 {
@@ -105,7 +102,7 @@ class TypesController extends Controller
     {
         $delete_count = Type::destroy($id);
 
-        if($delete_count != 1) {
+        if ($delete_count != 1) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Erro ao excluir tipo de quarto!');
         } else {

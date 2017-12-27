@@ -7,21 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-    	'name',
-    	'barcode',
-    	'price',
-    	'saleable',
-    	'uom',
-    	'minimum_stock'
+        'name',
+        'barcode',
+        'price',
+        'saleable',
+        'uom',
+        'minimum_stock',
     ];
-
-//    public function getPriceAttribute($price)
-//    {
-//
-//    }
-//
-//    public function setPriceAttribute($price)
-//    {
-//
-//    }
 }

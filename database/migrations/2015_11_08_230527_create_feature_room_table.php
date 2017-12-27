@@ -13,7 +13,6 @@ class CreateFeatureRoomTable extends Migration
     public function up()
     {
         Schema::create('feature_room', function (Blueprint $table) {
-
             $table->increments('id');
             $table->integer('feature_id')->unsigned();
             $table->integer('room_id')->unsigned();

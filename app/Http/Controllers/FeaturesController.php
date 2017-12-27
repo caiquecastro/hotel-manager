@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Feature;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 class FeaturesController extends Controller
 {
     /**
@@ -18,6 +15,7 @@ class FeaturesController extends Controller
     public function index()
     {
         $features = \App\Feature::paginate();
+
         return view('features.index', compact('features'));
     }
 
@@ -69,6 +67,7 @@ class FeaturesController extends Controller
     public function edit($id)
     {
         $feature = Feature::findOrFail($id);
+
         return view('features.edit', compact('feature'));
     }
 
@@ -102,7 +101,7 @@ class FeaturesController extends Controller
     {
         $delete_count = Feature::destroy($id);
 
-        if($delete_count != 1) {
+        if ($delete_count != 1) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Erro ao excluir característica!');
         } else {
