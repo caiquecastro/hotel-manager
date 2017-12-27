@@ -35,7 +35,7 @@ class BookingsController extends Controller
         $rooms = Room::lists('number', 'id');
         $customers = \App\Customer::lists('name', 'id');
 
-        if(! empty($id)) {
+        if (! empty($id)) {
             $room = Room::findOrFail($id);
         } else {
             $room = Room::all()->first();
