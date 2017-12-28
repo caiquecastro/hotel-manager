@@ -34,4 +34,64 @@ class CustomerTest extends TestCase
 
         $response->assertSessionHas(['message' => 'Cliente cadastrado com sucesso!']);
     }
+
+    public function testCustomerNameIsRequired()
+    {
+        $response = $this->post('customers', [
+            'person_type' => 'App\\NaturalPerson',
+            'cpf' => '16828363710',
+            'birthday' => '1980-12-27',
+            'gender' => 'male',
+            'name' => '',
+            'phone' => '(11) 2121-2807',
+            'address' => 'Infantino Street',
+        ]);
+
+        $response->assertSessionHasErrors(['name' => 'The name field is required.']);
+    }
+
+    public function testCustomerAddressIsRequired()
+    {
+        $response = $this->post('customers', [
+            'person_type' => 'App\\NaturalPerson',
+            'cpf' => '16828363710',
+            'birthday' => '1980-12-27',
+            'gender' => 'male',
+            'name' => 'John Doe',
+            'phone' => '(11) 2121-2807',
+            'address' => '',
+        ]);
+
+        $response->assertSessionHasErrors(['address' => 'The address field is required.']);
+    }
+
+    public function testCustomerDocumentIsRequired()
+    {
+        $response = $this->post('customers', [
+            'person_type' => 'App\\NaturalPerson',
+            'cpf' => '',
+            'birthday' => '1980-12-27',
+            'gender' => 'male',
+            'name' => 'John Doe',
+            'phone' => '(11) 2121-2807',
+            'address' => 'Infantino Street',
+        ]);
+
+        $response->assertSessionHasErrors(['cpf' => 'The cpf field is required.']);
+    }
+
+    public function testCustomerBirthdayIsRequired()
+    {
+        $response = $this->post('customers', [
+            'person_type' => 'App\\NaturalPerson',
+            'cpf' => '16828363710',
+            'birthday' => '',
+            'gender' => 'male',
+            'name' => 'John Doe',
+            'phone' => '(11) 2121-2807',
+            'address' => 'Infantino Street',
+        ]);
+
+        $response->assertSessionHasErrors(['birthday' => 'The birthday field is required.']);
+    }
 }
