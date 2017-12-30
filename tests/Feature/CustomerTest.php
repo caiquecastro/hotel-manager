@@ -18,7 +18,7 @@ class CustomerTest extends TestCase
         $response->assertSuccessful();
     }
 
-    public function testCreateCustomerWithoutCnpj()
+    public function testCreatePersonCustomer()
     {
         $this->withoutExceptionHandling();
 
@@ -77,7 +77,9 @@ class CustomerTest extends TestCase
             'address' => 'Infantino Street',
         ]);
 
-        $response->assertSessionHasErrors(['cpf' => 'The cpf field is required.']);
+        $response->assertSessionHasErrors([
+            'cpf' => 'The cpf field is required when person type is App\NaturalPerson.',
+        ]);
     }
 
     public function testCustomerBirthdayIsRequired()
@@ -92,6 +94,38 @@ class CustomerTest extends TestCase
             'address' => 'Infantino Street',
         ]);
 
-        $response->assertSessionHasErrors(['birthday' => 'The birthday field is required.']);
+        $response->assertSessionHasErrors([
+            'birthday' => 'The birthday field is required when person type is App\NaturalPerson.',
+        ]);
+    }
+
+    public function testCreateCompanyCustomer()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->post('customers', [
+            'person_type' => 'App\\LegalPerson',
+            'name' => 'Acme Ltda.',
+            'address' => 'Infantino Street',
+            'cnpj' => '46777333000122',
+            'phone' => '(11) 92121-2807',
+        ]);
+
+        $response->assertSessionHas(['message' => 'Cliente cadastrado com sucesso!']);
+    }
+
+    public function testCompanyCustomerRequiresCnpj()
+    {
+        $response = $this->post('customers', [
+            'person_type' => 'App\\LegalPerson',
+            'name' => 'Acme Ltda.',
+            'address' => 'Infantino Street',
+            'cnpj' => '',
+            'phone' => '(11) 92121-2807',
+        ]);
+
+        $response->assertSessionHasErrors([
+            'cnpj' => 'The cnpj field is required when person type is App\LegalPerson.',
+        ]);
     }
 }
