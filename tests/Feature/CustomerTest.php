@@ -78,7 +78,7 @@ class CustomerTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors([
-            'cpf' => 'The cpf field is required when person type is App\NaturalPerson.'
+            'cpf' => 'The cpf field is required when person type is App\NaturalPerson.',
         ]);
     }
 
