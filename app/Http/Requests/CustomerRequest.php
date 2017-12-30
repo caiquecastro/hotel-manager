@@ -26,8 +26,9 @@ class CustomerRequest extends FormRequest
         return [
             'name' => 'required',
             'address' => 'required',
-            'cpf' => 'required',
-            'birthday' => 'required',
+            'cpf' => 'required_if:person_type,App\NaturalPerson',
+            'cnpj' => 'required_if:person_type,App\LegalPerson',
+            'birthday' => 'required_if:person_type,App\NaturalPerson',
         ];
     }
 }
