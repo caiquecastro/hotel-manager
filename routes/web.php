@@ -10,12 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', 'HomeController@index');
-
-Auth::routes();
-
-Route::get('dashboard', 'DashboardController@index');
+Route::get('/', 'DashboardController@index');
 
 Route::resource('customers', 'CustomersController');
 
@@ -42,9 +37,4 @@ Route::post('consumption', 'ConsumptionController@store');
 
 Route::get('finance', 'FinancesController@index');
 
-Route::get('login', function () {
-    return view('login.index');
-});
-Route::post('login', function () {
-    return redirect('/');
-});
+Auth::routes();
