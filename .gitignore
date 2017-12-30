@@ -4,3 +4,6 @@
 Homestead.yaml
 Homestead.json
 .env
+/public/fonts
+/public/css
+/public/js
