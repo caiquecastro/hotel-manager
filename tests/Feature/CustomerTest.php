@@ -9,10 +9,18 @@ class CustomerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function testRequiresAuthenticationToListCustomers()
+    {
+        $response = $this->get('customers');
+
+        $response->assertRedirect('login');
+    }
+
     public function testViewCustomerList()
     {
         $this->withoutExceptionHandling();
 
+        $this->loginUser();
         $response = $this->get('customers');
 
         $response->assertSuccessful();
@@ -22,6 +30,7 @@ class CustomerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\NaturalPerson',
             'cpf' => '16828363710',
@@ -37,6 +46,7 @@ class CustomerTest extends TestCase
 
     public function testCustomerNameIsRequired()
     {
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\NaturalPerson',
             'cpf' => '16828363710',
@@ -52,6 +62,7 @@ class CustomerTest extends TestCase
 
     public function testCustomerAddressIsRequired()
     {
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\NaturalPerson',
             'cpf' => '16828363710',
@@ -67,6 +78,7 @@ class CustomerTest extends TestCase
 
     public function testCustomerDocumentIsRequired()
     {
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\NaturalPerson',
             'cpf' => '',
@@ -84,6 +96,7 @@ class CustomerTest extends TestCase
 
     public function testCustomerBirthdayIsRequired()
     {
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\NaturalPerson',
             'cpf' => '16828363710',
@@ -103,6 +116,7 @@ class CustomerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\LegalPerson',
             'name' => 'Acme Ltda.',
@@ -116,6 +130,7 @@ class CustomerTest extends TestCase
 
     public function testCompanyCustomerRequiresCnpj()
     {
+        $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\LegalPerson',
             'name' => 'Acme Ltda.',

@@ -18,8 +18,7 @@ class DashboardTest extends TestCase
 
     public function testLoggedUserIsRedirectedToDashboardIfVisitLoginPage()
     {
-        $this->actingAs(factory(User::class)->create());
-
+        $this->loginUser();
         $response = $this->get('/login');
 
         $response->assertRedirect('/');
