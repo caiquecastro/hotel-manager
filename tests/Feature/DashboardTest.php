@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DashboardTest extends TestCase
