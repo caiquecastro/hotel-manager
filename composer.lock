@@ -1665,16 +1665,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.4.10",
+            "version": "v3.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "9a7469ec3e0225e7f0e14264bcd9e838e16186fe"
+                "reference": "a7b5fc605d1c215cea1122359044b1e682eb70c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/9a7469ec3e0225e7f0e14264bcd9e838e16186fe",
-                "reference": "9a7469ec3e0225e7f0e14264bcd9e838e16186fe",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/a7b5fc605d1c215cea1122359044b1e682eb70c0",
+                "reference": "a7b5fc605d1c215cea1122359044b1e682eb70c0",
                 "shasum": ""
             },
             "require": {
@@ -1715,7 +1715,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T08:49:21+00:00"
+            "time": "2018-05-25T11:07:31+00:00"
         },
         {
             "name": "symfony/http-kernel",
