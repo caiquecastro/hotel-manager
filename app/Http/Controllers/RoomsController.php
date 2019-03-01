@@ -28,7 +28,7 @@ class RoomsController extends Controller
     public function create()
     {
         $features = Feature::all();
-        $types = \App\Type::orderBy('price')->lists('name', 'id');
+        $types = \App\Type::orderBy('price')->pluck('name', 'id');
 
         return view('rooms.create', compact('features', 'types'));
     }
