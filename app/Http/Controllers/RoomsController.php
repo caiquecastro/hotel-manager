@@ -44,7 +44,7 @@ class RoomsController extends Controller
         $data = $request->all();
         $data['status'] = 'available';
 
-        $features = $data['features'];
+        $features = $data['features'] ?? [];
 
         $room = Room::create($data);
         $room->features()->attach($features);

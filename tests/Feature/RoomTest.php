@@ -18,4 +18,23 @@ class RoomTest extends TestCase
 
         $response->assertSuccessful();
     }
+
+    public function testCreateRoomWithoutFeatures()
+    {
+        $this->withoutExceptionHandling();
+
+        $roomType = factory(\App\Type::class)->create();
+
+        $this->loginUser();
+        $response = $this->post('rooms', [
+            'type_id' => $roomType->id,
+            'number' => '1',
+            'floor' => '0',
+        ]);
+
+        $response->assertRedirect('/rooms');
+        $this->assertDatabaseHas('rooms', [
+            'number' => '1',
+        ]);
+    }
 }
