@@ -37,4 +37,15 @@ class RoomTest extends TestCase
             'number' => '1',
         ]);
     }
+
+    public function testItRequiresTypeIdToCreateRoom()
+    {
+        $this->loginUser();
+        $response = $this->post('rooms', [
+            'number' => '1',
+            'floor' => '0',
+        ]);
+
+        $response->assertSessionHasErrors(['type_id' => 'The type id field is required.']);
+    }
 }
