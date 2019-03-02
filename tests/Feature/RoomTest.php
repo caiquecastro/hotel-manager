@@ -59,4 +59,18 @@ class RoomTest extends TestCase
 
         $response->assertSessionHasErrors(['type_id' => 'The type id field is required.']);
     }
+
+    public function testItAllowToUpdateRoomWithoutFeatures()
+    {
+        $this->withoutExceptionHandling();
+
+        $room = factory(\App\Room::class)->create();
+
+        $this->loginUser();
+        $response = $this->patch("rooms/$room->id", [
+            //
+        ]);
+
+        $response->assertRedirect('/rooms');
+    }
 }

@@ -92,7 +92,7 @@ class RoomsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $features = $data['features'];
+        $features = $data['features'] ?? [];
 
         $room = Room::findOrFail($id);
         $room->update($data);
