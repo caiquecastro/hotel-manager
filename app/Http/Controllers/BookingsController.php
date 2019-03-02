@@ -32,8 +32,8 @@ class BookingsController extends Controller
      */
     public function create($id = null)
     {
-        $rooms = Room::lists('number', 'id');
-        $customers = \App\Customer::lists('name', 'id');
+        $rooms = Room::pluck('number', 'id');
+        $customers = \App\Customer::pluck('name', 'id');
 
         if (! empty($id)) {
             $room = Room::findOrFail($id);
