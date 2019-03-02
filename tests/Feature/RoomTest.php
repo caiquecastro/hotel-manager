@@ -19,6 +19,17 @@ class RoomTest extends TestCase
         $response->assertSuccessful();
     }
 
+    public function testViewEditRoomPage()
+    {
+        $this->withoutExceptionHandling();
+        $room = factory(\App\Room::class)->create();
+
+        $this->loginUser();
+        $response = $this->get("rooms/$room->id/edit");
+
+        $response->assertSuccessful();
+    }
+
     public function testCreateRoomWithoutFeatures()
     {
         $this->withoutExceptionHandling();

@@ -26,3 +26,13 @@ $factory->define(App\Type::class, function (Faker\Generator $faker) {
         'price' => $faker->numberBetween(0, 10000),
     ];
 });
+
+$factory->define(App\Room::class, function (Faker\Generator $faker) {
+    return [
+        'number' => '1',
+        'floor' => 'ground',
+        'type_id' => function () {
+            return factory(\App\Type::class)->create()->id;
+        }
+    ];
+});

@@ -77,7 +77,7 @@ class RoomsController extends Controller
     {
         $room = Room::findOrFail($id);
         $features = Feature::all('name', 'id');
-        $types = \App\Type::lists('name', 'id');
+        $types = \App\Type::pluck('name', 'id');
 
         return view('rooms.edit', compact('room', 'features', 'types'));
     }
