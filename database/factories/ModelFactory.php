@@ -33,6 +33,39 @@ $factory->define(App\Room::class, function (Faker\Generator $faker) {
         'floor' => 'ground',
         'type_id' => function () {
             return factory(\App\Type::class)->create()->id;
-        }
+        },
+    ];
+});
+
+$factory->define(App\NaturalPerson::class, function (Faker\Generator $faker) {
+    return [
+        'cpf' => $faker->cpf,
+        'birthday' => $faker->dateTimeThisCentury,
+        'gender' => $faker->randomElement(['male', 'female']),
+    ];
+});
+
+$factory->define(App\Customer::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->streetAddress,
+        'person_id' => function () {
+            return factory(\App\NaturalPerson::class)->create()->id;
+        },
+        'person_type' => 'App\\NaturalPerson',
+    ];
+});
+
+$factory->define(App\Booking::class, function (Faker\Generator $faker) {
+    return [
+        'customer_id' => function () {
+            return factory(\App\Customer::class)->create()->id;
+        },
+        'room_id' => function () {
+            return factory(\App\Room::class)->create()->id;
+        },
+        'checkin' => '03/03/2019',
+        'checkout' => '30/03/2019',
     ];
 });
