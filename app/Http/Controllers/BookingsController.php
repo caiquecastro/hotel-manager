@@ -61,7 +61,7 @@ class BookingsController extends Controller
             $query->where('room_id', '=', $room->id)
                 ->orWhere('customer_id', '=', $customer->id);
         })->where('checkin', '>=', $data['checkin'])
-            ->where('checkout', '>=', $data['checkout'])
+            ->orWhere('checkout', '>=', $data['checkout'])
             ->count();
 
         if ($available_room > 0) {
