@@ -40,12 +40,9 @@ class TypesController extends Controller
     {
         $data = $request->all();
 
-        \App\Type::create($data);
+        $type = \App\Type::create($data);
 
-        \Session::flash('message_type', 'success');
-        \Session::flash('message', 'Tipo de Quarto cadastrada com sucesso!');
-
-        return redirect('types');
+        return $type;
     }
 
     /**
@@ -86,29 +83,18 @@ class TypesController extends Controller
         $type = Type::findOrFail($id);
         $type->update($data);
 
-        \Session::flash('message_type', 'success');
-        \Session::flash('message', 'Tipo de Quarto atualizado com sucesso!');
-
-        return redirect('types');
+        return $type;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Type  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        $delete_count = Type::destroy($id);
-
-        if ($delete_count != 1) {
-            \Session::flash('message_type', 'danger');
-            \Session::flash('message', 'Erro ao excluir tipo de quarto!');
-        } else {
-            \Session::flash('message_type', 'success');
-            \Session::flash('message', 'Tipo de quarto excluido com sucesso!');
-        }
+        $type->delete();
 
         return redirect('types');
     }

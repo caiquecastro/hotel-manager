@@ -1,3 +1,17 @@
+import Vue from 'vue';
+import jQuery from 'jquery';
+import VueNoty from 'vuejs-noty';
+import RoomTypeForm from './components/RoomTypeForm';
+import 'jquery-mask-plugin';
+import 'vuejs-noty/dist/vuejs-noty.css'
+
+Vue.use(VueNoty);
+Vue.component('room-type-form', RoomTypeForm);
+
+const app = new Vue({
+    el: '#app',
+});
+
 ;(function (win, doc, $, undefined) {
     var phoneMask, phoneMaskOptions;
 
@@ -14,9 +28,9 @@
     $(".js-date").mask("99/99/9999");
     $(".js-cpf").mask("999.999.999-99");
     $(".js-cnpj").mask("99.999.999/9999-99");
-    $(".js-price").maskMoney({
-        prefix: 'R$ '
-    });
+    // $(".js-price").maskMoney({
+    //     prefix: 'R$ '
+    // });
     $('.js-telefone').mask(phoneMask, phoneMaskOptions);
 
     $("input[name=person_type]").on("change", toggleCustomerForm);
