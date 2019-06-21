@@ -25,7 +25,7 @@ class RoomTypeTest extends TestCase
     public function testItDeletesAUnexistentRoomType()
     {
         $this->loginUser();
-        $response = $this->delete("types/100");
+        $response = $this->delete('types/100');
 
         $response->assertStatus(404);
     }
