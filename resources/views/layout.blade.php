@@ -50,9 +50,9 @@
         </ul>
     </div>
 </nav>
-<div class="container">
+<div class="container" id="app">
     @yield('content')
 </div>
-<script src="/js/all.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>
