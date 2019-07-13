@@ -4,6 +4,7 @@ php:
   - 7.2
   - 7.3
   - 7.4snapshot
+  - nightly
 
 services:
   - postgresql
@@ -23,3 +24,8 @@ script:
 cache:
   directories:
     - $HOME/.composer/cache
+
+matrix:
+  allow_failures:
+    - php: 7.4snapshot
+    - php: nightly
