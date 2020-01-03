@@ -19,7 +19,7 @@ services:
       - POSTGRES_PASSWORD=hotelmanager_pass
 
   cache:
-    image: ambientum/redis:4.0
+    image: redis:5.0-alpine
     command: --appendonly yes
     volumes:
       - redis-data:/data
@@ -27,7 +27,7 @@ services:
       - "6379:6379"
 
   app:
-    image: ambientum/php:7.1-nginx
+    image: ambientum/php:7.3-nginx
     volumes:
       - .:/var/www/app
     ports:
@@ -37,7 +37,7 @@ services:
       - cache
 
   queue:
-    image: ambientum/php:7.1
+    image: ambientum/php:7.3
     command: php artisan queue:listen
     volumes:
       - .:/var/www/app
