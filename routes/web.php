@@ -24,10 +24,11 @@ Route::resource('types', 'TypesController');
 Route::resource('products', 'ProductsController');
 
 Route::resource('bookings', 'BookingsController');
-Route::get('bookings/create/{id}', 'BookingsController@create');
 Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
 
 Route::get('stock', 'StockController@index');
+Route::post('stock', 'StockController@store');
+Route::get('stock/create', 'StockController@create');
 Route::get('stock/{id}', 'StockController@getProductInfo');
 
 Route::get('reports', 'ReportsController@index');

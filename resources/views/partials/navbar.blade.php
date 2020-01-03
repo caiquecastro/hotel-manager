@@ -53,6 +53,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{ action('StockController@index') }}">Ver Estoque</a>
+          <a class="dropdown-item" href="{{ action('StockController@create') }}">Movimentar Estoque</a>
         </div>
       </li>
       <li class="nav-item">
