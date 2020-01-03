@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Room;
 use App\Feature;
-use Illuminate\Http\Request;
 use App\Http\Requests\RoomRequest;
+use App\Room;
+use Illuminate\Http\Request;
 
 class RoomsController extends Controller
 {

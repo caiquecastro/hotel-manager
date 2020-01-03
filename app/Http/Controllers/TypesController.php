@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TypeRequest;
 use App\Type;
 use Illuminate\Http\Request;
-use App\Http\Requests\TypeRequest;
 
 class TypesController extends Controller
 {

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Requests\CustomerRequest;
 use App\LegalPerson;
 use App\NaturalPerson;
 use Illuminate\Http\Request;
-use App\Http\Requests\CustomerRequest;
 
 class CustomersController extends Controller
 {

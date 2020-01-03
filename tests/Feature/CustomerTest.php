@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CustomerTest extends TestCase
 {
@@ -35,7 +35,6 @@ class CustomerTest extends TestCase
             'person_type' => 'App\\NaturalPerson',
             'cpf' => '16828363710',
             'birthday' => '1980-12-27',
-            'gender' => 'male',
             'name' => 'John Doe',
             'phone' => '(11) 2121-2807',
             'address' => 'Infantino Street',
