@@ -1,3 +1,4 @@
+import 'bootstrap';
 import Vue from 'vue';
 import jQuery from 'jquery';
 import VueNoty from 'vuejs-noty';
