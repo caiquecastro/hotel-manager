@@ -10,7 +10,7 @@
         <tr>
             <th>#</th>
             <th>Nome</th>
-            <th>Documento</th>
+            <th>E-mail</th>
             <th>Telefone</th>
             <th>Cliente desde</th>
             <th>Ações</th>
@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $customer->id }}</td>
                 <td>{{ $customer->name }}</td>
-                <td>{{ $customer->person->cpf or $customer->person->cnpj }}</td>
+                <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone }}</td>
                 <td>{{ $customer->created_at->format("d/m/Y") }}</td>
                 <td>

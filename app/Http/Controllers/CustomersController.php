@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Http\Requests\CustomerRequest;
-use App\LegalPerson;
-use App\NaturalPerson;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -22,7 +20,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customer::with('person')->paginate();
+        $customers = Customer::paginate();
 
         return view('customers.index', compact('customers'));
     }
@@ -47,15 +45,7 @@ class CustomersController extends Controller
     {
         $data = $request->all();
 
-        $type = $request->input('person_type');
-
-        if ('App\\NaturalPerson' == $type) {
-            $person = NaturalPerson::create($data);
-        } else {
-            $person = LegalPerson::create($data);
-        }
-
-        $person->customer()->create($data);
+        Customer::create($data);
 
         \Session::flash('message_type', 'success');
         \Session::flash('message', 'Cliente cadastrado com sucesso!');
