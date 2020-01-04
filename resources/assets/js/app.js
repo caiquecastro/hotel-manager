@@ -27,14 +27,10 @@ const app = new Vue({
     };
 
     $(".js-date").mask("99/99/9999");
-    $(".js-cpf").mask("999.999.999-99");
-    $(".js-cnpj").mask("99.999.999/9999-99");
     // $(".js-price").maskMoney({
     //     prefix: 'R$ '
     // });
     $('.js-telefone').mask(phoneMask, phoneMaskOptions);
-
-    $("input[name=person_type]").on("change", toggleCustomerForm);
 
     $("#print-page").on("click", function () {
         win.print();
@@ -122,38 +118,4 @@ const app = new Vue({
             $("#modal-consumption").modal();
         });
     });
-
-    $("input[name=person_type]").find(":checked").each(function () {
-        toggleCustomerForm();
-    });
-
-    function toggleCustomerForm() {
-        var current_val = $(this).val();
-
-        if (current_val.indexOf('LegalPerson') > 0) {
-            $(".row-cpf").attr("hidden", true);
-            $("#cpf").attr("disabled", true);
-
-            $(".row-birthdate").attr("hidden", true);
-            $("#birthday").attr("disabled", true);
-
-            $(".row-gender").attr("hidden", true);
-            $("input[name=gender]").attr("disabled", true);
-
-            $(".row-cnpj").attr("hidden", false);
-            $("#cnpj").attr("disabled", false);
-        } else {
-            $(".row-cnpj").attr("hidden", true);
-            $("#cnpj").attr("disabled", true);
-
-            $(".row-cpf").attr("hidden", false);
-            $("#cpf").attr("disabled", false);
-
-            $(".row-birthdate").attr("hidden", false);
-            $("#birthday").attr("disabled", false);
-
-            $(".row-gender").attr("hidden", false);
-            $("input[name=gender]").attr("disabled", false);
-        }
-    }
 }(window, document, jQuery));
