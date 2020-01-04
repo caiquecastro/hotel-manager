@@ -59,55 +59,44 @@ class CustomerTest extends TestCase
         $response->assertSessionHasErrors(['name' => 'The name field is required.']);
     }
 
-    public function testCustomerAddressIsRequired()
+    public function testCustomerHasAddress()
     {
         $this->loginUser();
         $response = $this->post('customers', [
-            'person_type' => 'App\\NaturalPerson',
-            'cpf' => '16828363710',
-            'birthday' => '1980-12-27',
-            'gender' => 'male',
             'name' => 'John Doe',
-            'phone' => '(11) 2121-2807',
-            'address' => '',
+            'address' => '9th Avenue',
         ]);
 
-        $response->assertSessionHasErrors(['address' => 'The address field is required.']);
-    }
-
-    public function testCustomerDocumentIsRequired()
-    {
-        $this->loginUser();
-        $response = $this->post('customers', [
-            'person_type' => 'App\\NaturalPerson',
-            'cpf' => '',
-            'birthday' => '1980-12-27',
-            'gender' => 'male',
+        $this->assertDatabaseHas('customers', [
             'name' => 'John Doe',
-            'phone' => '(11) 2121-2807',
-            'address' => 'Infantino Street',
-        ]);
-
-        $response->assertSessionHasErrors([
-            'cpf' => 'The cpf field is required when person type is App\NaturalPerson.',
+            'address' => '9th Avenue',
         ]);
     }
 
-    public function testCustomerBirthdayIsRequired()
+    public function testCustomerHasDocument()
     {
         $this->loginUser();
         $response = $this->post('customers', [
-            'person_type' => 'App\\NaturalPerson',
-            'cpf' => '16828363710',
-            'birthday' => '',
-            'gender' => 'male',
+            'document_number' => '123',
             'name' => 'John Doe',
-            'phone' => '(11) 2121-2807',
-            'address' => 'Infantino Street',
+        ]);
+
+        $this->assertDatabaseHas('customers', [
+            'document_number' => '123',
+            'name' => 'John Doe',
+        ]);
+    }
+
+    public function testCustomerBirthdayRequiresDateFormat()
+    {
+        $this->loginUser();
+        $response = $this->post('customers', [
+            'name' => 'John Doe',
+            'birthdate' => 'foo',
         ]);
 
         $response->assertSessionHasErrors([
-            'birthday' => 'The birthday field is required when person type is App\NaturalPerson.',
+            'birthdate' => 'The birthdate does not match the format d/m/Y.',
         ]);
     }
 
@@ -127,19 +116,17 @@ class CustomerTest extends TestCase
         $response->assertSessionHas(['message' => 'Cliente cadastrado com sucesso!']);
     }
 
-    public function testCompanyCustomerRequiresCnpj()
+    public function testCustomerHasEmail()
     {
         $this->loginUser();
         $response = $this->post('customers', [
             'person_type' => 'App\\LegalPerson',
             'name' => 'Acme Ltda.',
             'address' => 'Infantino Street',
-            'cnpj' => '',
             'phone' => '(11) 92121-2807',
+            'email' => 'johndoe@example.com',
         ]);
 
-        $response->assertSessionHasErrors([
-            'cnpj' => 'The cnpj field is required when person type is App\LegalPerson.',
-        ]);
+        $response->assertSessionHas('message', 'Cliente cadastrado com sucesso!');
     }
 }

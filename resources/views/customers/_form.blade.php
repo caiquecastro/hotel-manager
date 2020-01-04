@@ -17,28 +17,52 @@
             {!! Form::text('job_title', null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="col">
+    <div class="col-4">
+        <div class="form-group">
+            {!! Form::label('document_number', 'Documento', ['class' => 'form-control-label']) !!}
+            {!! Form::text('document_number', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            {!! Form::label('birthdate', 'Nascimento', ['class' => 'form-control-label']) !!}
+            {!! Form::text('birthdate', null, ['class' => 'form-control js-date']) !!}
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            {!! Form::label('zipcode', 'CEP', ['class' => 'form-control-label']) !!}
+            {!! Form::text('zipcode', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="col-9">
         <div class="form-group">
             {!! Form::label('address', 'Endereço', ['class' => 'form-control-label']) !!}
             {!! Form::text('address', null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="col cpf-field">
+    <div class="col-4">
         <div class="form-group">
-            {!! Form::label('document_number', 'Documento', ['class' => 'form-control-label']) !!}
-            {!! Form::text('cpf', null, ['class' => 'form-control']) !!}
+            {!! Form::label('city', 'Cidade', ['class' => 'form-control-label']) !!}
+            {!! Form::text('city', null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="col row-birthdate">
+    <div class="col-2">
         <div class="form-group">
-            {!! Form::label('birthday', 'Nascimento', ['class' => 'form-control-label']) !!}
-            {!! Form::text('birthday', null, ['class' => 'form-control js-date']) !!}
+            {!! Form::label('state', 'Estado', ['class' => 'form-control-label']) !!}
+            {!! Form::text('state', null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="col">
+    <div class="col-3">
         <div class="form-group">
             {!! Form::label('phone', 'Telefone', ['class' => 'form-control-label']) !!}
             {!! Form::text('phone', null, ['class' => 'form-control js-telefone']) !!}
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            {!! Form::label('car_plate', 'Placa do Carro', ['class' => 'form-control-label']) !!}
+            {!! Form::text('car_plate', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>

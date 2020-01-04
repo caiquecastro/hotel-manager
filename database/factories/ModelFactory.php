@@ -1,5 +1,9 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use Illuminate\Support\Str;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -15,8 +19,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'remember_token' => Str::random(10),
     ];
 });
 
@@ -37,23 +41,12 @@ $factory->define(App\Room::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\NaturalPerson::class, function (Faker\Generator $faker) {
-    return [
-        'cpf' => $faker->cpf,
-        'birthday' => $faker->dateTimeThisCentury,
-        'gender' => $faker->randomElement(['male', 'female']),
-    ];
-});
-
 $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'phone' => $faker->phoneNumber,
         'address' => $faker->streetAddress,
-        'person_id' => function () {
-            return factory(\App\NaturalPerson::class)->create()->id;
-        },
-        'person_type' => 'App\\NaturalPerson',
+        'birthdate' => '04/01/2000', //$faker->dateTimeThisCentury,
     ];
 });
 

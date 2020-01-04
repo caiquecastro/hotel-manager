@@ -91,7 +91,6 @@ class CustomersController extends Controller
         $customer = Customer::findOrFail($id);
 
         $customer->update($data);
-        $customer->person->update($data);
 
         \Session::flash('message_type', 'success');
         \Session::flash('message', 'Cliente atualizado com sucesso!');
@@ -109,7 +108,6 @@ class CustomersController extends Controller
     {
         $customer = Customer::findOrFail($id);
 
-        $customer->person->delete();
         $delete_count = $customer->delete();
 
         if ($delete_count != 1) {
