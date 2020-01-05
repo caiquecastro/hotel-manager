@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Novo Quarto</h1>
-    <a href="{{ action('RoomsController@index') }}" class="btn btn-primary m-b">Ver todos</a>
+    <a href="{{ action('RoomsController@index') }}" class="btn btn-secondary mb-3">Voltar</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">

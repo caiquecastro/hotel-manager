@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Reservar Quarto</h1>
-    <a href="{{ action('RoomsController@index') }}" class="btn btn-primary m-b">Ver todos</a>
+    <a href="{{ action('RoomsController@index') }}" class="btn btn-primary mb-3">Todos os quartos</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">

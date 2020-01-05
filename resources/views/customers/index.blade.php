@@ -42,7 +42,14 @@
                         <span class="fa fa-pencil"></span>
                     </a>
                     {!! Form::open(['method'=>'DELETE', 'action'=>['CustomersController@destroy', $customer->id], 'class' => 'display-inline-block']) !!}
-                        {!! Form::button('<span class="fa fa-trash"></span>', ['type'=>'submit', 'class'=>'btn btn-danger btn-sm']) !!}
+                        <button
+                            class="btn btn-danger btn-sm"
+                            type="submit"
+                            aria-label="Excluir cliente"
+                            data-balloon-pos="up"
+                        >
+                            <span class="fa fa-trash"></span>
+                        </button>
                     {!! Form::close() !!}
                 </td>
             </tr>

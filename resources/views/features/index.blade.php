@@ -20,11 +20,23 @@
                 <td>{{ $feature->id }}</td>
                 <td>{{ $feature->name }}</td>
                 <td>
-                    <a href="{{ action('FeaturesController@edit', $feature->id) }}" class="btn btn-secondary btn-sm">
+                    <a
+                        href="{{ action('FeaturesController@edit', $feature->id) }}"
+                        class="btn btn-secondary btn-sm"
+                        aria-label="Editar"
+                        data-balloon-pos="up"
+                    >
                         <span class="fa fa-pencil"></span>
                     </a>
                     {!! Form::open(['method'=>'DELETE', 'action'=>['FeaturesController@destroy', $feature->id], 'class' => 'display-inline-block']) !!}
-                    {!! Form::button('<span class="fa fa-trash"></span>', ['type'=>'submit', 'class'=>'btn btn-danger btn-sm']) !!}
+                        <button
+                            class="btn btn-danger btn-sm"
+                            type="submit"
+                            aria-label="Excluir"
+                            data-balloon-pos="up"
+                        >
+                            <span class="fa fa-trash"></span>
+                        </button>
                     {!! Form::close() !!}
                 </td>
             </tr>
