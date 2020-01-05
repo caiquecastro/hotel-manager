@@ -24,7 +24,7 @@ class BookingsController extends Controller
     public function index()
     {
         $bookings = Booking::paginate();
-        $rooms = Room::all();
+        $rooms = Room::orderBy('number')->get();
 
         return view('bookings.index', compact('bookings', 'rooms'));
     }
@@ -35,18 +35,12 @@ class BookingsController extends Controller
      * @param null $id
      * @return \Illuminate\Http\Response
      */
-    public function create($id = null)
+    public function create()
     {
-        $rooms = Room::pluck('number', 'id');
+        $rooms = Room::orderBy('number')->pluck('number', 'id');
         $customers = \App\Customer::pluck('name', 'id');
 
-        if (! empty($id)) {
-            $room = Room::findOrFail($id);
-        } else {
-            $room = Room::all()->first();
-        }
-
-        return view('bookings.create', compact('rooms', 'customers', 'room'));
+        return view('bookings.create', compact('rooms', 'customers'));
     }
 
     /**
@@ -60,25 +54,25 @@ class BookingsController extends Controller
         $data = $request->all();
 
         $room = Room::findOrFail($data['room_id']);
-        $customer = Customer::findOrFail($data['customer_id']);
 
-        $available_room = Booking::where(function ($query) use ($room, $customer) {
-            $query->where('room_id', '=', $room->id)
-                ->orWhere('customer_id', '=', $customer->id);
-        })->where('checkin', '>=', $data['checkin'])
-            ->orWhere('checkout', '>=', $data['checkout'])
+        $checkin = Carbon::createFromFormat('d/m/Y', $data['checkin']);
+        $checkout = Carbon::createFromFormat('d/m/Y', $data['checkin']);
+
+        $available_room = Booking::where('room_id', $room->id)
+            ->where(function ($query) use ($checkin, $checkout) {
+                $query->where('checkin', '>=', $checkin)
+                ->orWhere('checkout', '>=', $checkout);
+            })
             ->count();
 
         if ($available_room > 0) {
             \Session::flash('message_type', 'danger');
             \Session::flash('message', 'Não foi possível reservar o quarto na data desejada!');
 
-            return redirect('bookings');
+            return redirect()->back();
         }
 
         \App\Booking::create($data);
-        $room->status = 'occupied';
-        $room->save();
 
         \Session::flash('message_type', 'success');
         \Session::flash('message', 'Reserva cadastrada com sucesso!');
