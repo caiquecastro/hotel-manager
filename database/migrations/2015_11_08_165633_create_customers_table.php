@@ -26,6 +26,7 @@ class CreateCustomersTable extends Migration
             $table->string('state')->nullable();
             $table->string('car_plate')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
