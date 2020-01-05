@@ -8,9 +8,8 @@
     <div class="row">
         <div class="col-md-8">
             {!! Form::model($product, ['method'=>'PUT', 'action' => ['ProductsController@update', $product->id]]) !!}
-            {!! Form::hidden('person_type') !!}
             @include('products._form')
             {!! Form::close() !!}
         </div>
     </div>
-@stop
+@endsection

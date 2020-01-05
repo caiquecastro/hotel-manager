@@ -29,7 +29,7 @@
                 <div class="form-group row">
                     {!! Form::label('room_id', 'Quarto', ['class' => 'col-sm-2 form-control-label']) !!}
                     <div class="col-sm-5">
-                        {!! Form::select('room_id', $rooms, $room->id ?? null, ['class' => 'form-control c-select']) !!}
+                        {!! Form::select('room_id', $rooms, $room->id ?? request('roomId'), ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
