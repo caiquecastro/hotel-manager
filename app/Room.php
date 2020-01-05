@@ -33,4 +33,11 @@ class Room extends Model
     {
         return $this->hasMany('App\Booking');
     }
+
+    public function bookingsFor($date)
+    {
+        return $this->bookings->first(function ($value) use ($date) {
+            return $value->checkin <= $date && $value->checkout > $date;
+        });
+    }
 }

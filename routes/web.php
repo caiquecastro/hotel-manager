@@ -25,6 +25,7 @@ Route::resource('products', 'ProductsController');
 
 Route::resource('bookings', 'BookingsController');
 Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
+Route::get('/calendar', 'CalendarController@index');
 
 Route::get('stock', 'StockController@index');
 Route::post('stock', 'StockController@store');
