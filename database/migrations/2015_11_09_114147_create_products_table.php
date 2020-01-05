@@ -15,11 +15,11 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('barcode');
+            $table->string('barcode')->unique();
             $table->decimal('price', 6, 2);
             $table->boolean('saleable');
             $table->enum('uom', ['unit', 'weight']);
-            $table->integer('minimum_stock')->unsigned();
+            $table->integer('minimum_stock')->unsigned()->nullable();
             $table->timestamps();
         });
     }
