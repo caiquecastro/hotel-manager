@@ -10,10 +10,13 @@ use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $fromDate = Carbon::now()->startOfDay();
-        $toDate = Carbon::now()->startOfDay()->addDays(6);
+        $fromDate = $request->query('from');
+
+        $fromDate = $fromDate ? Carbon::parse($fromDate)->startOfDay() : Carbon::now()->startOfDay();
+
+        $toDate = $fromDate->copy()->addDays(6);
         $period = new CarbonPeriod($fromDate, '1 day', $toDate);
 
         $rooms = Room::orderBy('number')->get();
