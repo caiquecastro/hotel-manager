@@ -44,4 +44,9 @@ class Customer extends Model
     {
         return Carbon::parse($value)->format('d/m/Y');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

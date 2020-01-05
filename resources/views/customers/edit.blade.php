@@ -6,7 +6,6 @@
     @include('errors.list')
     @include('partials._messages')
     {!! Form::model($customer, ['method'=>'PUT', 'action' => ['CustomersController@update', $customer->id]]) !!}
-        {!! Form::hidden('person_type') !!}
         @include('customers._form')
     {!! Form::close() !!}
 @stop

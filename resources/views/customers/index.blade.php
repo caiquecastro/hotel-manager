@@ -25,10 +25,20 @@
                 <td>{{ $customer->phone }}</td>
                 <td>{{ $customer->created_at->format("d/m/Y") }}</td>
                 <td>
-                    <a href="{{ action('CustomersController@show', $customer->id) }}" class="btn btn-secondary btn-sm">
+                    <a
+                        href="{{ action('CustomersController@show', $customer->id) }}"
+                        class="btn btn-primary btn-sm"
+                        aria-label="Ficha do cliente"
+                        data-balloon-pos="up"
+                    >
                         <span class="fa fa-file"></span>
                     </a>
-                    <a href="{{ action('CustomersController@edit', $customer->id) }}" class="btn btn-secondary btn-sm">
+                    <a
+                        href="{{ action('CustomersController@edit', $customer->id) }}"
+                        class="btn btn-secondary btn-sm"
+                        aria-label="Editar cliente"
+                        data-balloon-pos="up"
+                    >
                         <span class="fa fa-pencil"></span>
                     </a>
                     {!! Form::open(['method'=>'DELETE', 'action'=>['CustomersController@destroy', $customer->id], 'class' => 'display-inline-block']) !!}
