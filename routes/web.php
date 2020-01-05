@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', 'DashboardController@index');
+Route::redirect('/', 'bookings');
 
 Route::resource('customers', 'CustomersController');
 
