@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Produtos</h1>
-    <a href="{{ action('ProductsController@create') }}" class="btn btn-primary m-b">Adicionar novo</a>
+    <a href="{{ action('ProductsController@create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
     @include('errors.list')
     @include('partials._messages')
     <table class="table">
@@ -32,4 +32,5 @@
         @endforeach
         </tbody>
     </table>
-@stop
+    {{ $products->render() }}
+@endsection

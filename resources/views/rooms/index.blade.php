@@ -59,7 +59,7 @@
                     {!! Form::open(['method'=>'PUT', 'action'=>['RoomsController@putMaintenance', $room->id], 'class' => 'display-inline-block']) !!}
                     {!! Form::button('<span class="fa fa-wrench"></span>', ['type'=>'submit', 'class'=>'btn btn-warning btn-sm']) !!}
                     {!! Form::close() !!}
-                    <a href="{{ action('BookingsController@create', $room->id) }}" class="btn btn-primary btn-sm">
+                    <a href="{{ action('BookingsController@create', ['roomId' => $room->id]) }}" class="btn btn-primary btn-sm">
                         <span class="fa fa-calendar"></span>
                     </a>
                     <a href="{{ action('RoomsController@edit', $room->id) }}" class="btn btn-secondary btn-sm">
