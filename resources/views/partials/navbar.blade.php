@@ -6,49 +6,31 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+      <li class="nav-item{{ request()->is('customers*') ? ' active' : '' }}">
+        <a class="nav-link" href="/customers">Clientes</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Clientes
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ action('CustomersController@index') }}">Ver Clientes</a>
-          <a class="dropdown-item" href="{{ action('CustomersController@create') }}">Novo Cliente</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item{{ request()->is('rooms*') ? ' active' : '' }}">
+        <a class="nav-link" href="/rooms">
           Quartos
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ action('RoomsController@index') }}">Ver Quartos</a>
-          <a class="dropdown-item" href="{{ action('RoomsController@create') }}">Novo Quarto</a>
-          <a class="dropdown-item" href="{{ action('TypesController@index') }}">Tipos de Quarto</a>
-        </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item{{ request()->is('products*') ? ' active' : '' }}">
+        <a class="nav-link" href="/products">
           Produtos
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ action('ProductsController@index') }}">Ver Produtos</a>
-          <a class="dropdown-item" href="{{ action('ProductsController@create') }}">Novo Produto</a>
-        </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item{{ request()->is('bookings*') ? ' active' : '' }}">
+        <a class="nav-link" href="/bookings">
           Reservas
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ action('BookingsController@index') }}">Ver Reservas</a>
-          <a class="dropdown-item" href="{{ action('BookingsController@create') }}">Nova Reserva</a>
-          <a class="dropdown-item" href="{{ action('ConsumptionController@index') }}">Consumos</a>
-        </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item{{ request()->is('consumption*') ? ' active' : '' }}">
+        <a class="nav-link" href="/consumption">
+          Consumos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Estoque
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
