@@ -1,5 +1,5 @@
 @if ($errors->any())
-    <ul class="notification is-danger list-unstyled Notification">
+    <ul class="alert alert-danger list-unstyled Notification">
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
         @endforeach
