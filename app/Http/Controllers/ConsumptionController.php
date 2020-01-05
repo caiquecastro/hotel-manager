@@ -19,7 +19,9 @@ class ConsumptionController extends Controller
             ->where('checkout', '>=', Carbon::today())
             ->get();
 
-        return view('consumption.index', compact('activeRooms'));
+        $consumptions = \App\Consumption::all();
+
+        return view('consumption.index', compact('activeRooms', 'consumptions'));
     }
 
     /**

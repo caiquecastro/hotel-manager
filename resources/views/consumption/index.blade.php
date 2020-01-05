@@ -7,7 +7,7 @@
         @foreach($activeRooms as $booking)
             <div class="col-sm-2">
                 <div class="card">
-                    <div class="card-block">
+                    <div class="card-body">
                         <h4 class="card-title">#{{ $booking->room->number }}</h4>
                         <button type="button" class="btn btn-primary btn-block open-consumption"
                                 data-id="{{ $booking->id }}">
@@ -18,6 +18,26 @@
             </div>
         @endforeach
     </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($consumptions as $consumption)
+                <tr>
+                    <td>{{ $consumption->product->name }}</td>
+                    <td>{{ $consumption->price }}</td>
+                    <td>{{ $consumption->created_at->format('d/m/Y H:i:s') }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
     <div class="modal fade" id="modal-consumption" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
