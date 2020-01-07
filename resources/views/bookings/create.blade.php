@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Reservar Quarto</h1>
-    <a href="{{ action('RoomsController@index') }}" class="btn btn-primary mb-3">Todos os quartos</a>
+    <a href="{{ action('RoomsController@index') }}" class="btn btn-primary mb-3">Ver todos os quartos</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">
@@ -33,10 +33,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Reservar</button>
+                    {!! Form::label('price', 'Valor', ['class' => 'col-sm-2 form-control-label']) !!}
+                    <div class="col-sm-5">
+                        {!! Form::text('price', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Reservar</button>
             {!! Form::close() !!}
         </div>
     </div>

@@ -71,7 +71,7 @@ const app = new Vue({
         var barcode = $(this).val();
         $.ajax({
             method: "GET",
-            url: "/stock/" + barcode
+            url: "/inventory/" + barcode
         }).done(function (data) {
             $("#name").val(data.name);
             $("#product_id").val(data.id);

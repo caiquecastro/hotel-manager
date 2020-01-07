@@ -21,11 +21,23 @@
                 <td>{{ $product->name }}</td>
                 <td>R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                 <td>
-                    <a href="{{ action('ProductsController@edit', $product->id) }}" class="btn btn-secondary btn-sm">
+                    <a
+                        href="{{ action('ProductsController@edit', $product->id) }}"
+                        class="btn btn-secondary btn-sm"
+                        aria-label="Editar"
+                        data-balloon-pos="up"
+                    >
                         <span class="fa fa-pencil"></span>
                     </a>
                     {!! Form::open(['method'=>'DELETE', 'action'=>['ProductsController@destroy', $product->id], 'class' => 'display-inline-block']) !!}
-                    {!! Form::button('<span class="fa fa-trash"></span>', ['type'=>'submit', 'class'=>'btn btn-danger btn-sm']) !!}
+                        <button
+                            class="btn btn-danger btn-sm"
+                            type="submit"
+                            aria-label="Excluir"
+                            data-balloon-pos="up"
+                        >
+                            <span class="fa fa-trash"></span>
+                        </button>
                     {!! Form::close() !!}
                 </td>
             </tr>

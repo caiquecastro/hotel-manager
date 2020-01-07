@@ -27,10 +27,10 @@ Route::resource('bookings', 'BookingsController');
 Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
 Route::get('/calendar', 'CalendarController@index');
 
-Route::get('stock', 'StockController@index');
-Route::post('stock', 'StockController@store');
-Route::get('stock/create', 'StockController@create');
-Route::get('stock/{id}', 'StockController@getProductInfo');
+Route::get('inventory', 'StockController@index');
+Route::post('inventory', 'StockController@store');
+Route::get('inventory/create', 'StockController@create');
+Route::get('inventory/{id}', 'StockController@getProductInfo');
 
 Route::get('reports', 'ReportsController@index');
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Nova Característica</h1>
-    <a href="{{ action('FeaturesController@index') }}" class="btn btn-primary m-b">Ver todos</a>
+    <a href="{{ action('FeaturesController@index') }}" class="btn btn-secondary mb-3">Voltar</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">

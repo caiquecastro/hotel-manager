@@ -20,23 +20,13 @@
         </a>
       </li>
       <li class="nav-item{{ request()->is('bookings*') ? ' active' : '' }}">
-        <a class="nav-link" href="/bookings">
-          Reservas
-        </a>
+        <a class="nav-link" href="/bookings">Reservas</a>
       </li>
       <li class="nav-item{{ request()->is('consumption*') ? ' active' : '' }}">
-        <a class="nav-link" href="/consumption">
-          Consumos
-        </a>
+        <a class="nav-link" href="/consumption">Consumos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Estoque
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ action('StockController@index') }}">Ver Estoque</a>
-          <a class="dropdown-item" href="{{ action('StockController@create') }}">Movimentar Estoque</a>
-        </div>
+        <a class="nav-link" href="/inventory">Estoque</a>
       </li>
       <li class="nav-item">
         <a href="/reports" class="nav-link">Relatórios</a>

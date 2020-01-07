@@ -3,7 +3,7 @@
 @section('content')
     <h1>Movimentar Estoque</h1>
 
-    <form action="/stock" method="POST">
+    <form action="/inventory" method="POST">
         {!! Form::token() !!}
         <div class="form-group row">
             <label for="barcode-search" class="col-sm-2 form-control-label">Código</label>

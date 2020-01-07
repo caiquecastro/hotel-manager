@@ -4,32 +4,45 @@
     <h1>Reservas</h1>
     @include('errors.list')
     @include('partials._messages')
+    <a href="{{ action('BookingsController@create', null) }}" class="btn btn-primary mb-2">Nova reserva</a>
+    <a href="{{ action('CalendarController@index', null) }}" class="btn btn-primary mb-2">Calendário</a>
     <div class="row">
         @foreach($rooms as $room)
-            <div class="col-sm-2">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">#{{ $room->number }}</h4>
+            <div class="col-sm-4">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">#{{ $room->number }}</h5>
 
                         @if ($room->status == "available")
                             <p class="card-text text-success">Disponível</p>
-                            <a href="{{ action('BookingsController@create', $room->id) }}"
-                               class="btn btn-primary btn-block">Reservar</a>
+                            <a
+                                href="{{ action('BookingsController@create', ['roomId' => $room->id]) }}"
+                                class="btn btn-primary btn-block"
+                            >
+                                Reservar
+                            </a>
                         @elseif($room->status == "occupied")
                             <p class="card-text text-danger">Ocupado</p>
-                            <a href="{{ action('BookingsController@getCheckout', $room->id) }}"
-                               class="btn btn-secondary btn-block">Checkout</a>
+                            <a
+                                href="{{ action('BookingsController@getCheckout', $room->id) }}"
+                                class="btn btn-secondary btn-block"
+                            >
+                                Checkout
+                            </a>
                         @else
                             <p class="card-text text-warning">Manutenção</p>
-                            <a href="{{ action('BookingsController@getCheckout', $room->id) }}"
-                               class="btn btn-secondary btn-block invisible">Checkout</a>
+                            <a
+                                href="{{ action('BookingsController@getCheckout', $room->id) }}"
+                                class="btn btn-secondary btn-block"
+                            >
+                                Tirar manutenção
+                            </a>
                         @endif
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-    <a href="{{ action('BookingsController@create', null) }}" class="btn btn-primary m-b">Nova reserva</a>
     <table class="table">
         <thead>
         <tr>
@@ -50,11 +63,23 @@
                 <td>{{ $booking->checkin->format("d/m/Y") }}</td>
                 <td>{{ $booking->checkout->format("d/m/Y") }}</td>
                 <td>
-                    <a href="{{ action('BookingsController@edit', $booking->id) }}" class="btn btn-secondary btn-sm">
+                    <a
+                        href="{{ action('BookingsController@edit', $booking->id) }}"
+                        class="btn btn-secondary btn-sm"
+                        aria-label="Editar"
+                        data-balloon-pos="up"
+                    >
                         <span class="fa fa-pencil"></span>
                     </a>
                     {!! Form::open(['method'=>'DELETE', 'action'=>['BookingsController@destroy', $booking->id], 'class' => 'display-inline-block']) !!}
-                    {!! Form::button('<span class="fa fa-trash"></span>', ['type'=>'submit', 'class'=>'btn btn-danger btn-sm']) !!}
+                        <button
+                            class="btn btn-danger btn-sm"
+                            type="submit"
+                            aria-label="Excluir"
+                            data-balloon-pos="up"
+                        >
+                            <span class="fa fa-trash"></span>
+                        </button>
                     {!! Form::close() !!}
                 </td>
             </tr>

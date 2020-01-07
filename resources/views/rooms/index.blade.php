@@ -12,7 +12,6 @@
         <tr>
             <th>#</th>
             <th>Andar</th>
-            {{--<th>Tipo</th>--}}
             <th>Características</th>
             <th>Status</th>
             <th>Ações</th>
@@ -31,11 +30,8 @@
                         2º Andar
                     @endif
                 </td>
-                {{--<td>{{ $room->type->name }}</td>--}}
                 <td>
-                    @foreach($room->features as $feature)
-                        {{ $feature->name }}
-                    @endforeach
+                    {{ $room->features->implode('name', ', ') }}
                 </td>
                 <td>
                     @if($room->status == "available")
@@ -56,6 +52,14 @@
                     @endif
                 </td>
                 <td>
+                    <a
+                        href="{{ action('RoomsController@show', $room->id) }}"
+                        class="btn btn-sm btn-info"
+                        aria-label="Ver"
+                        data-balloon-pos="up"
+                    >
+                        <span class="fa fa-eye"></span>
+                    </a>
                     {!! Form::open(['method'=>'PUT', 'action'=>['RoomsController@putMaintenance', $room->id], 'class' => 'display-inline-block']) !!}
                         <button
                             class="btn btn-warning btn-sm"

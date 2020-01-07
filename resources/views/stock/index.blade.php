@@ -3,6 +3,8 @@
 @section('content')
     <h1>Estoque</h1>
 
+    <a href="/inventory/create" class="btn btn-primary mb-3">Nova Movimentação</a>
+
     <table class="table">
         <thead>
         <tr>
