@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Booking extends Model
 {
-    protected $fillable = ['customer_id', 'room_id', 'checkin', 'checkout'];
+    protected $fillable = ['customer_id', 'room_id', 'checkin', 'checkout', 'price'];
     protected $dates = ['created_at', 'updated_at', 'checkin', 'checkout'];
 
     public function setCheckinAttribute($value)
