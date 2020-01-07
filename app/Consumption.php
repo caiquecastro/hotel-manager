@@ -13,6 +13,11 @@ class Consumption extends Model
         return $this->price * $this->amount;
     }
 
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Http\Requests\ConsumptionRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class ConsumptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ConsumptionRequest $request)
     {
         $consumption = \App\Consumption::create($request->all());
 
