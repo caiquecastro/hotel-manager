@@ -10,7 +10,7 @@ class DashboardTest extends TestCase
 
     public function testUserIsRedirectToLoginIfNotAuthenticated()
     {
-        $response = $this->get('/');
+        $response = $this->get('/bookings');
 
         $response->assertRedirect('login');
     }

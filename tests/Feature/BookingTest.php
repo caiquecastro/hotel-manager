@@ -26,16 +26,18 @@ class BookingTest extends TestCase
         $room = factory(\App\Room::class)->create();
         factory(\App\Booking::class)->create([
             'room_id' => $room->id,
-            'checkin' => '2019-03-04',
-            'checkout' => '2019-04-05',
+            'checkin' => '04/03/2019',
+            'checkout' => '05/04/2019',
+            'price' => '100',
         ]);
 
         $this->loginUser();
         $this->post('bookings', [
             'customer_id' => factory(\App\Customer::class)->create()->id,
             'room_id' => $room->id,
-            'checkin' => '2019-03-04',
-            'checkout' => '2019-04-26',
+            'checkin' => '03/04/2019',
+            'checkout' => '26/04/2019',
+            'price' => '100',
         ]);
 
         $bookingsCount = \App\Booking::count();
