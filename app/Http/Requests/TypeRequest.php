@@ -23,7 +23,6 @@ class TypeRequest extends Request
     {
         return [
             'name' => 'required',
-            'price' => 'required|numeric',
         ];
     }
 }

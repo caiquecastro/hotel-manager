@@ -34,7 +34,7 @@ class RoomsController extends Controller
     public function create()
     {
         $features = Feature::all();
-        $types = \App\Type::orderBy('price')->pluck('name', 'id');
+        $types = \App\Type::pluck('name', 'id');
 
         return view('rooms.create', compact('features', 'types'));
     }
@@ -69,7 +69,9 @@ class RoomsController extends Controller
      */
     public function show($id)
     {
-        return Room::findOrFail($id);
+        $room = Room::findOrFail($id);
+
+        return view('rooms.show', compact('room'));
     }
 
     /**

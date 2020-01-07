@@ -1,35 +1,10 @@
 <template>
     <form @submit.prevent="onSubmit" :method="method" :action="action">
-        <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label for="name" class="label">Nome</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <input type="text" v-model="form.name" class="input" name="name" id="name">
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="name" class="label">Nome</label>
+            <input type="text" v-model="form.name" class="form-control" name="name" id="name">
         </div>
-        <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label for="price" class="label">Preço</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <money v-model="form.price" v-bind="money" class="input" name="price"></money>
-                </div>
-            </div>
-        </div>
-        <div class="field is-horizontal">
-            <div class="field-label"></div>
-            <div class="field-body">
-                <div class="field">
-                    <div class="control">
-                        <button type="submit" class="button is-primary">Salvar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
 </template>
 
@@ -44,22 +19,10 @@ export default {
         method: {},
         initialData: {},
     },
-
-    components: {
-        Money,
-    },
-
     data () {
         return {
             form: {
                 name: '',
-                price: 0,
-            },
-            money: {
-                decimal: ',',
-                thousands: '.',
-                prefix: 'R$ ',
-                precision: 2,
             },
         }
     },
