@@ -37,7 +37,7 @@ class Booking extends Model
             $checkout = Carbon::createFromFormat('d/m/Y', $value);
             $checkout->hour = 12;
             $checkout->minute = 0;
-            $checkin->second = 0;
+            $checkout->second = 0;
         }
 
         $this->attributes['checkout'] = $checkout;
