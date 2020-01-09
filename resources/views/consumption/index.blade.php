@@ -42,60 +42,7 @@
 
     <div class="modal fade" id="modal-consumption" tabindex="-1">
         <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Inserir consumo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        {{ csrf_field() }}
-                        <input type="hidden" id="booking_id" value="">
-                        <input type="hidden" name="product_id" id="product_id">
-
-                        <div class="form-row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="barcode-search">Código do Produto</label>
-                                    <input type="text" class="form-control form-control-lg" id="barcode-search">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Descrição</label>
-                            <input type="text" class="form-control form-control-lg" id="name" readonly>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="amount">Valor Unitário</label>
-                                    <input type="text" class="form-control form-control-lg" id="price" readonly>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="amount">Quantidade</label>
-                                    <input type="text" class="form-control form-control-lg" id="amount">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="amount">Total</label>
-                                    <input type="text" class="form-control form-control-lg" id="total" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="save-consumption">Salvar</button>
-                </div>
-            </div>
+            <consumption-form />
         </div>
     </div>
-@stop
+@endsection

@@ -43,7 +43,13 @@ class ConsumptionController extends Controller
      */
     public function store(ConsumptionRequest $request)
     {
-        $consumption = \App\Consumption::create($request->all());
+        $data = $request->all();
+
+        $product = \App\Product::findOrFail($data['product_id']);
+
+        $consumption = \App\Consumption::create($data + [
+            'price' => $product->price,
+        ]);
 
         return response()->json($consumption);
     }

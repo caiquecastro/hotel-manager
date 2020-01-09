@@ -18,9 +18,16 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate();
+        $search = $request->query('q');
+        $products = Product::where('barcode', 'like', "%$search%")
+            ->orWhere('name', 'like', "%$search%")
+            ->paginate();
+
+        if ($request->wantsJson()) {
+            return $products;
+        }
 
         return view('products.index', compact('products'));
     }

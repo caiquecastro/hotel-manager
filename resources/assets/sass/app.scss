@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~balloon-css/src/balloon";
 @import "~font-awesome/scss/font-awesome";
+@import "~vue-select/src/scss/vue-select.scss";
 
 .navbar {
   margin-bottom: 10px;
@@ -24,4 +25,16 @@ input[type=month].form-control {
 .booking-box {
   width: 100px;
   font-size: .8rem;
+}
+
+.form-control-xl {
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.v-select {
+  font-size: 2rem;
 }

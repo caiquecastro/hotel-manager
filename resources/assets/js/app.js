@@ -3,11 +3,13 @@ import Vue from 'vue';
 import jQuery from 'jquery';
 import VueNoty from 'vuejs-noty';
 import RoomTypeForm from './components/RoomTypeForm';
+import ConsumptionForm from './components/ConsumptionForm';
 import 'jquery-mask-plugin';
 import 'vuejs-noty/dist/vuejs-noty.css'
 
 Vue.use(VueNoty);
 Vue.component('room-type-form', RoomTypeForm);
+Vue.component('consumption-form', ConsumptionForm);
 
 const app = new Vue({
     el: '#app',
@@ -27,9 +29,6 @@ const app = new Vue({
     };
 
     $(".js-date").mask("99/99/9999");
-    // $(".js-price").maskMoney({
-    //     prefix: 'R$ '
-    // });
     $('.js-telefone').mask(phoneMask, phoneMaskOptions);
 
     $("#print-page").on("click", function () {
@@ -66,24 +65,6 @@ const app = new Vue({
         var ctx = chartRoom.getContext("2d");
         var roomNightsChart = new Chart(ctx).Line(data, options);
     }
-
-    $("#barcode-search").blur(function () {
-        var barcode = $(this).val();
-        $.ajax({
-            method: "GET",
-            url: "/inventory/" + barcode
-        }).done(function (data) {
-            $("#name").val(data.name);
-            $("#product_id").val(data.id);
-            $("#price").val(data.price);
-        });
-    });
-
-    $("body").on("blur", "#amount", function() {
-        var price = $("#price").val();
-        var amount = $(this).val();
-        $("#total").val(price*amount);
-    });
 
     $("body").on("click", "#save-consumption", function(e) {
         e.preventDefault();

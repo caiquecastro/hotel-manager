@@ -24,7 +24,9 @@ class ConsumptionRequest extends FormRequest
     public function rules()
     {
         return [
+            'booking_id' => 'required',
             'product_id' => 'required',
+            'amount' => 'required',
         ];
     }
 }

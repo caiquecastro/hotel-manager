@@ -20,9 +20,15 @@ class BookingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bookings = Booking::paginate();
+
+        if ($request->wantsJson()) {
+            $bookings->load('customer')->load('room');
+            return $bookings;
+        }
+
         $rooms = Room::orderBy('number')->get();
 
         return view('bookings.index', compact('bookings', 'rooms'));
@@ -55,12 +61,18 @@ class BookingsController extends Controller
         $room = Room::findOrFail($data['room_id']);
 
         $checkin = Carbon::createFromFormat('d/m/Y', $data['checkin']);
-        $checkout = Carbon::createFromFormat('d/m/Y', $data['checkin']);
+        $checkin->hour = 14;
+        $checkin->minute = 0;
+        $checkin->second = 0;
+        $checkout = Carbon::createFromFormat('d/m/Y', $data['checkout']);
+        $checkout->hour = 12;
+        $checkout->minute = 0;
+        $checkout->second = 0;
 
         $available_room = Booking::where('room_id', $room->id)
             ->where(function ($query) use ($checkin, $checkout) {
-                $query->where('checkin', '>=', $checkin)
-                ->orWhere('checkout', '>=', $checkout);
+                $query->whereBetween('checkin', [$checkin, $checkout])
+                    ->orWhereBetween('checkout', [$checkin, $checkout]);
             })
             ->count();
 
