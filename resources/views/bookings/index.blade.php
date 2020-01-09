@@ -60,8 +60,8 @@
                 <td>{{ $booking->id }}</td>
                 <td>{{ $booking->customer->name }}</td>
                 <td>{{ $booking->room->number }}</td>
-                <td>{{ $booking->checkin->format("d/m/Y") }}</td>
-                <td>{{ $booking->checkout->format("d/m/Y") }}</td>
+                <td>{{ $booking->checkin->format("d/m/Y H:i:s") }}</td>
+                <td>{{ $booking->checkout->format("d/m/Y H:i:s") }}</td>
                 <td>
                     <a
                         href="{{ action('BookingsController@edit', $booking->id) }}"

@@ -22,6 +22,7 @@ class BookingRequest extends Request
     public function rules()
     {
         return [
+            'price' => 'required',
             'room_id' => 'exists:rooms,id',
             'checkin' => 'date_format:d/m/Y',
             'checkout' => 'date_format:d/m/Y|after:checkin',

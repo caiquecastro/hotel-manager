@@ -44,4 +44,30 @@ class BookingTest extends TestCase
 
         $this->assertEquals(1, $bookingsCount);
     }
+
+    public function testAllowNonConflictingBookings()
+    {
+        $this->withoutExceptionHandling();
+
+        $room = factory(\App\Room::class)->create();
+        factory(\App\Booking::class)->create([
+            'room_id' => $room->id,
+            'checkin' => '10/03/2019',
+            'checkout' => '12/03/2019',
+            'price' => '100',
+        ]);
+
+        $this->loginUser();
+        $this->post('bookings', [
+            'customer_id' => factory(\App\Customer::class)->create()->id,
+            'room_id' => $room->id,
+            'checkin' => '08/03/2019',
+            'checkout' => '09/03/2019',
+            'price' => '100',
+        ]);
+
+        $bookingsCount = \App\Booking::count();
+
+        $this->assertEquals(2, $bookingsCount);
+    }
 }

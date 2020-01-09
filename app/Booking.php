@@ -17,12 +17,30 @@ class Booking extends Model
 
     public function setCheckinAttribute($value)
     {
-        $this->attributes['checkin'] = $value ? Carbon::createFromFormat('d/m/Y', $value) : null;
+        $checkin = null;
+
+        if ($value) {
+            $checkin = Carbon::createFromFormat('d/m/Y', $value);
+            $checkin->hour = 14;
+            $checkin->minute = 0;
+            $checkin->second = 0;
+        }
+
+        $this->attributes['checkin'] = $checkin;
     }
 
     public function setCheckoutAttribute($value)
     {
-        $this->attributes['checkout'] = $value ? Carbon::createFromFormat('d/m/Y', $value) : null;
+        $checkout = null;
+
+        if ($value) {
+            $checkout = Carbon::createFromFormat('d/m/Y', $value);
+            $checkout->hour = 12;
+            $checkout->minute = 0;
+            $checkin->second = 0;
+        }
+
+        $this->attributes['checkout'] = $checkout;
     }
 
     public function customer()

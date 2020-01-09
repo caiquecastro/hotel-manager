@@ -26,6 +26,7 @@ class BookingsController extends Controller
 
         if ($request->wantsJson()) {
             $bookings->load('customer')->load('room');
+
             return $bookings;
         }
 

@@ -17,8 +17,8 @@ class CreateBookingsTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->decimal('price', 8, 2);
-            $table->date('checkin');
-            $table->date('checkout');
+            $table->timestamp('checkin');
+            $table->timestamp('checkout');
             $table->timestamp('checkin_at')->nullable();
             $table->timestamp('checkout_at')->nullable();
             $table->timestamps();
