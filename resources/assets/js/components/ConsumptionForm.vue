@@ -1,7 +1,7 @@
 <template>
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">Inserir consumo</h5>
+            <h5 class="modal-title">Inserir consumo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 <span class="sr-only">Close</span>
@@ -46,7 +46,6 @@
                             <input type="text" class="form-control form-control-xl" :value="totalPrice" readonly>
                         </div>
                     </div>
-
                     <button class="btn btn-primary btn-lg">Salvar</button>
                 </div>
             </form>
@@ -62,6 +61,8 @@
 import axios from 'axios';
 import vSelect from 'vue-select';
 import { formatMoney } from '../utils';
+import { searchProduct } from '../services/ProductService';
+import { fetchActiveBookings } from '../services/BookingService';
 
 export default {
     components: {
@@ -76,6 +77,10 @@ export default {
             product: null,
         };
     },
+    async created() {
+        this.products = await searchProduct();
+        this.bookings = await fetchActiveBookings();
+    },
     computed: {
         unitPrice() {
             return this.product ? formatMoney(this.product.price) : null;
@@ -89,31 +94,12 @@ export default {
     methods: {
         async searchProduct(query, loading) {
             loading(true);
-            const { data } = await axios.get('/products', {
-                params: {
-                    q: query
-                },
-            });
-
-            this.products = data.data.map(p => ({
-                ...p,
-                label: `${p.barcode} - ${p.name}`,
-            }));
+            this.products = await searchProduct(query);
             loading(false);
         },
         async searchBooking(query, loading) {
             loading(true);
-            const { data } = await axios.get('/bookings', {
-                params: {
-                    active: 1,
-                    q: query
-                },
-            });
-
-            this.bookings = data.data.map(b => ({
-                ...b,
-                label: `${b.room.number} - ${b.customer.name}`,
-            }));
+            this.bookings = await fetchActiveBookings(query);
             loading(false);
         },
         async saveForm() {
