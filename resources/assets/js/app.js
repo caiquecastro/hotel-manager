@@ -11,6 +11,8 @@ Vue.use(VueNoty);
 Vue.component('room-type-form', RoomTypeForm);
 Vue.component('consumption-form', ConsumptionForm);
 
+window.$ = jQuery;
+
 const app = new Vue({
     el: '#app',
 });
@@ -65,28 +67,6 @@ const app = new Vue({
         var ctx = chartRoom.getContext("2d");
         var roomNightsChart = new Chart(ctx).Line(data, options);
     }
-
-    $("body").on("click", "#save-consumption", function(e) {
-        e.preventDefault();
-        $.ajax({
-            method: "POST",
-            url: "/consumption",
-            data: {
-                _token: $("[name=_token]").val(),
-                booking_id: $("#booking_id").val(),
-                product_id: $("#product_id").val(),
-                price: $("#price").val(),
-                amount: $("#amount").val()
-            }
-        }).done(function () {
-            $("#barcode-search").val('');
-            $("#name").val('');
-            $("#product_id").val('');
-            $("#price").val('');
-
-            $("#modal-consumption").modal('close');
-        });
-    });
 
     $(".open-consumption").click(function() {
         var booking_id = $(this).data("id");

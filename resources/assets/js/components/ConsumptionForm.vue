@@ -1,59 +1,59 @@
 <template>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Inserir consumo</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-            </button>
+    <div class="modal fade" id="modal-consumption" tabindex="-1">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Inserir consumo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" @submit.prevent="saveForm">
+                        <div class="form-group">
+                            <label for="booking-search">Quarto</label>
+                            <v-select
+                                @search="searchBooking"
+                                v-model="booking"
+                                :filterable="false"
+                                :options="bookings"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="product-search">Código do Produto</label>
+                            <v-select
+                                @search="searchProduct"
+                                v-model="product"
+                                :filterable="false"
+                                :options="products"
+                            />
+                        </div>
+                        <div class="form-row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="amount">Valor Unitário</label>
+                                    <input type="text" class="form-control form-control-xl" :value="unitPrice" readonly>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="amount">Quantidade</label>
+                                    <input type="text" class="form-control form-control-xl" v-model="amount">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="amount">Total</label>
+                                    <input type="text" class="form-control form-control-xl" :value="totalPrice" readonly>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <form action="" @submit.prevent="saveForm">
-                <div class="form-group">
-                    <label for="booking-search">Quarto</label>
-                    <v-select
-                        @search="searchBooking"
-                        v-model="booking"
-                        :filterable="false"
-                        :options="bookings"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="product-search">Código do Produto</label>
-                    <v-select
-                        @search="searchProduct"
-                        v-model="product"
-                        :filterable="false"
-                        :options="products"
-                    />
-                </div>
-                <div class="form-row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="amount">Valor Unitário</label>
-                            <input type="text" class="form-control form-control-xl" :value="unitPrice" readonly>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="amount">Quantidade</label>
-                            <input type="text" class="form-control form-control-xl" v-model="amount">
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="amount">Total</label>
-                            <input type="text" class="form-control form-control-xl" :value="totalPrice" readonly>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-lg">Salvar</button>
-                </div>
-            </form>
-        </div>
-        <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="save-consumption">Salvar</button>
-        </div> -->
     </div>
 </template>
 
@@ -108,6 +108,8 @@ export default {
                 product_id: this.product ? this.product.id : null,
                 amount: this.amount,
             });
+
+            window.location.reload();
         }
     }
 }
