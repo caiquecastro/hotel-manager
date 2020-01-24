@@ -1,9 +1,23 @@
-version: '3.4'
+version: "3.6"
 
 volumes:
+  # postgres-data
   postgres-data:
     driver: local
+  # redis-data
   redis-data:
+    driver: local
+  # dot-config
+  dot-config:
+    driver: local
+  # dot-cache
+  dot-cache:
+    driver: local
+  # dot-local
+  dot-local:
+    driver: local
+  # dot-composer
+  dot-composer:
     driver: local
 
 services:
@@ -26,12 +40,24 @@ services:
     ports:
       - "6379:6379"
 
-  app:
+  web:
     image: ambientum/php:7.3-nginx
     volumes:
       - .:/var/www/app
+      - dot-config:/home/ambientum/.config
+      - dot-cache:/home/ambientum/.cache
+      - dot-local:/home/ambientum/.local
+      - dot-composer:/home/ambientum/.composer
+    environment:
+      - FRAMEWORK=laravel
+      - XDEBUG_ENABLED=true
+      - OPCACHE_MODE=normal
+      - PHP_MEMORY_LIMIT=256M
     ports:
-      - "80:8080"
+      - target: 8080
+        published: 8080
+      - target: 8083
+        published: 8083
     links:
       - postgres
       - cache
