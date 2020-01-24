@@ -16,11 +16,12 @@ class ConsumptionController extends Controller
      */
     public function index()
     {
-        $activeRooms = Booking::with('room')->where('checkin', '>=', Carbon::today())
-            ->where('checkout', '>=', Carbon::today())
+        $activeRooms = Booking::with('room')
+            ->whereNotNull('checkin_at')
+            ->whereNull('checkout_at')
             ->get();
 
-        $consumptions = \App\Consumption::all();
+        $consumptions = \App\Consumption::orderBy('created_at', 'desc')->get();
 
         return view('consumption.index', compact('activeRooms', 'consumptions'));
     }
