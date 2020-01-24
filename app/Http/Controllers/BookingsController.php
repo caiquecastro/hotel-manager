@@ -22,7 +22,12 @@ class BookingsController extends Controller
      */
     public function index(Request $request)
     {
-        $bookings = Booking::paginate();
+        $activeFilter = $request->has('active');
+
+        $bookings = Booking::when($activeFilter, function ($query) {
+            return $query->whereNotNull('checkin_at')
+                ->whereNull('checkout_at');
+        })->paginate();
 
         if ($request->wantsJson()) {
             $bookings->load('customer')->load('room');
