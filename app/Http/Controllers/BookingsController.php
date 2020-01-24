@@ -98,11 +98,11 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Booking $booking)
     {
-        return response()->json(
-            Booking::findOrFail($id)
-        );
+        return view('bookings.show', [
+            'booking' => $booking,
+        ]);
     }
 
     /**
