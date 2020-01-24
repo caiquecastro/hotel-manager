@@ -123,9 +123,29 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Booking $booking)
     {
-        //
+        if ($request->has('checkin')) {
+            $booking->forceFill([
+                'checkin_at' => now(),
+            ])->save();
+
+            $request->session()->flash('message_type', 'success');
+            $request->session()->flash('message', 'Checkin confirmado');
+
+            return redirect()->back();
+        }
+
+        if ($request->has('checkout')) {
+            $booking->forceFill([
+                'checkout_at' => now(),
+            ])->save();
+
+            $request->session()->flash('message_type', 'success');
+            $request->session()->flash('message', 'Checkout confirmado');
+
+            return redirect()->back();
+        }
     }
 
     /**
