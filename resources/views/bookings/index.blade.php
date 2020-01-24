@@ -64,23 +64,13 @@
                 <td>{{ $booking->checkout->format("d/m/Y H:i:s") }}</td>
                 <td>
                     <a
-                        href="{{ action('BookingsController@edit', $booking->id) }}"
-                        class="btn btn-secondary btn-sm"
-                        aria-label="Editar"
+                        href="{{ action('BookingsController@show', $booking->id) }}"
+                        class="btn btn-info btn-sm"
+                        aria-label="Ver detalhes"
                         data-balloon-pos="up"
                     >
-                        <span class="fa fa-pencil"></span>
+                        <span class="fa fa-eye"></span>
                     </a>
-                    {!! Form::open(['method'=>'DELETE', 'action'=>['BookingsController@destroy', $booking->id], 'class' => 'display-inline-block']) !!}
-                        <button
-                            class="btn btn-danger btn-sm"
-                            type="submit"
-                            aria-label="Excluir"
-                            data-balloon-pos="up"
-                        >
-                            <span class="fa fa-trash"></span>
-                        </button>
-                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
