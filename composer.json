@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.2",
+        "laravel/framework": "^6.12",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.0"
     },
