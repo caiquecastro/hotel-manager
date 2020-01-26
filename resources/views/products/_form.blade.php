@@ -5,6 +5,12 @@
     </div>
 </div>
 <div class="form-group row">
+    {!! Form::label('display_name', 'Nome exibição', ['class' => 'col-sm-2 form-control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::text('display_name', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group row">
     {!! Form::label('barcode', 'Código', ['class' => 'col-sm-2 form-control-label']) !!}
     <div class="col-sm-5">
         {!! Form::text('barcode', null, ['class' => 'form-control']) !!}
