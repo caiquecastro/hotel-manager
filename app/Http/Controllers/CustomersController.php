@@ -18,9 +18,13 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::paginate();
+        $customers = Customer::with('activeBooking')->paginate();
+
+        if ($request->wantsJson()) {
+            return $customers;
+        }
 
         return view('customers.index', compact('customers'));
     }
