@@ -34,6 +34,10 @@ Route::get('inventory/{id}', 'StockController@getProductInfo');
 
 Route::get('reports', 'ReportsController@index');
 
+Route::get('orders', 'OrdersController@index');
+Route::post('orders', 'OrdersController@store');
+Route::get('orders/{order}', 'OrdersController@show')->name('orders.show');
+
 Route::get('consumption', 'ConsumptionController@index');
 Route::post('consumption', 'ConsumptionController@store');
 

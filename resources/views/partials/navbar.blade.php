@@ -22,8 +22,8 @@
       <li class="nav-item{{ request()->is('bookings*') ? ' active' : '' }}">
         <a class="nav-link" href="/bookings">Reservas</a>
       </li>
-      <li class="nav-item{{ request()->is('consumption*') ? ' active' : '' }}">
-        <a class="nav-link" href="/consumption">Consumos</a>
+      <li class="nav-item{{ request()->is('orders*') ? ' active' : '' }}">
+        <a class="nav-link" href="/orders">Pedidos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/inventory">Estoque</a>
