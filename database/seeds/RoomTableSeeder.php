@@ -1,7 +1,7 @@
 <?php
 
-use App\Type;
 use App\Room;
+use App\Type;
 use Illuminate\Database\Seeder;
 
 class RoomTableSeeder extends Seeder

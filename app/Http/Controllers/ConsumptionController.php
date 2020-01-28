@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Http\Requests\ConsumptionRequest;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ConsumptionController extends Controller
