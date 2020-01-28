@@ -65,18 +65,10 @@ const app = new Vue({
 
     if (chartRoom) {
         var ctx = chartRoom.getContext("2d");
-        var roomNightsChart = new Chart(ctx).Line(data, options);
+        new Chart(ctx).Line(data, options);
     }
 
     $(".open-consumption").click(function() {
-        var booking_id = $(this).data("id");
-
-        $.ajax({
-            method: "GET",
-            url: "/bookings/" + booking_id
-        }).done(function (data) {
-            $("#booking_id").val(data.id);
-            $("#modal-consumption").modal();
-        });
+        $("#modal-consumption").modal();
     });
 }(window, document, jQuery));

@@ -14,10 +14,10 @@
                         <div class="form-group">
                             <label for="booking-search">Quarto</label>
                             <v-select
-                                @search="searchBooking"
-                                v-model="booking"
+                                @search="searchCustomer"
+                                v-model="customer"
                                 :filterable="false"
-                                :options="bookings"
+                                :options="customers"
                             />
                         </div>
                         <div class="form-group">
@@ -62,6 +62,7 @@ import axios from 'axios';
 import vSelect from 'vue-select';
 import { formatMoney } from '../utils';
 import { searchProduct } from '../services/ProductService';
+import { searchCustomer } from '../services/CustomerService';
 import { fetchActiveBookings } from '../services/BookingService';
 
 export default {
@@ -71,15 +72,15 @@ export default {
     data() {
         return {
             amount: 1,
-            bookings: [],
-            booking: null,
+            customers: [],
+            customer: null,
             products: [],
             product: null,
         };
     },
     async created() {
         this.products = await searchProduct();
-        this.bookings = await fetchActiveBookings();
+        this.customers = await searchCustomer();
     },
     computed: {
         unitPrice() {
@@ -97,14 +98,14 @@ export default {
             this.products = await searchProduct(query);
             loading(false);
         },
-        async searchBooking(query, loading) {
+        async searchCustomer(query, loading) {
             loading(true);
-            this.bookings = await fetchActiveBookings(query);
+            this.customers = await searchCustomer(query);
             loading(false);
         },
         async saveForm() {
-            await axios.post('/consumption', {
-                booking_id: this.booking ? this.booking.id : null,
+            await axios.post('/orders', {
+                customer_id: this.customer ? this.customer.id : null,
                 product_id: this.product ? this.product.id : null,
                 amount: this.amount,
             });
