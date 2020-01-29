@@ -31,6 +31,9 @@
       <li class="nav-item">
         <a href="/reports" class="nav-link">Relatórios</a>
       </li>
+      <li class="nav-item{{ request()->is('users*') ? ' active' : '' }}">
+        <a class="nav-link" href="/users">Usuários</a>
+      </li>
     </ul>
   </div>
 </nav>
