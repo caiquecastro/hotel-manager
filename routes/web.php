@@ -22,6 +22,7 @@ Route::resource('features', 'FeaturesController');
 Route::resource('types', 'TypesController');
 
 Route::resource('products', 'ProductsController');
+Route::resource('users', 'UsersController');
 
 Route::resource('bookings', 'BookingsController');
 Route::get('bookings/{id}/checkout', 'BookingsController@getCheckout');
