@@ -7,24 +7,15 @@
         Novo Pedido
     </button>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Detalhes</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($openOrders as $order)
-                <tr>
-                    <td>{{ $order->customer->name }}</td>
-                    <td>
-                        <a href="{{ route('orders.show', $order) }}">Ver</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="row row-narrow mb-3">
+        @foreach ($openOrders as $order)
+            <div class="col-2">
+                <a href="{{ route('orders.show', $order) }}" class="btn btn-dark btn-block mt-1 OrderButton">
+                    {{ $order->customer->activeBooking->room->number ?? $order->customer->name }}
+                </a>
+            </div>
+        @endforeach
+    </div>
 
     <h2>Consumos</h2>
 
