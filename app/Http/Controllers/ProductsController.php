@@ -23,6 +23,7 @@ class ProductsController extends Controller
         $search = $request->query('q');
         $products = Product::where('barcode', 'like', "%$search%")
             ->orWhere('name', 'like', "%$search%")
+            ->orderBy('barcode')
             ->paginate();
 
         if ($request->wantsJson()) {
