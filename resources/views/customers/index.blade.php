@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th>#</th>
             <th>Nome</th>
             <th>E-mail</th>
             <th>Telefone</th>
@@ -19,7 +18,6 @@
         <tbody>
         @foreach ($customers as $customer)
             <tr>
-                <td>{{ $customer->id }}</td>
                 <td>{{ $customer->name }}</td>
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone }}</td>
