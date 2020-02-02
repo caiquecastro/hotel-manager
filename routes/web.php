@@ -44,4 +44,4 @@ Route::post('consumption', 'ConsumptionController@store');
 
 Route::get('finance', 'FinancesController@index');
 
-Auth::routes();
+Auth::routes(['register' => false]);
