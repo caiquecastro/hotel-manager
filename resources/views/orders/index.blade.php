@@ -22,7 +22,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Reserva</th>
+                <th>Cliente</th>
                 <th>Quarto</th>
                 <th>Produto</th>
                 <th>Preço</th>
@@ -34,7 +34,7 @@
         <tbody>
             @foreach ($orderItems as $orderItem)
                 <tr>
-                    <td>{{ $orderItem->order->customer->activeBooking->id ?? 'Sem reserva' }}</td>
+                    <td>{{ $orderItem->order->customer->name ?? 'Sem reserva' }}</td>
                     <td>{{ $orderItem->order->customer->activeBooking->room->number ?? 'Sem reserva' }}</td>
                     <td>{{ $orderItem->product->name }}</td>
                     <td>R$ {{ $orderItem->price }}</td>
