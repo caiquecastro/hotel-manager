@@ -1,9 +1,9 @@
-/.idea
-/vendor
 /node_modules
+/vendor
 Homestead.yaml
 Homestead.json
 .env
 /public/fonts
 /public/css
 /public/js
+.phpunit.result.cache
