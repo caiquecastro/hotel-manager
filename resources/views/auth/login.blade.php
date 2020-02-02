@@ -1,61 +1,67 @@
 @extends('layout')
 
 @section('content')
-    <h1>Login</h1>
+    <h1>{{ __('Login') }}</h1>
 
-    <form method="POST" action="{{ url('/login') }}">
-        {{ csrf_field() }}
-
-        <div class="form-group">
-            <label for="email" class="label">E-mail</label>
-
-            <div class="control">
-                <input id="email"
-                    type="email"
-                    class="form-control{{ $errors->has('email') ? ' is-danger' : '' }}"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                >
-
-                @if ($errors->has('email'))
-                    <p class="help is-danger">
-                        {{ $errors->first('email') }}
-                    </p>
-                @endif
-            </div> <!-- email .control -->
-        </div> <!-- email .field -->
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
 
         <div class="form-group">
-            <label for="password" class="label">Senha</label>
+            <label for="email" class="text-md-right">{{ __('E-Mail Address') }}</label>
 
-            <div class="control">
-                <input
-                    id="password"
-                    type="password"
-                    class="form-control{{ $errors->has('password') ? ' is-danger' : '' }}"
-                    name="password"
-                    required
-                >
-                @if ($errors->has('password'))
-                    <p class="help is-danger">
-                        {{ $errors->first('password') }}
-                    </p>
-                @endif
-            </div> <!-- password .control -->
-        </div> <!-- password .field -->
+            <input
+                id="email"
+                type="email"
+                class="form-control @error('email') is-invalid @enderror"
+                name="email"
+                value="{{ old('email') }}"
+                required
+                autocomplete="email"
+                autofocus
+            >
 
-        <div class="field">
-            <div class="control">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember"> Remember Me
-                </label>
-            </div> <!-- remember me .control -->
-        </div> <!-- remember me .field -->
-        <button type="submit" class="btn btn-primary">Login</button>
-        <a class="btn btn-link" href="{{ url('/password/reset') }}">
-            Forgot Your Password?
-        </a>
-    </form> <!-- login form -->
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="text-md-right">{{ __('Password') }}</label>
+
+            <input
+                id="password"
+                type="password"
+                class="form-control @error('password') is-invalid @enderror"
+                name="password"
+                required
+                autocomplete="current-password"
+            >
+
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+            <label class="form-check-label" for="remember">
+                {{ __('Remember Me') }}
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            {{ __('Login') }}
+        </button>
+
+        @if (Route::has('password.request'))
+            <a class="btn btn-link" href="{{ route('password.request') }}">
+                {{ __('Forgot Your Password?') }}
+            </a>
+        @endif
+    </form>
 @endsection
