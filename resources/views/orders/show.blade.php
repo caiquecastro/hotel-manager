@@ -36,4 +36,12 @@
             @endforeach
         </tbody>
     </table>
+
+    @if ($order->status !== 'paid')
+        <form action="/orders/{{ $order->id }}" method="POST">
+            @csrf
+            {{ method_field('PATCH') }}
+            <button class="btn btn-primary" name="status" value="paid">Fechar pedido</button>
+        </form>
+    @endif
 @endsection
