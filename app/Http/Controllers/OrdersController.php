@@ -24,7 +24,7 @@ class OrdersController extends Controller
             ->get();
 
         return view('orders.index', [
-            'openOrders' => \App\Order::all(),
+            'openOrders' => \App\Order::where('status', 'open')->get(),
             'orderItems' => $orderItems,
         ]);
     }
