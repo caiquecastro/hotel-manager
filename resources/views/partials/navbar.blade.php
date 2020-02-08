@@ -35,5 +35,14 @@
         <a class="nav-link" href="/users">Usuários</a>
       </li>
     </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            @auth
+                <a href="#" class="nav-link">{{ auth()->user()->name }}</a>
+            @else
+                <a href="/login" class="nav-link">Login</a>
+            @endauth
+        </li>
+    </ul>
   </div>
 </nav>
