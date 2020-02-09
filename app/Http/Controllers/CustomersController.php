@@ -20,9 +20,12 @@ class CustomersController extends Controller
      */
     public function index(Request $request)
     {
-        $customers = Customer::with('activeBooking')
-            ->orderBy('name')
-            ->paginate();
+        $activeFilter = $request->has('active');
+
+        $customersQuery = Customer::with('activeBooking')
+            ->orderBy('name');
+
+        $customers = $customersQuery->paginate(50);
 
         if ($request->wantsJson()) {
             return $customers;
