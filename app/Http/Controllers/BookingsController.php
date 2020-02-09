@@ -27,7 +27,9 @@ class BookingsController extends Controller
         $bookings = Booking::when($activeFilter, function ($query) {
             return $query->whereNotNull('checkin_at')
                 ->whereNull('checkout_at');
-        })->paginate();
+        })
+        ->orderBy('checkout')
+        ->paginate();
 
         if ($request->wantsJson()) {
             $bookings->load('customer')->load('room');
