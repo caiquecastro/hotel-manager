@@ -28,7 +28,7 @@ class BookingsController extends Controller
             return $query->whereNotNull('checkin_at')
                 ->whereNull('checkout_at');
         })
-        ->orderBy('checkout')
+        ->orderBy('checkout', 'desc')
         ->paginate();
 
         if ($request->wantsJson()) {
