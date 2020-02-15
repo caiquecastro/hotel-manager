@@ -11,6 +11,8 @@ class Order extends Model
         'customer_id',
     ];
 
+    protected $appends = ['total'];
+
     public function getTotalAttribute()
     {
         return $this->items->sum('total');
