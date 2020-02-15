@@ -9,6 +9,6 @@ export async function searchProduct(query) {
 
     return data.data.map(p => ({
         ...p,
-        label: `${p.barcode} - ${p.name}`,
+        label: `${p.barcode} ${p.display_name || p.name}`,
     }));
 }
