@@ -17,14 +17,22 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $openOrders = \App\Order::where('status', 'open')
+            ->with('items')
+            ->get();
+
+        if ($request->wantsJson()) {
+            return $openOrders;
+        }
+
         $orderItems = \App\OrderItem::with('order')
             ->orderBy('created_at', 'desc')
             ->get();
 
         return view('orders.index', [
-            'openOrders' => \App\Order::where('status', 'open')->get(),
+            'openOrders' => $openOrders,
             'orderItems' => $orderItems,
         ]);
     }
@@ -36,7 +44,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**

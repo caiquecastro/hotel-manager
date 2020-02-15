@@ -2,6 +2,7 @@ import 'bootstrap';
 import Vue from 'vue';
 import jQuery from 'jquery';
 import VueNoty from 'vuejs-noty';
+import OrderForm from './components/OrderForm';
 import RoomTypeForm from './components/RoomTypeForm';
 import ConsumptionForm from './components/ConsumptionForm';
 import 'jquery-mask-plugin';
@@ -9,6 +10,7 @@ import 'vuejs-noty/dist/vuejs-noty.css'
 
 Vue.use(VueNoty);
 Vue.component('room-type-form', RoomTypeForm);
+Vue.component('orders-form', OrderForm);
 Vue.component('consumption-form', ConsumptionForm);
 
 window.$ = jQuery;
