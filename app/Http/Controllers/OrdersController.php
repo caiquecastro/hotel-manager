@@ -79,8 +79,12 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Order $order, Request $request)
     {
+        if ($request->wantsJson()) {
+            return $order->load('items.product');
+        }
+
         return view('orders.show', [
             'order' => $order,
         ]);
