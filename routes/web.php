@@ -36,6 +36,8 @@ Route::get('inventory/{id}', 'StockController@getProductInfo');
 Route::get('reports', 'ReportsController@index');
 
 Route::resource('orders', 'OrdersController');
+Route::get('order-items/create', 'OrderItemsController@create');
+Route::post('order-items', 'OrderItemsController@create');
 
 Route::get('consumption', 'ConsumptionController@index');
 Route::post('consumption', 'ConsumptionController@store');
