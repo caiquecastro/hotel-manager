@@ -5,7 +5,10 @@
 
     <dl class="row">
         <dt class="col-2">Cliente</dt>
-        <dd class="col-10">{{ $order->customer->name }}</dd>
+        <dd class="col-10">{{ $order->customer->name ?? '-' }}</dd>
+
+        <dt class="col-2">Número</dt>
+        <dd class="col-10">{{ $order->number }}</dd>
     </dl>
 
     <table class="table">
