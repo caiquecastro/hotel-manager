@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Order;
 use App\Product;
-use App\Http\Requests\OrderRequest;
 
 class OrderItemsController extends Controller
 {
