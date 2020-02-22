@@ -11,7 +11,7 @@
         @foreach ($openOrders as $order)
             <div class="col-2">
                 <a href="{{ route('orders.show', $order) }}" class="btn btn-dark btn-block mt-1 OrderButton">
-                    {{ $order->customer->activeBooking->room->number ?? $order->customer->name }}
+                    {{ $order->number }}
                 </a>
             </div>
         @endforeach
