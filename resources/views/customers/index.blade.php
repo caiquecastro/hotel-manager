@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Clientes</h1>
+    <h1>Hóspedes</h1>
     <a href="{{ action('CustomersController@create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
     @include('errors.list')
     @include('partials._messages')
