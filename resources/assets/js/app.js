@@ -12,6 +12,9 @@ Vue.use(VueNoty);
 Vue.component('room-type-form', RoomTypeForm);
 Vue.component('orders-form', OrderForm);
 Vue.component('consumption-form', ConsumptionForm);
+Vue.filter('price', (value) => {
+    return `R$ ${Number(value).toFixed(2)}`;
+});
 
 window.$ = jQuery;
 
@@ -69,8 +72,4 @@ const app = new Vue({
         var ctx = chartRoom.getContext("2d");
         new Chart(ctx).Line(data, options);
     }
-
-    $(".open-consumption").click(function() {
-        $("#modal-consumption").modal();
-    });
 }(window, document, jQuery));

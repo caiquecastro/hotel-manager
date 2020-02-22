@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item{{ request()->is('customers*') ? ' active' : '' }}">
-        <a class="nav-link" href="/customers">Clientes</a>
+        <a class="nav-link" href="/customers">Hóspedes</a>
       </li>
       <li class="nav-item{{ request()->is('rooms*') ? ' active' : '' }}">
         <a class="nav-link" href="/rooms">

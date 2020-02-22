@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Requests\OrderRequest;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,7 @@ class OrdersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
         $orderNumber = $request->input('number');
         $customerId = $request->input('customer_id');

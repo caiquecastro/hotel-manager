@@ -46,7 +46,28 @@
                 </form>
             </div>
             <div class="col-6">
-                <ul v-for="item in orderItems" :key="item.id"></ul>
+                <table class="table" v-if="orderItems.length">
+                    <thead>
+                        <th>Data</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <tr>
+                                <td colspan="2">Total</td>
+                                <td>{{ orderTotal | price }}</td>
+                            </tr>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr v-for="item in orderItems" :key="item.id">
+                            <td>{{ item.created_at }}</td>
+                            <td>{{ item.amount }} {{ item.product.name }}</td>
+                            <td>{{ item.price | price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -69,7 +90,9 @@ export default {
             products: [],
             product: null,
             orders: [],
-            order: null
+            order: null,
+            orderTotal: 0,
+            orderItems: []
         };
     },
     async created() {
@@ -87,6 +110,17 @@ export default {
             this.orders = await searchOrders(query);
             loading(false);
         },
+        async fetchItems() {
+            if (!this.order) {
+                this.orderItems = [];
+                return;
+            }
+
+            const { data } = await axios.get(`/orders/${this.order.id}`);
+
+            this.orderItems = data.items;
+            this.orderTotal = data.total;
+        },
         async saveForm() {
             if (!this.order) {
                 return alert('Nenhum pedido selecionado');
@@ -99,7 +133,7 @@ export default {
                 amount: this.amount,
             });
 
-            alert('Feito');
+            this.fetchItems();
         }
     },
     computed: {
@@ -110,10 +144,10 @@ export default {
             return this.product && this.amount
                 ? formatMoney(this.product.price * this.amount)
                 : null;
-        },
-        orderItems() {
-            return this.order ? this.order.items : [];
         }
+    },
+    watch: {
+        order: 'fetchItems'
     }
 }
 </script>

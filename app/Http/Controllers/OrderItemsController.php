@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderRequest;
+use App\Http\Requests\OrderItemRequest;
 use App\Order;
 use App\Product;
 
@@ -18,7 +18,7 @@ class OrderItemsController extends Controller
         return view('order-items.create');
     }
 
-    public function store(Order $order, OrderRequest $request)
+    public function store(Order $order, OrderItemRequest $request)
     {
         $product = Product::findOrFail($request->input('product_id'));
         $amount = $request->input('amount');
