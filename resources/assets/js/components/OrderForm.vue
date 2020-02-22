@@ -88,11 +88,13 @@ export default {
             loading(false);
         },
         async saveForm() {
-            if (!this.orderId) {
+            if (!this.order) {
                 return alert('Nenhum pedido selecionado');
             }
 
-            await axios.post(`/orders/${this.orderId}/items`, {
+            const orderId = this.order.id;
+
+            await axios.post(`/orders/${orderId}/items`, {
                 product_id: this.product ? this.product.id : null,
                 amount: this.amount,
             });
