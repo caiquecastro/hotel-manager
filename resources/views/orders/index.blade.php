@@ -3,9 +3,8 @@
 @section('content')
     <h1>Restaurante</h1>
 
-    <button type="button" class="btn btn-primary open-consumption">
-        Novo Pedido
-    </button>
+    <a href="/orders/create" class="btn btn-primary">Abrir Comanda</a>
+    <a href="/order-items/create" class="btn btn-primary">Novo Pedido</a>
 
     <div class="row row-narrow mb-3">
         @foreach ($openOrders as $order)
