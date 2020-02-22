@@ -58,22 +58,16 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
+        $orderNumber = $request->input('number');
         $customerId = $request->input('customer_id');
 
-        $customerOpenOrder = Order::firstOrCreate([
-            'status' => 'open',
+        Order::create([
             'customer_id' => $customerId,
+            'number' => $orderNumber,
+            'status' => 'open',
         ]);
 
-        $amount = $request->input('amount');
-        $productId = $request->input('product_id');
-        $product = \App\Product::findOrFail($productId);
-
-        $customerOpenOrder->items()->create([
-            'amount' => $amount,
-            'price' => $product->price,
-            'product_id' => $productId,
-        ]);
+        return redirect('/orders');
     }
 
     /**
