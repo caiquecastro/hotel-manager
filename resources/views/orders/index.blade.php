@@ -9,7 +9,10 @@
     <div class="row row-narrow mb-3">
         @foreach ($openOrders as $order)
             <div class="col-2">
-                <a href="{{ route('orders.show', $order) }}" class="btn btn-dark btn-block mt-1 OrderButton">
+                <a
+                    href="{{ route('orders.show', $order) }}"
+                    class="btn btn-dark btn-block mt-1 OrderButton"
+                >
                     {{ $order->number }}
                 </a>
             </div>
@@ -22,7 +25,7 @@
         <thead>
             <tr>
                 <th>Cliente</th>
-                <th>Quarto</th>
+                <th>Comanda</th>
                 <th>Produto</th>
                 <th>Preço</th>
                 <th>Quantidade</th>
@@ -34,7 +37,7 @@
             @foreach ($orderItems as $orderItem)
                 <tr>
                     <td>{{ $orderItem->order->customer->name ?? 'Sem reserva' }}</td>
-                    <td>{{ $orderItem->order->customer->activeBooking->room->number ?? 'Sem reserva' }}</td>
+                    <td>{{ $orderItem->order->number }}</td>
                     <td>{{ $orderItem->product->name }}</td>
                     <td>R$ {{ $orderItem->price }}</td>
                     <td>{{ $orderItem->amount }}</td>
