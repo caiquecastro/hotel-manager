@@ -21,9 +21,16 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
-        $openOrders = \App\Order::where('status', 'open')
-            ->with('items')
-            ->get();
+        $search = $request->query('q');
+
+        $openOrdersQuery = \App\Order::where('status', 'open')
+            ->with('items');
+
+        if ($search) {
+            $openOrdersQuery->where('number', 'like', "%$search%");
+        }
+
+        $openOrders = $openOrdersQuery->get();
 
         if ($request->wantsJson()) {
             return $openOrders;
