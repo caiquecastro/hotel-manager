@@ -7,6 +7,7 @@ import RoomTypeForm from './components/RoomTypeForm';
 import ConsumptionForm from './components/ConsumptionForm';
 import 'jquery-mask-plugin';
 import 'vuejs-noty/dist/vuejs-noty.css'
+import format from 'date-fns/format';
 
 Vue.use(VueNoty);
 Vue.component('room-type-form', RoomTypeForm);
@@ -14,6 +15,9 @@ Vue.component('orders-form', OrderForm);
 Vue.component('consumption-form', ConsumptionForm);
 Vue.filter('price', (value) => {
     return `R$ ${Number(value).toFixed(2)}`;
+});
+Vue.filter('date', (value) => {
+    return format(new Date(value), 'dd/MM HH:mm:ss')
 });
 
 window.$ = jQuery;

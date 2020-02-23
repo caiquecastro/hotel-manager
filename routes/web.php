@@ -38,6 +38,7 @@ Route::get('reports', 'ReportsController@index');
 Route::resource('orders', 'OrdersController');
 Route::get('order-items/create', 'OrderItemsController@create');
 Route::post('orders/{order}/items', 'OrderItemsController@store');
+Route::delete('order-items/{orderItem}', 'OrderItemsController@destroy');
 
 Route::get('consumption', 'ConsumptionController@index');
 Route::post('consumption', 'ConsumptionController@store');

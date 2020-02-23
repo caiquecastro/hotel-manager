@@ -15,6 +15,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "cross-env": "^6.0.3",
+    "date-fns": "^2.9.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "jquery-mask-plugin": "^1.14.15",

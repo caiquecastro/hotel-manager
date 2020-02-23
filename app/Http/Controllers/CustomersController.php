@@ -25,7 +25,7 @@ class CustomersController extends Controller
         $customersQuery = Customer::with('activeBooking')
             ->orderBy('name');
 
-        $customers = $customersQuery->paginate(50);
+        $customers = $customersQuery->paginate();
 
         if ($request->wantsJson()) {
             return $customers;

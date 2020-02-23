@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Novo Pedido</h1>
+    <h1>Abrir Comanda</h1>
 
     <form action="/orders" method="POST">
         @csrf
@@ -20,5 +20,7 @@
             {!! Form::label('number', 'Nº Comanda', ['class' => 'form-control-label']) !!}
             {!! Form::text('number', null, ['class' => 'form-control']) !!}
         </div>
+
+        <button class="btn btn-primary">Salvar</button>
     </form>
 @endsection
