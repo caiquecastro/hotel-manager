@@ -41,16 +41,19 @@
                                 <input type="text" class="form-control form-control-xl" :value="totalPrice" readonly>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-lg" :disabled="!order">Salvar</button>
+                        <button class="btn btn-primary btn-lg" v-if="order && !loading">
+                            Salvar
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="col-6">
-                <table class="table" v-if="orderItems.length">
+            <div class="col-12 col-sm-6">
+                <table class="table mt-3" v-if="orderItems.length">
                     <thead>
                         <th>Data</th>
                         <th>Produto</th>
                         <th>Valor</th>
+                        <th></th>
                     </thead>
                     <tfoot>
                         <tr>
@@ -62,9 +65,14 @@
                     </tfoot>
                     <tbody>
                         <tr v-for="item in orderItems" :key="item.id">
-                            <td>{{ item.created_at }}</td>
+                            <td>{{ item.created_at | date }}</td>
                             <td>{{ item.amount }} {{ item.product.name }}</td>
                             <td>{{ item.price | price }}</td>
+                            <td>
+                                <button @click="deleteItem(item)" class="btn btn-danger btn-sm">
+                                    &times;
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,6 +94,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             amount: 1,
             products: [],
             product: null,
@@ -121,10 +130,18 @@ export default {
             this.orderItems = data.items;
             this.orderTotal = data.total;
         },
+        async deleteItem(item) {
+            if (confirm("Deseja excluir o item?")) {
+                await axios.delete(`/order-items/${item.id}`);
+
+                this.fetchItems();
+            }
+        },
         async saveForm() {
             if (!this.order) {
                 return alert('Nenhum pedido selecionado');
             }
+            this.loading = true;
 
             const orderId = this.order.id;
 
@@ -133,6 +150,8 @@ export default {
                 amount: this.amount,
             });
 
+            this.loading = false;
+            this.product = null;
             this.fetchItems();
         }
     },

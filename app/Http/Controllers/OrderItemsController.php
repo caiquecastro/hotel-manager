@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderItemRequest;
 use App\Order;
+use App\OrderItem;
 use App\Product;
 
 class OrderItemsController extends Controller
@@ -28,5 +29,12 @@ class OrderItemsController extends Controller
             'price' => $product->price,
             'amount' => $amount,
         ]);
+    }
+
+    public function destroy(OrderItem $orderItem)
+    {
+        $orderItem->delete();
+
+        return $orderItem;
     }
 }

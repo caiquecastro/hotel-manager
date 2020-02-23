@@ -11,7 +11,6 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Andar</th>
             <th>Características</th>
             <th>Status</th>
             <th>Ações</th>
@@ -21,15 +20,6 @@
         @foreach($rooms as $room)
             <tr>
                 <td>{{ $room->number }}</td>
-                <td>
-                    @if($room->floor == "ground")
-                        Térreo
-                    @elseif($room->floor == "first")
-                        1º Andar
-                    @else
-                        2º Andar
-                    @endif
-                </td>
                 <td>
                     {{ $room->features->implode('name', ', ') }}
                 </td>

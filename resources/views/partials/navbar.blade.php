@@ -23,7 +23,7 @@
         <a class="nav-link" href="/bookings">Reservas</a>
       </li>
       <li class="nav-item{{ request()->is('orders*') ? ' active' : '' }}">
-        <a class="nav-link" href="/orders">Pedidos</a>
+        <a class="nav-link" href="/orders">Restaurante</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/inventory">Estoque</a>
