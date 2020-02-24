@@ -35,45 +35,4 @@
             <button class="btn btn-primary mb-3" name="checkout">Realizar checkout</button>
         @endif
     </form>
-
-    <h2>Consumos</h2>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Código</th>
-            <th>Descrição</th>
-            <th class="text-center">Quantidade</th>
-            <th class="text-right">Valor Unitário</th>
-            <th class="text-right">Valor Total</th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <td colspan="4" class="text-right">Total</td>
-            <td class="text-right">
-                R$ {{ number_format($booking->consumptions->sum('total_price'), 2, ',', '.') }}
-            </td>
-        </tr>
-        </tfoot>
-        <tbody>
-        @foreach ($booking->consumptions as $consumption)
-            <tr>
-                <td>{{ $consumption->product->barcode }}</td>
-                <td>
-                    {{ $consumption->product->name }} ({{ $consumption->created_at->format("d-m-Y H:i") }})
-                </td>
-                <td class="text-center">
-                    {{ $consumption->amount }}
-                </td>
-                <td class="text-right">
-                    R$ {{ number_format($consumption->price, 2, ',', '.') }}
-                </td>
-                <td class="text-right">
-                    R$ {{ number_format($consumption->total_price, 2, ',', '.') }}
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
 @endsection
