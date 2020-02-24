@@ -5,6 +5,20 @@
     <a href="{{ action('ProductsController@create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
     @include('errors.list')
     @include('partials._messages')
+
+    <form class="form-inline" action="/products" method="GET">
+        <div class="form-group mb-2">
+            <label for="query">Name</label>
+            <input
+                type="search"
+                class="form-control ml-2"
+                id="query"
+                name="q"
+                placeholder="Água"
+                value="{{ request()->query('q') }}"
+            >
+        </div>
+    </form>
     <table class="table">
         <thead>
         <tr>
