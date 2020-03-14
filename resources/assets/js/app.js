@@ -3,6 +3,7 @@ import Vue from 'vue';
 import jQuery from 'jquery';
 import VueNoty from 'vuejs-noty';
 import OrderForm from './components/OrderForm';
+import BookingForm from './components/BookingForm';
 import RoomTypeForm from './components/RoomTypeForm';
 import ConsumptionForm from './components/ConsumptionForm';
 import 'jquery-mask-plugin';
@@ -10,8 +11,9 @@ import 'vuejs-noty/dist/vuejs-noty.css'
 import format from 'date-fns/format';
 
 Vue.use(VueNoty);
-Vue.component('room-type-form', RoomTypeForm);
 Vue.component('orders-form', OrderForm);
+Vue.component('room-type-form', RoomTypeForm);
+Vue.component('booking-form', BookingForm);
 Vue.component('consumption-form', ConsumptionForm);
 Vue.filter('price', (value) => {
     return `R$ ${Number(value).toFixed(2)}`;
