@@ -64,39 +64,7 @@ class BookingsController extends Controller
      */
     public function store(BookingRequest $request)
     {
-        $data = $request->all();
-
-        $room = Room::findOrFail($data['room_id']);
-
-        $checkin = Carbon::createFromFormat('d/m/Y', $data['checkin']);
-        $checkin->hour = 14;
-        $checkin->minute = 0;
-        $checkin->second = 0;
-        $checkout = Carbon::createFromFormat('d/m/Y', $data['checkout']);
-        $checkout->hour = 12;
-        $checkout->minute = 0;
-        $checkout->second = 0;
-
-        $available_room = Booking::where('room_id', $room->id)
-            ->where(function ($query) use ($checkin, $checkout) {
-                $query->whereBetween('checkin', [$checkin, $checkout])
-                    ->orWhereBetween('checkout', [$checkin, $checkout]);
-            })
-            ->count();
-
-        if ($available_room > 0) {
-            \Session::flash('message_type', 'danger');
-            \Session::flash('message', 'Não foi possível reservar o quarto na data desejada!');
-
-            return redirect()->back();
-        }
-
-        \App\Booking::create($data);
-
-        \Session::flash('message_type', 'success');
-        \Session::flash('message', 'Reserva cadastrada com sucesso!');
-
-        return redirect('bookings');
+        return \App\Booking::create($request->all());
     }
 
     /**
@@ -105,8 +73,12 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show(Request $request, Booking $booking)
     {
+        if ($request->wantsJson()) {
+            return $booking;
+        }
+
         return view('bookings.show', [
             'booking' => $booking,
         ]);
@@ -118,9 +90,11 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Booking $booking)
     {
-        //
+        return view('bookings.edit', [
+            'booking' => $booking,
+        ]);
     }
 
     /**
@@ -130,29 +104,23 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(BookingRequest $request, Booking $booking)
     {
-        if ($request->has('checkin')) {
-            $booking->forceFill([
-                'checkin_at' => now(),
-            ])->save();
+        // if ($request->has('checkin')) {
+        //     $booking->forceFill([
+        //         'checkin_at' => now(),
+        //     ])->save();
+        // }
 
-            $request->session()->flash('message_type', 'success');
-            $request->session()->flash('message', 'Checkin confirmado');
+        // if ($request->has('checkout')) {
+        //     $booking->forceFill([
+        //         'checkout_at' => now(),
+        //     ])->save();
+        // }
 
-            return redirect()->back();
-        }
+        $booking->update($request->all());
 
-        if ($request->has('checkout')) {
-            $booking->forceFill([
-                'checkout_at' => now(),
-            ])->save();
-
-            $request->session()->flash('message_type', 'success');
-            $request->session()->flash('message', 'Checkout confirmado');
-
-            return redirect()->back();
-        }
+        return $booking->fresh();
     }
 
     /**

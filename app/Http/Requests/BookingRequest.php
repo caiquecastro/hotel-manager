@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ConflictCheckin;
+
 class BookingRequest extends Request
 {
     /**
@@ -22,10 +24,15 @@ class BookingRequest extends Request
     public function rules()
     {
         return [
+            'customer_id' => 'required',
+            'room_id' => 'required|exists:rooms,id',
+            'checkin' => [
+                'required',
+                'date',
+                new ConflictCheckin($this->input('room_id'), $this->input('checkout')),
+            ],
+            'checkout' => 'date|after:checkin',
             'price' => 'required',
-            'room_id' => 'exists:rooms,id',
-            'checkin' => 'date_format:d/m/Y',
-            'checkout' => 'date_format:d/m/Y|after:checkin',
         ];
     }
 }
