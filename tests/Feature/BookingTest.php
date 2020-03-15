@@ -21,24 +21,24 @@ class BookingTest extends TestCase
 
     public function testForbidConflictingBookings()
     {
-        $this->withoutExceptionHandling();
-
         $room = factory(\App\Room::class)->create();
         factory(\App\Booking::class)->create([
             'room_id' => $room->id,
-            'checkin' => '04/03/2019',
-            'checkout' => '05/04/2019',
+            'checkin' => '2019-03-04T14:00:00',
+            'checkout' => '2019-04-05T12:00:00',
             'price' => '100',
         ]);
 
         $this->loginUser();
-        $this->post('bookings', [
+        $response = $this->postJson('bookings', [
             'customer_id' => factory(\App\Customer::class)->create()->id,
             'room_id' => $room->id,
-            'checkin' => '03/04/2019',
-            'checkout' => '26/04/2019',
+            'checkin' => '2019-04-03T14:00',
+            'checkout' => '2019-04-26T12:00',
             'price' => '100',
         ]);
+
+        $response->assertStatus(422);
 
         $bookingsCount = \App\Booking::count();
 
@@ -52,8 +52,8 @@ class BookingTest extends TestCase
         $room = factory(\App\Room::class)->create();
         factory(\App\Booking::class)->create([
             'room_id' => $room->id,
-            'checkin' => '10/03/2019',
-            'checkout' => '12/03/2019',
+            'checkin' => '2019-03-25',
+            'checkout' => '2019-03-27',
             'price' => '100',
         ]);
 
@@ -61,8 +61,8 @@ class BookingTest extends TestCase
         $this->post('bookings', [
             'customer_id' => factory(\App\Customer::class)->create()->id,
             'room_id' => $room->id,
-            'checkin' => '08/03/2019',
-            'checkout' => '09/03/2019',
+            'checkin' => '2019-03-28',
+            'checkout' => '2019-03-30',
             'price' => '100',
         ]);
 
