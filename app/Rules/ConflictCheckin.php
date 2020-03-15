@@ -31,9 +31,11 @@ class ConflictCheckin implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Booking::where('room_id', $this->roomId)
-            ->whereBetween($attribute, [$value, $this->checkout])
-            ->count() === 0;
+        $values = $attribute === 'checkin' ? [$value, $this->checkout] : [$this->checkout, $value];
+        $query = Booking::where('room_id', $this->roomId)
+            ->whereBetween($attribute, $values);
+
+        return $query->first() === null;
     }
 
     /**

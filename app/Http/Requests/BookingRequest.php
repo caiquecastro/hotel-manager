@@ -31,7 +31,11 @@ class BookingRequest extends Request
                 'date',
                 new ConflictCheckin($this->input('room_id'), $this->input('checkout')),
             ],
-            'checkout' => 'date|after:checkin',
+            'checkout' => [
+                'date',
+                'after:checkin',
+                new ConflictCheckin($this->input('room_id'), $this->input('checkin'))
+            ],
             'price' => 'required',
         ];
     }
