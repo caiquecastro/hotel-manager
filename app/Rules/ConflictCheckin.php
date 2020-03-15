@@ -43,6 +43,6 @@ class ConflictCheckin implements Rule
      */
     public function message()
     {
-        return "Existe uma reserva no quarto conflitante com a data";
+        return 'Existe uma reserva no quarto conflitante com a data';
     }
 }
