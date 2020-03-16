@@ -57,7 +57,8 @@ $factory->define(App\Booking::class, function (Faker\Generator $faker) {
         'room_id' => function () {
             return factory(\App\Room::class)->create()->id;
         },
-        'checkin' => '03/03/2019',
-        'checkout' => '30/03/2019',
+        'checkin' => '2019-03-03',
+        'checkout' => '2019-03-30',
+        'price' => 100,
     ];
 });
