@@ -24,7 +24,7 @@ class BookingRequest extends Request
     public function rules()
     {
         return [
-            'customer_id' => 'required',
+            'customer_id' => 'required|exists:customers,id',
             'room_id' => 'required|exists:rooms,id',
             'checkin' => [
                 'required',
