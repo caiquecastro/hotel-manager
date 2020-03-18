@@ -1,39 +1,42 @@
 <template>
     <div>
-        <div class="alert alert-danger" v-if="error">
-            {{ error }}
-        </div>
+        <div class="alert alert-danger" v-if="error">{{ error }}</div>
         <form method="POST" :action="action" @submit.prevent="submitForm">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="customer_id">Cliente</label>
-                    <select id="customer_id" class="form-control" v-model="form.customer_id">
+                    <select id="customer_id" class="form-control" v-model="form.customer_id" :class="{ 'is-invalid': form.errors.has('customer_id') }">
                         <option :value="null">Selecione</option>
                         <option v-for="customer in customers" :key="customer.id" :value="customer.id">
                             {{ customer.name }}
                         </option>
                     </select>
+                    <div class="invalid-feedback">{{ form.errors.first('customer_id') }}</div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="checkin">Entrada a partir de</label>
-                    <input type="datetime-local" class="form-control" v-model="form.checkin">
+                    <datetime-input :invalid="form.errors.has('checkin')" v-model="form.checkin" />
+                    <div class="invalid-feedback">{{ form.errors.first('checkin') }}</div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="checkout">Saída até</label>
-                    <input type="datetime-local" class="form-control" v-model="form.checkout">
+                    <datetime-input :invalid="form.errors.has('checkout')" v-model="form.checkout" />
+                    <div class="invalid-feedback">{{ form.errors.first('checkout') }}</div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="room_id">Quarto</label>
-                    <select name="room_id" id="room_id" class="form-control" v-model="form.room_id">
+                    <select name="room_id" id="room_id" class="form-control" v-model="form.room_id" :class="{ 'is-invalid': form.errors.has('room_id') }">
                         <option :value="null">Selecione</option>
                         <option v-for="room in rooms" :key="room.id" :value="room.id">
                             {{ room.number }}
                         </option>
                     </select>
+                    <div class="invalid-feedback">{{ form.errors.first('room_id') }}</div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="price">Valor</label>
-                    <input type="text" class="form-control" v-model.number="form.price" />
+                    <input type="text" class="form-control" v-model.number="form.price" :class="{ 'is-invalid': form.errors.has('price') }" />
+                    <div class="invalid-feedback">{{ form.errors.first('price') }}</div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Reservar</button>
@@ -43,9 +46,14 @@
 
 <script>
 import axios from 'axios';
+import { getErrorMessage } from '../utils';
 import BookingForm from '../forms/Booking';
+import DatetimeInput from './DatetimeInput';
 
 export default {
+    components: {
+        DatetimeInput,
+    },
     props: {
         id: {},
     },
@@ -85,9 +93,13 @@ export default {
 
             try {
                 const data = await this.form[method](this.action);
+
+                if (!this.id) {
+                    window.location.href = `/bookings/${data.id}`;
+                }
                 this.form.withData(data);
             } catch (err) {
-                this.error = err.message;
+                this.error = getErrorMessage(err);
             }
         },
     },
