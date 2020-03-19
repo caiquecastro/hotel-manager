@@ -19,9 +19,13 @@ class RoomsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $rooms = Room::orderBy('number')->paginate();
+
+        if ($request->wantsJson()) {
+            return $rooms;
+        }
 
         return view('rooms.index', compact('rooms'));
     }
@@ -67,10 +71,8 @@ class RoomsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Room $room)
     {
-        $room = Room::findOrFail($id);
-
         return view('rooms.show', compact('room'));
     }
 
