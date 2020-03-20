@@ -2,11 +2,19 @@
 
 namespace App;
 
+use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    use GeneratesUuid;
+
     protected $fillable = ['number', 'floor', 'type_id'];
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     public function getStatusAttribute($value)
     {

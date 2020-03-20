@@ -43,7 +43,7 @@
                 </td>
                 <td>
                     <a
-                        href="{{ action('RoomsController@show', $room->id) }}"
+                        href="{{ action('RoomsController@show', $room) }}"
                         class="btn btn-sm btn-info"
                         aria-label="Ver"
                         data-balloon-pos="up"
