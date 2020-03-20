@@ -27,6 +27,8 @@ class AddRoomUuidColumn extends Migration
                 'uuid' => Uuid::uuid4(),
             ]);
         });
+
+        Room::reguard();
     }
 
     /**
