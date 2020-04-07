@@ -25,12 +25,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="room_id">Quarto</label>
-                    <select name="room_id" id="room_id" class="form-control" v-model="form.room_id" :class="{ 'is-invalid': form.errors.has('room_id') }">
-                        <option :value="null">Selecione</option>
-                        <option v-for="room in rooms" :key="room.id" :value="room.id">
-                            {{ room.number }}
-                        </option>
-                    </select>
+                    <rooms-select v-model="form.room_id" :invalid="form.errors.has('room_id')" />
                     <div class="invalid-feedback">{{ form.errors.first('room_id') }}</div>
                 </div>
                 <div class="form-group col-md-6">
@@ -46,12 +41,14 @@
 
 <script>
 import axios from 'axios';
+import RoomsSelect from './RoomsSelect';
 import { getErrorMessage } from '../utils';
 import BookingForm from '../forms/Booking';
 import DatetimeInput from './DatetimeInput';
 
 export default {
     components: {
+        RoomsSelect,
         DatetimeInput,
     },
     props: {
@@ -60,9 +57,6 @@ export default {
     async created() {
         try {
             await this.loadForm();
-
-            const { data: rooms } = await axios.get('/rooms');
-            this.rooms = rooms.data;
 
             const { data: customers } = await axios.get('/customers');
             this.customers = customers.data;
@@ -75,7 +69,6 @@ export default {
             error: null,
             form: new BookingForm(),
             customers: [],
-            rooms: [],
         };
     },
     methods: {
