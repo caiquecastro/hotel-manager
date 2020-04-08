@@ -41,7 +41,6 @@ const app = new Vue({
         }
     };
 
-    $(".js-date").mask("99/99/9999");
     $('.js-telefone').mask(phoneMask, phoneMaskOptions);
 
     $("#print-page").on("click", function () {
