@@ -15,10 +15,10 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "cross-env": "^7.0.2",
-    "date-fns": "^2.11.0",
+    "date-fns": "^2.12.0",
     "font-awesome": "^4.7.0",
     "form-backend-validation": "^2.3.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-mask-plugin": "^1.14.15",
     "jquery-maskmoney": "^3.0.2",
     "laravel-mix": "^5.0.4",
@@ -28,7 +28,7 @@
     "sass-loader": "^8.0.2",
     "v-money": "^0.8.1",
     "vue": "^2.6.11",
-    "vue-select": "^3.9.0",
+    "vue-select": "^3.10.0",
     "vue-template-compiler": "^2.6.11",
     "vuejs-noty": "^0.1.3"
   }
