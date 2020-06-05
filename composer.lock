@@ -920,16 +920,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v6.1.0",
+            "version": "v6.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "64f2268bf41bf02b3a9dd3c30f102e934d721664"
+                "reference": "5ef9a3c9ae2423fe5618996f3cde375d461a3fc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/64f2268bf41bf02b3a9dd3c30f102e934d721664",
-                "reference": "64f2268bf41bf02b3a9dd3c30f102e934d721664",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/5ef9a3c9ae2423fe5618996f3cde375d461a3fc6",
+                "reference": "5ef9a3c9ae2423fe5618996f3cde375d461a3fc6",
                 "shasum": ""
             },
             "require": {
@@ -984,7 +984,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
-            "time": "2020-03-02T16:41:28+00:00"
+            "time": "2020-05-19T18:02:16+00:00"
         },
         {
             "name": "league/commonmark",
