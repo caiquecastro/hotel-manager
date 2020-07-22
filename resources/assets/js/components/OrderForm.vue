@@ -152,6 +152,7 @@ export default {
 
             this.loading = false;
             this.product = null;
+            this.amount = 1;
             this.fetchItems();
         }
     },
