@@ -37,4 +37,33 @@ class ProductTest extends TestCase
 
         $response->assertSessionHasErrors(['price' => 'The price field is required.']);
     }
+
+    public function testSortProductsByCustomField()
+    {
+        $this->loginUser();
+
+        $productOne = factory(\App\Product::class)->create([
+            'name' => 'AAA',
+        ]);
+        $productTwo = factory(\App\Product::class)->create([
+            'name' => 'BBB',
+        ]);
+        $productThree = factory(\App\Product::class)->create([
+            'name' => 'CCC',
+        ]);
+
+        $response = $this->getJson('products?sort=-name');
+
+        $response->assertJson([
+            'data' => [
+                $productThree->toArray(),
+                $productTwo->toArray(),
+                $productOne->toArray(),
+            ],
+        ]);
+
+        // dd($response->json()).
+
+        // $response->assertSessionHasErrors(['price' => 'The price field is required.']);
+    }
 }
