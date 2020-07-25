@@ -62,3 +62,13 @@ $factory->define(App\Booking::class, function (Faker\Generator $faker) {
         'price' => 100,
     ];
 });
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'barcode' => $faker->word,
+        'price' => 100,
+        'saleable' => true,
+        'uom' => 'unit',
+    ];
+});

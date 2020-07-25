@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
@@ -21,10 +22,22 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('q');
-        $products = Product::where('barcode', 'like', "%$search%")
-            ->orWhere('name', 'like', "%$search%")
-            ->orderBy('barcode')
-            ->paginate();
+
+        $orderBy = $request->get('sort');
+
+        $orderByField = Str::startsWith($orderBy, '-') ? Str::substr($orderBy, 1) : $orderBy;
+        $orderBySort = Str::startsWith($orderBy, '-') ? 'desc' : 'asc';
+
+        $productsQuery = Product::query();
+
+        if ($search) {
+            $productsQuery->where('barcode', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%");
+        }
+
+        $productsQuery->orderBy($orderByField, $orderBySort);
+
+        $products = $productsQuery->paginate();
 
         if ($request->wantsJson()) {
             return $products;
