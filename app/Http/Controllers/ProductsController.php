@@ -23,7 +23,7 @@ class ProductsController extends Controller
     {
         $search = $request->query('q');
 
-        $orderBy = $request->get('sort');
+        $orderBy = $request->get('sort', 'name');
 
         $orderByField = Str::startsWith($orderBy, '-') ? Str::substr($orderBy, 1) : $orderBy;
         $orderBySort = Str::startsWith($orderBy, '-') ? 'desc' : 'asc';
