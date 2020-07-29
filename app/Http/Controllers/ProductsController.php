@@ -21,6 +21,10 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
+        if (! $request->wantsJson()) {
+            return view('products.index');
+        }
+
         $search = $request->query('q');
 
         $orderBy = $request->get('sort', 'name');
@@ -39,11 +43,7 @@ class ProductsController extends Controller
 
         $products = $productsQuery->paginate();
 
-        if ($request->wantsJson()) {
-            return $products;
-        }
-
-        return view('products.index', compact('products'));
+        return $products;
     }
 
     /**
