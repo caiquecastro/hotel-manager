@@ -19,7 +19,7 @@ Vue.filter('price', (value) => {
     return `R$ ${Number(value).toFixed(2)}`;
 });
 Vue.filter('date', (value) => {
-    return format(new Date(value), 'dd/MM HH:mm:ss')
+    return format(new Date(value), 'dd/MM HH:mm');
 });
 
 window.$ = jQuery;
