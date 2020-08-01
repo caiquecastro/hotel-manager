@@ -16,7 +16,7 @@ Vue.component('room-type-form', RoomTypeForm);
 Vue.component('booking-form', BookingForm);
 Vue.component('consumption-form', ConsumptionForm);
 Vue.filter('price', (value) => {
-    return `R$ ${Number(value).toFixed(2)}`;
+    return Number(value).toFixed(2);
 });
 Vue.filter('date', (value) => {
     return format(new Date(value), 'dd/MM HH:mm');
