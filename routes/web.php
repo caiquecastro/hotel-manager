@@ -11,6 +11,9 @@
 |
 */
 Route::redirect('/', 'bookings');
+Route::get('/register', 'GuestsController@create');
+Route::post('/register', 'GuestsController@store');
+Route::get('/register/success', 'GuestsController@registerSuccess');
 
 Route::resource('customers', 'CustomersController');
 
