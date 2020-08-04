@@ -25,11 +25,6 @@ class Customer extends Model
         'car_plate',
     ];
 
-    public function setBirthdateAttribute($value)
-    {
-        $this->attributes['birthdate'] = $value ? Carbon::createFromFormat('d/m/Y', $value) : null;
-    }
-
     public function getBirthdateAttribute($value)
     {
         return Carbon::parse($value)->format('m/d/Y');
