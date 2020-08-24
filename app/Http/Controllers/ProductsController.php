@@ -67,6 +67,10 @@ class ProductsController extends Controller
         $data = $request->all();
         $data['saleable'] = isset($data['saleable']) ? $data['saleable'] : false;
 
+        if (! $data['barcode']) {
+            $data['barcode'] = Product::max('barcode') + 1;
+        }
+
         $room = Product::create($data);
 
         \Session::flash('message_type', 'success');
