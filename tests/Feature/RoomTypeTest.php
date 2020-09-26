@@ -13,7 +13,7 @@ class RoomTypeTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $roomType = factory(\App\Type::class)->create();
+        $roomType = \App\Type::factory()->create();
 
         $this->loginUser();
         $response = $this->delete("types/$roomType->id");
