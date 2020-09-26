@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
