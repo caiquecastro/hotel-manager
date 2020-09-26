@@ -23,7 +23,7 @@ class LoginTest extends TestCase
         $email = 'johndoe@example.com';
         $password = 'secret';
 
-        factory(\App\User::class)->create([
+        \App\User::factory()->create([
             'email' => $email,
             'password' => bcrypt($password),
         ]);

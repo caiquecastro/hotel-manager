@@ -42,7 +42,7 @@ class ProductTest extends TestCase
     {
         $this->loginUser();
 
-        $product = factory(\App\Product::class)->create([
+        $product = \App\Product::factory()->create([
             'name' => 'AAA',
         ]);
 
@@ -59,13 +59,13 @@ class ProductTest extends TestCase
     {
         $this->loginUser();
 
-        $productOne = factory(\App\Product::class)->create([
+        $productOne = \App\Product::factory()->create([
             'name' => 'AAA',
         ]);
-        $productTwo = factory(\App\Product::class)->create([
+        $productTwo = \App\Product::factory()->create([
             'name' => 'BBB',
         ]);
-        $productThree = factory(\App\Product::class)->create([
+        $productThree = \App\Product::factory()->create([
             'name' => 'CCC',
         ]);
 

@@ -22,7 +22,7 @@ class RoomTest extends TestCase
     public function testViewEditRoomPage()
     {
         $this->withoutExceptionHandling();
-        $room = factory(\App\Room::class)->create();
+        $room = \App\Room::factory()->create();
 
         $this->loginUser();
         $response = $this->get("rooms/$room->id/edit");
@@ -34,7 +34,7 @@ class RoomTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $roomType = factory(\App\Type::class)->create();
+        $roomType = \App\Type::factory()->create();
 
         $this->loginUser();
         $response = $this->post('rooms', [
@@ -64,7 +64,7 @@ class RoomTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $room = factory(\App\Room::class)->create();
+        $room = \App\Room::factory()->create();
 
         $this->loginUser();
         $response = $this->patch("rooms/$room->id", [

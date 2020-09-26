@@ -3,11 +3,12 @@
 namespace App;
 
 use Dyrynda\Database\Support\GeneratesUuid;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    use GeneratesUuid;
+    use HasFactory, GeneratesUuid;
 
     protected $fillable = ['number', 'floor', 'type_id'];
 
