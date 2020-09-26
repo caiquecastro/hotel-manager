@@ -2,8 +2,6 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Illuminate\Support\Str;
-
 /*
 |--------------------------------------------------------------------------
 | Model Factories
