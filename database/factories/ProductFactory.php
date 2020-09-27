@@ -23,7 +23,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'barcode' => $this->faker->word,
+            'barcode' => $this->faker->unique()->word,
             'price' => 100,
             'saleable' => true,
             'uom' => 'unit',
