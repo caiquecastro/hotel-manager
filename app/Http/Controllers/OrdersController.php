@@ -36,13 +36,8 @@ class OrdersController extends Controller
             return $openOrders;
         }
 
-        $orderItems = \App\OrderItem::with('order')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
         return view('orders.index', [
             'openOrders' => $openOrders,
-            'orderItems' => $orderItems,
         ]);
     }
 

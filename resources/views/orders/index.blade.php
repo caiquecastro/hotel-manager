@@ -18,34 +18,4 @@
             </div>
         @endforeach
     </div>
-
-    <h2>Consumos</h2>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Comanda</th>
-                <th>Produto</th>
-                <th>Preço</th>
-                <th>Quantidade</th>
-                <th>Total</th>
-                <th>Data</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($orderItems as $orderItem)
-                <tr>
-                    <td>{{ $orderItem->order->customer->name ?? 'Sem reserva' }}</td>
-                    <td>{{ $orderItem->order->number }}</td>
-                    <td>{{ $orderItem->product->name }}</td>
-                    <td>R$ {{ $orderItem->price }}</td>
-                    <td>{{ $orderItem->amount }}</td>
-                    <td>R$ {{ number_format($orderItem->total, 2) }}</td>
-                    <td>{{ $orderItem->created_at->format('d/m/Y H:i:s') }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <consumption-form />
 @endsection
