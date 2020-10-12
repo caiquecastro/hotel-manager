@@ -23,14 +23,22 @@
         </thead>
         <tfoot>
             <tr>
-                <td colspan="4">Total</td>
+                <td colspan="4">Subtotal</td>
                 <td>R$ {{ number_format($order->total, 2) }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">10%</td>
+                <td>R$ {{ number_format($order->total * .1, 2) }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">Total</td>
+                <td>R$ {{ number_format($order->total * 1.1, 2) }}</td>
             </tr>
         </tfoot>
         <tbody>
             @foreach ($order->items as $item)
                 <tr>
-                    <td>{{ $item->created_at->format('d/m/Y H:i:s') }}</td>
+                    <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                     <td>{{ $item->product->name }}</td>
                     <td>R$ {{ $item->price }}</td>
                     <td>{{ $item->amount }}</td>
