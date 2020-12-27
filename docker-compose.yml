@@ -1,72 +1,87 @@
-version: "3.6"
-
-volumes:
-  # postgres-data
-  postgres-data:
-    driver: local
-  # redis-data
-  redis-data:
-    driver: local
-  # dot-config
-  dot-config:
-    driver: local
-  # dot-cache
-  dot-cache:
-    driver: local
-  # dot-local
-  dot-local:
-    driver: local
-  # dot-composer
-  dot-composer:
-    driver: local
+# For more information: https://laravel.com/docs/sail
+version: "3.9"
 
 services:
-  postgres:
-    image: postgres:12
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=hotelmanager
-      - POSTGRES_USER=hotelmanager_user
-      - POSTGRES_PASSWORD=hotelmanager_pass
-
-  cache:
-    image: redis:5.0-alpine
-    command: --appendonly yes
-    volumes:
-      - redis-data:/data
-    ports:
-      - "6379:6379"
-
-  web:
-    image: ambientum/php:7.3-nginx
-    volumes:
-      - .:/var/www/app
-      - dot-config:/home/ambientum/.config
-      - dot-cache:/home/ambientum/.cache
-      - dot-local:/home/ambientum/.local
-      - dot-composer:/home/ambientum/.composer
-    environment:
-      - FRAMEWORK=laravel
-      - XDEBUG_ENABLED=true
-      - OPCACHE_MODE=normal
-      - PHP_MEMORY_LIMIT=256M
-    ports:
-      - target: 8080
-        published: 8080
-      - target: 8083
-        published: 8083
-    links:
-      - postgres
-      - cache
-
-  queue:
-    image: ambientum/php:7.3
-    command: php artisan queue:listen
-    volumes:
-      - .:/var/www/app
-    links:
-      - postgres
-      - cache
+    laravel.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.0
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.0/app
+        ports:
+            - '${APP_PORT:-80}:80'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+            - redis
+            # - selenium
+    # selenium:
+    #     image: 'selenium/standalone-chrome'
+    #     volumes:
+    #         - '/dev/shm:/dev/shm'
+    #     networks:
+    #         - sail
+    postgres:
+      image: postgres:12
+      volumes:
+        - sailpsql:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_DB=hotelmanager
+        - POSTGRES_USER=hotelmanager_user
+        - POSTGRES_PASSWORD=hotelmanager_pass
+      networks:
+        - sail
+    mysql:
+      image: 'mysql:8.0'
+      ports:
+          - '${FORWARD_DB_PORT:-3306}:3306'
+      environment:
+        MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        MYSQL_DATABASE: '${DB_DATABASE}'
+        MYSQL_USER: '${DB_USERNAME}'
+        MYSQL_PASSWORD: '${DB_PASSWORD}'
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      volumes:
+          - 'sailmysql:/var/lib/mysql'
+      networks:
+          - sail
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'sailredis:/data'
+        networks:
+            - sail
+    # memcached:
+    #     image: 'memcached:alpine'
+    #     ports:
+    #         - '11211:11211'
+    #     networks:
+    #         - sail
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - 1025:1025
+            - 8025:8025
+        networks:
+            - sail
+networks:
+    sail:
+        driver: bridge
+volumes:
+    sailmysql:
+        driver: local
+    sailpsql:
+        driver: local
+    sailredis:
+        driver: local
