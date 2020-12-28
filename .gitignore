@@ -7,4 +7,3 @@ Homestead.json
 /public/css
 /public/js
 .phpunit.result.cache
-public/mix-manifest.json
