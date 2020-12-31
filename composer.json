@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
-        "doctrine/dbal": "^2.10",
+        "doctrine/dbal": "^3.0",
         "dyrynda/laravel-model-uuid": "^6.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^8.0",
