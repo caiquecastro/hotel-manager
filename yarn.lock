@@ -4358,6 +4358,11 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
+livewire-vue@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/livewire-vue/-/livewire-vue-0.3.1.tgz#897655acb292fecaf6cac5291623bffcb8d31ce4"
+  integrity sha512-R04O2zq86goM0Hw2MztDxK1cEVb196wCiGr3fFF6j4CTA2ocox1bLB4sF7qzyu+mnXmNSy1Wo3CZoY5BJNpl4w==
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
