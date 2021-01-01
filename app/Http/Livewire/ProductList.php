@@ -14,8 +14,8 @@ class ProductList extends Component
         $productsQuery = Product::query();
 
         if ($this->search) {
-            $productsQuery->where('barcode', 'like', "%$this->search%")
-                ->orWhere('name', 'like', "%$this->search%");
+            $productsQuery->where('barcode', 'ilike', "%$this->search%")
+                ->orWhere('name', 'ilike', "%$this->search%");
         }
 
         $products = $productsQuery->paginate();
