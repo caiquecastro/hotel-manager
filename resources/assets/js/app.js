@@ -9,7 +9,7 @@ import ConsumptionForm from './components/ConsumptionForm';
 import 'jquery-mask-plugin';
 import 'vuejs-noty/dist/vuejs-noty.css'
 import format from 'date-fns/format';
-import 'livewire-vue';
+// import 'livewire-vue';
 
 Vue.use(VueNoty);
 Vue.component('orders-form', OrderForm);
