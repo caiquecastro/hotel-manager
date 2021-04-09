@@ -6,6 +6,6 @@ class PagesController extends Controller
 {
     public function menu()
     {
-        return redirect('/assets/menu.pdf');
+        return redirect('/assets/pdf/cardapio.pdf');
     }
 }
