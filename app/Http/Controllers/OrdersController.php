@@ -37,6 +37,11 @@ class OrdersController extends Controller
             $ordersQuery->where('number', 'like', "%$search%");
         }
 
+        if ($request->has('closed')) {
+            $ordersQuery->orderBy('closed_at', 'desc')
+                ->limit(30);
+        }
+
         $orders = $ordersQuery->get();
 
         if ($request->wantsJson()) {
@@ -126,8 +131,13 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Order $order)
     {
-        //
+        $order->update([
+            'status' => 'paid',
+            'closed_at' => now(),
+        ]);
+
+        return redirect()->back();
     }
 }

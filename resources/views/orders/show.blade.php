@@ -51,8 +51,8 @@
     @if ($order->status !== 'paid')
         <form action="/orders/{{ $order->id }}" method="POST">
             @csrf
-            {{ method_field('PATCH') }}
-            <button class="btn btn-primary" name="status" value="paid">Fechar pedido</button>
+            {{ method_field('DELETE') }}
+            <button class="btn btn-primary">Fechar pedido</button>
         </form>
     @endif
 @endsection

@@ -10,6 +10,7 @@ class Order extends Model
         'status',
         'number',
         'customer_id',
+        'closed_at',
     ];
 
     protected $appends = ['total'];
