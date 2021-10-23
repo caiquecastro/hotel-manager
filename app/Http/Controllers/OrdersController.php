@@ -22,23 +22,28 @@ class OrdersController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('q');
+        $displayMode = 'grid';
+        $orderStatus = 'open';
 
-        $openOrdersQuery = \App\Order::where('status', 'open')
+        if ($request->has('closed')) {
+            $orderStatus = 'paid';
+            $displayMode = 'table';
+        }
+
+        $ordersQuery = \App\Order::where('status', $orderStatus)
             ->with('items');
 
         if ($search) {
-            $openOrdersQuery->where('number', 'like', "%$search%");
+            $ordersQuery->where('number', 'like', "%$search%");
         }
 
-        $openOrders = $openOrdersQuery->get();
+        $orders = $ordersQuery->get();
 
         if ($request->wantsJson()) {
-            return $openOrders;
+            return $orders;
         }
 
-        return view('orders.index', [
-            'openOrders' => $openOrders,
-        ]);
+        return view('orders.index', compact('orders', 'displayMode'));
     }
 
     /**
