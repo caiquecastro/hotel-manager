@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "doctrine/dbal": "^3.0.0",
         "dyrynda/laravel-model-uuid": "^6.2",
         "fideloper/proxy": "^4.0",
