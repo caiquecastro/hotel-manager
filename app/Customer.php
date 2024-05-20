@@ -3,14 +3,13 @@
 namespace App;
 
 use Carbon\Carbon;
-use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    use HasFactory, FormAccessible, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
