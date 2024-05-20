@@ -166,7 +166,7 @@ return [
          * Package Service Providers...
          */
 
-        Collective\Html\HtmlServiceProvider::class,
+        Spatie\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
