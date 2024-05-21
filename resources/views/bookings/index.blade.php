@@ -4,8 +4,8 @@
     <h1>Reservas</h1>
     @include('errors.list')
     @include('partials._messages')
-    <a href="{{ action('BookingsController@create', null) }}" class="btn btn-primary mb-2">Nova reserva</a>
-    <a href="{{ action('CalendarController@index', null) }}" class="btn btn-primary mb-2">Calendário</a>
+    <a href="{{ route('bookings.create') }}" class="btn btn-primary mb-2">Nova reserva</a>
+    <a href="{{ route('calendar') }}" class="btn btn-primary mb-2">Calendário</a>
     <div class="row">
         @foreach($rooms as $room)
             <div class="col-sm-4">
@@ -16,7 +16,7 @@
                         @if ($room->status == "available")
                             <p class="card-text text-success">Disponível</p>
                             <a
-                                href="{{ action('BookingsController@create', ['roomId' => $room->id]) }}"
+                                href="{{ url('/bookings/create?roomId='.$room->id) }}"
                                 class="btn btn-primary btn-block"
                             >
                                 Reservar
@@ -24,7 +24,7 @@
                         @elseif($room->status == "occupied")
                             <p class="card-text text-danger">Ocupado</p>
                             <a
-                                href="{{ action('BookingsController@getCheckout', $room->id) }}"
+                                href="{{ url('/bookings/'.$room->id.'/checkout') }}"
                                 class="btn btn-secondary btn-block"
                             >
                                 Checkout
@@ -32,7 +32,7 @@
                         @else
                             <p class="card-text text-warning">Manutenção</p>
                             <a
-                                href="{{ action('BookingsController@getCheckout', $room->id) }}"
+                                href="{{ url('/bookings/'.$room->id.'/maintenance') }}"
                                 class="btn btn-secondary btn-block"
                             >
                                 Tirar manutenção
@@ -64,7 +64,7 @@
                 <td>{{ $booking->checkout->format("d/m/Y H:i:s") }}</td>
                 <td>
                     <a
-                        href="{{ action('BookingsController@show', $booking->id) }}"
+                        href="{{ url('/bookings/'.$booking->id) }}"
                         class="btn btn-info btn-sm"
                         aria-label="Ver detalhes"
                         data-balloon-pos="up"
