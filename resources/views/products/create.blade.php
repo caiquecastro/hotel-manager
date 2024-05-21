@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Novo Produto</h1>
-    <a href="{{ action('ProductsController@index') }}" class="btn btn-secondary mb-3">Voltar</a>
+    <a href="{{ route('productsController.index') }}" class="btn btn-secondary mb-3">Voltar</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">

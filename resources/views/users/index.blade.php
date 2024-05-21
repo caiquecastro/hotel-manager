@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Usuários</h1>
-    <a href="{{ action('UsersController@create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
+    <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
     @include('errors.list')
     @include('partials._messages')
     <table class="table">
@@ -20,14 +20,14 @@
                 <td>{{ $user->email }}</td>
                 <td>
                     <a
-                        href="{{ action('UsersController@edit', $user->id) }}"
+                        href="{{ route('users.edit', ['user' => $user->id]) }}"
                         class="btn btn-secondary btn-sm"
                         aria-label="Editar usuário"
                         data-balloon-pos="up"
                     >
                         <span class="fa fa-pencil"></span>
                     </a>
-                    {!! Form::open(['method'=>'DELETE', 'action'=>['UsersController@destroy', $user->id], 'class' => 'display-inline-block']) !!}
+                    {{ html()->form('DELETE', '/users/' . $user->id)->class('display-inline-block')->open() }}
                         <button
                             class="btn btn-danger btn-sm"
                             type="submit"
@@ -36,7 +36,7 @@
                         >
                             <span class="fa fa-trash"></span>
                         </button>
-                    {!! Form::close() !!}
+                    {{ html()->form()->close() }}
                 </td>
             </tr>
         @endforeach

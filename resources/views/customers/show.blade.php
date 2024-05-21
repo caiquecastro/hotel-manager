@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Ficha do Cliente</h1>
-    <a href="{{ action('CustomersController@index') }}" class="btn btn-primary mb-3">Voltar</a>
+    <a href="{{ route('customers.index') }}" class="btn btn-primary mb-3">Voltar</a>
 
     <dl class="row">
         <dt class="col-2">Nome</dt>

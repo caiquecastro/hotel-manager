@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Novo Cliente</h1>
-    <a href="{{ action('CustomersController@index') }}" class="btn btn-secondary mb-3">Voltar</a>
+    <a href="{{ route('customers.index') }}" class="btn btn-secondary mb-3">Voltar</a>
     @include('errors.list')
     @include('partials._messages')
     {!! Form::open(array('action' => array('CustomersController@store'))) !!}
