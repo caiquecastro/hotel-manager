@@ -39,7 +39,7 @@ Route::resource('customers', CustomersController::class);
 
 Route::resource('rooms', RoomsController::class);
 Route::put('rooms/{id}/maintenance', [RoomsController::class, 'putMaintenance']);
-Route::get('rooms/{id}/booking', [RoomsController::class, 'getBooking');
+Route::get('rooms/{id}/booking', [RoomsController::class, 'getBooking']);
 
 Route::resource('features', FeaturesController::class);
 Route::resource('types', TypesController::class);
