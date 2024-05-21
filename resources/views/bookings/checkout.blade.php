@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Checkout</h1>
-    <a href="{{ action('BookingsController@index') }}" class="btn btn-primary m-b">Voltar</a>
+    <a href="{{ route('bookings.index') }}" class="btn btn-primary m-b">Voltar</a>
     <div class="row">
         <div class="col-md-12">
             <form action="finish-checkout.html">
