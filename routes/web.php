@@ -5,7 +5,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ConsumptionController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\FeaturesController;
-use App\Http\Controllers\FinancesController
+use App\Http\Controllers\FinancesController;
 use App\Http\Controllers\GuestsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\OrderItemsController;
