@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Hóspedes</h1>
-    <a href="{{ action('CustomersController@create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
+    <a href="{{ route('customers.create') }}" class="btn btn-primary mb-3">Adicionar novo</a>
     @include('errors.list')
     @include('partials._messages')
     <table class="table">
@@ -24,7 +24,7 @@
                 <td>{{ $customer->created_at->format("d/m/Y") }}</td>
                 <td>
                     <a
-                        href="{{ action('CustomersController@show', $customer->id) }}"
+                        href="{{ route('customers.show', ['customer' => $customer->id]) }}"
                         class="btn btn-primary btn-sm"
                         aria-label="Ficha do cliente"
                         data-balloon-pos="up"
@@ -32,7 +32,7 @@
                         <span class="fa fa-file"></span>
                     </a>
                     <a
-                        href="{{ action('CustomersController@edit', $customer->id) }}"
+                        href="{{ route('customers.edit', ['customer' => $customer->id]) }}"
                         class="btn btn-secondary btn-sm"
                         aria-label="Editar cliente"
                         data-balloon-pos="up"

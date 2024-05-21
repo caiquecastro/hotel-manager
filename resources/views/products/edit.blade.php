@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Editar Produto</h1>
-    <a href="{{ action('ProductsController@index') }}" class="btn btn-primary m-b">Ver todos</a>
+    <a href="{{ route('products.index') }}" class="btn btn-primary m-b">Ver todos</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">

@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Ver Quarto</h1>
-    <a href="{{ action('RoomsController@index') }}" class="btn btn-secondary mb-3">Voltar</a>
+    <a href="{{ route('rooms.index') }}" class="btn btn-secondary mb-3">Voltar</a>
 
     <h2>Reservas</h2>
     <table class="table">

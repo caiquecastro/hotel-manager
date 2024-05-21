@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Editar Característica</h1>
-    <a href="{{ action('FeaturesController@index') }}" class="btn btn-secondary mb-3">Voltar</a>
+    <a href="{{ route('features.index') }}" class="btn btn-secondary mb-3">Voltar</a>
     @include('errors.list')
     @include('partials._messages')
     <div class="row">

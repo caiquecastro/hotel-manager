@@ -33,7 +33,7 @@
                     <td>R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                     <td>
                         <a
-                            href="{{ action('ProductsController@edit', $product->id) }}"
+                            href="{{ route('products.edit', ['product' => $product->id]) }}"
                             class="btn btn-secondary btn-sm"
                             aria-label="Editar"
                             data-balloon-pos="up"
