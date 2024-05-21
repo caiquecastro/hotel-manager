@@ -1,7 +1,7 @@
 <div class="form-group row">
-    {!! Form::label('name', 'Nome', ['class' => 'col-sm-2 form-control-label']) !!}
+    <label class="col-sm-2 form-control-label" for="name">Nome</label>
     <div class="col-sm-5">
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        <input type="text" name="name" id="name" class="form-control" value="{{ isset($feature) ? $feature->name : '' }}" />
     </div>
 </div>
 <div class="form-group row">

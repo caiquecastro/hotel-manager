@@ -7,7 +7,7 @@
         @csrf
 
         <div class="form-group">
-            {!! Form::label('customer_id', 'Cliente', ['class' => 'form-control-label']) !!}
+            <label class="form-control-label" for="customer_id">Cliente</label>
             <select name="customer_id" id="customer_id" class="form-control">
                 <option value="">Selecione</option>
                 @foreach ($customers as $customer)
@@ -17,8 +17,8 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('number', 'Nº Comanda', ['class' => 'form-control-label']) !!}
-            {!! Form::text('number', null, ['class' => 'form-control']) !!}
+            <label for="number" class="form-control-label">Nº Comanda</label>
+            <input type="text" name="number" id="number" class="form-control" />
         </div>
 
         <button class="btn btn-primary">Salvar</button>
