@@ -61,7 +61,7 @@
                         </button>
                     {{ html()->form()->close() }}
                     <a
-                        href="{{ action('BookingsController@create', ['roomId' => $room->id]) }}"
+                        href="{{ route('bookings.create', ['roomId' => $room->id]) }}"
                         class="btn btn-primary btn-sm"
                         aria-label="Reservar"
                         data-balloon-pos="up"
@@ -69,7 +69,7 @@
                         <span class="fa fa-calendar"></span>
                     </a>
                     <a
-                        href="{{ action('RoomsController@edit', $room->id) }}"
+                        href="{{ route('rooms.edit', ['id' => $room->id]) }}"
                         class="btn btn-secondary btn-sm"
                         aria-label="Editar"
                         data-balloon-pos="up"
