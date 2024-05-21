@@ -7,9 +7,10 @@
     @include('partials._messages')
     <div class="row">
         <div class="col-md-8">
-            {!! Form::model($room, ['method'=>'PUT', 'action' => ['RoomsController@update', $room->id]]) !!}
-            @include('rooms._form')
-            {!! Form::close() !!}
+            <form action="{{ route('rooms.update', ['room' => $room->id]) }}" method="POST">
+                @method('PUT')
+                @include('rooms._form')
+            </form>
         </div>
     </div>
 @stop

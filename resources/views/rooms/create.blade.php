@@ -7,9 +7,9 @@
     @include('partials._messages')
     <div class="row">
         <div class="col-md-8">
-            {!! Form::open(array('action' => array('RoomsController@store'))) !!}
+            <form action="{{ route('rooms.store') }}" method="POST">
             @include('rooms._form')
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 @stop
